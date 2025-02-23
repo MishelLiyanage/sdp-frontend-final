@@ -31,14 +31,15 @@ body {
     @include flex-center;
     flex-direction: column;
     width: 100%;
-    max-width: 424px;
+    max-width: 474px;
 }
 
 .registration-topic {
     text-align: center;
     font-size: 55px;
     color: sharedStyles.$primary-color;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    margin-top: 50px;
     font-weight: bold;
     font-family: sharedStyles.$font-family;
 }
@@ -49,12 +50,13 @@ body {
     flex-direction: column;
     text-align: center;
     width: 100%;
-    max-width: 424px;
+    max-width: 470px;
     padding: 20px;
     background: sharedStyles.$glass-bg;
     backdrop-filter: blur(10px);
     border-radius: 30px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
 }
 
 .signature-input {
