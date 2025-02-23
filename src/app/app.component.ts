@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./features/components/header/header.component";
+import { FooterComponent } from './features/components/footer/footer.component';
 // import { HomeComponent } from "./features/landing/home/home.component";
 // import { PublicationCardComponent } from "./features/components/publication-card/publication-card.component";
 
@@ -11,7 +12,8 @@ import { HeaderComponent } from "./features/components/header/header.component";
     // HomeComponent
     // PublicationCardComponent
     ,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
