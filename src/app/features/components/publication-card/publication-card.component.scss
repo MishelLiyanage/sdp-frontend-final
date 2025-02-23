@@ -1,0 +1,38 @@
+.publication-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 25rem; /* Adjust based on design */
+  height: 27rem; /* Adjust based on design */
+  padding: 1rem, 1.5rem, 0rem, 1.5rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  text-align: center;
+}
+
+.publication-image {
+  width: 100%;
+  height: 90%;
+  border-radius: 10px;
+}
+
+.publication-name {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 92.7%;
+  height: 2rem;
+  padding-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.publication-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}

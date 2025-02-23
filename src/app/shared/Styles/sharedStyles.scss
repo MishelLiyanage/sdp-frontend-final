@@ -1,0 +1,30 @@
+// Define variables
+$primary-color: white;
+$secondary-color: rgba(255, 255, 255, 0.3);
+$placeholder-color: rgba(255, 255, 255, 0.7);
+$glass-bg: rgba(47, 47, 138, 60%);
+$gradient-bg: linear-gradient(to bottom right, #C961DE, #2954A3);
+$font-family: "Quattrocento Sans", serif;
+
+.form-group {
+    height: 80px;
+    width: 400px;
+    padding: 0;
+    margin: 0;
+
+    input {
+        height: 60px;
+        width: 408px;
+        border-radius: 15px;
+        font-size:  1.2rem;
+        color: $primary-color;
+        background: $secondary-color;
+        border: none;
+        padding-left: 15px;
+
+        &::placeholder {
+            color: $placeholder-color;
+            font-size:  1.2rem;
+        }
+    }
+}

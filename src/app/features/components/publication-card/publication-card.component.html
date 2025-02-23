@@ -1,0 +1,10 @@
+<mat-card
+  class="publication-card"
+  appearance="outlined"
+  [ngStyle]="{ 'background-color': getCardColor(cardId) }"
+>
+  <img [src]="imageUrl" alt="Publication Image" class="publication-image" />
+  <mat-card-content class="publication-name">{{
+    publicationName
+  }}</mat-card-content>
+</mat-card>

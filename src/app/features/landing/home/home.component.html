@@ -1,0 +1,146 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St. Joseph's Institute</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Rock+Salt&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<div class="page-container">
+  <h1>St. Joseph's Institute</h1>
+  <p>Your trusted partner in academic excellence</p>
+
+  <div class="login-registration-buttons">
+    <button class="login-btn" (click)="navigateTo('/auth/login')">Login</button>
+    <button class="register-btn" (click)="navigateTo('/auth/register')">
+      Register
+    </button>
+  </div>
+</div>
+
+<div class="description">
+  <div class="floating-image">
+    <h2>Why choose us?</h2>
+    <p>
+      We provide expertly crafted model question papers tailored for schools,
+      covering a wide range of subjects and grade levels. Our model papers are
+      ideal for term tests, scholarship exams, and other assessments, helping
+      students prepare with confidence.
+    </p>
+    <br /><br /><br />
+
+    <p>
+      Each paper is designed by educational professionals to align with
+      curriculum standards, ensuring that schools receive high-quality, relevant
+      materials. Our easy ordering process allows schools to select and purchase
+      papers specific to their needs, whether for regular term assessments or
+      special examination preparations.
+    </p>
+  </div>
+</div>
+
+<div class="publications">
+  <h2>Our Publications</h2>
+  <div class="publications-container">
+    <div *ngFor="let card of publications">
+      <app-publication-card
+        [cardId]="card.id"
+        [imageUrl]="card.image"
+        [publicationName]="card.name"
+      >
+      </app-publication-card>
+    </div>
+  </div>
+</div>
+
+<div class="whyUs">
+  <h2>Why us?</h2>
+  <div class="whyUs-container">
+    <div class="column">
+      <h3>Expertly Crafted Papers</h3>
+      <p>
+        Papers are authored by experienced professional master teachers,
+        ensuring that each paper meets the academic standards required by
+        schools and aligns with educational board guidelines.
+      </p>
+      <br /><br /><br />
+
+      <h3>Flexible Payment Options</h3>
+      <p>
+        We aim to make the ordering process as easy and convenient as possible
+        with multiple payment methods: Cash on Delivery, Online Payments
+      </p>
+    </div>
+    <div class="column">
+      <h3>Aiding Student Success</h3>
+      <p>
+        We are committed to supporting educators by providing reliable and
+        accessible resources that inspire confidence and foster better learning
+        outcomes for students.
+      </p>
+      <br /><br /><br />
+
+      <h3>Comprehensive Coverage</h3>
+      <p>
+        We offer question papers across various subjects and grade levels. Our
+        resources are designed to help students thoroughly understand concepts
+        and prepare effectively for exams.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="howToOrder">
+  <h2>How To Place Order</h2>
+  <div class="wrapper">
+    <div class="cards">
+      <div class="header">
+        <div>
+          <p class="title">Browser</p>
+          <p class="subTitle">Our Publications</p>
+        </div>
+        <div class="image1"></div>
+      </div>
+      <div class="content">
+        <p>
+          ✔ Go through our catalog and select the papers that suit your school’s needs.
+        </p>
+
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="header">
+        <div>
+          <p class="title">Order</p>
+          <p class="subTitle">With Flexibility</p>
+        </div>
+        <div class="image2"></div>
+      </div>
+      <div class="content">
+        <p>
+          ✔ Fill the forms easily and Pay with most convenient method.
+        </p>
+
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="header">
+        <div>
+          <p class="title">Browser</p>
+          <p class="subTitle">Our Publications</p>
+        </div>
+        <div class="image3"></div>
+      </div>
+      <div class="content">
+        <p>
+          ✔ High-quality, ready-to-use model papers that will support your students' academic journeys.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
