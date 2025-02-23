@@ -3,6 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule, NgFor } from '@angular/common';
 import { PublicationCardComponent } from '../../components/publication-card/publication-card.component';
 import { MatCardModule } from '@angular/material/card';
+import { HowToOrderComponent } from "../../components/how-to-order/how-to-order.component";
 
 @Component({
   selector: 'app-home',
@@ -10,14 +11,18 @@ import { MatCardModule } from '@angular/material/card';
   imports: [
     CommonModule,
     NgFor,
-    RouterModule, 
+    RouterModule,
     PublicationCardComponent,
-    MatCardModule
-  ],
+    MatCardModule,
+    HowToOrderComponent
+],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  title: string = "St. Joseph's Institute";
+  description: string = 'Your trusted partner in academic excellence';
+
   constructor(private router: Router) {}
 
   navigateTo(path: string) {

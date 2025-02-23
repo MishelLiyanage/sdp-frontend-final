@@ -1,16 +1,11 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>St. Joseph's Institute</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Rock+Salt&display=swap"
-    rel="stylesheet"
-  />
+  
 </head>
 <div class="page-container">
-  <h1>St. Joseph's Institute</h1>
-  <p>Your trusted partner in academic excellence</p>
+  <h1>{{ title }}</h1>
+  <p>{{ description }}</p>
 
   <div class="login-registration-buttons">
     <button class="login-btn" (click)="navigateTo('/auth/login')">Login</button>
@@ -92,55 +87,4 @@
   </div>
 </div>
 
-<div class="howToOrder">
-  <h2>How To Place Order</h2>
-  <div class="wrapper">
-    <div class="cards">
-      <div class="header">
-        <div>
-          <p class="title">Browser</p>
-          <p class="subTitle">Our Publications</p>
-        </div>
-        <div class="image1"></div>
-      </div>
-      <div class="content">
-        <p>
-          ✔ Go through our catalog and select the papers that suit your school’s needs.
-        </p>
-
-      </div>
-    </div>
-
-    <div class="cards">
-      <div class="header">
-        <div>
-          <p class="title">Order</p>
-          <p class="subTitle">With Flexibility</p>
-        </div>
-        <div class="image2"></div>
-      </div>
-      <div class="content">
-        <p>
-          ✔ Fill the forms easily and Pay with most convenient method.
-        </p>
-
-      </div>
-    </div>
-
-    <div class="cards">
-      <div class="header">
-        <div>
-          <p class="title">Browser</p>
-          <p class="subTitle">Our Publications</p>
-        </div>
-        <div class="image3"></div>
-      </div>
-      <div class="content">
-        <p>
-          ✔ High-quality, ready-to-use model papers that will support your students' academic journeys.
-        </p>
-
-      </div>
-    </div>
-  </div>
-</div>
+<app-how-to-order></app-how-to-order>
