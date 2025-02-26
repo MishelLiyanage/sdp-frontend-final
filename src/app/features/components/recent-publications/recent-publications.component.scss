@@ -1,0 +1,49 @@
+@use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
+
+.publication-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 25rem; /* Adjust based on design */
+  height: 6rem; /* Adjust based on design */
+  padding: 1rem, 1.5rem, 0rem, 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-top-color: #510289;
+  border-left-color: #510289;
+  border-right-color: hsl(0, 0%, 0%, 50%);
+  border-bottom-color: hsl(0, 0%, 0%, 50%);
+  text-align: center;
+  background-image: linear-gradient(to bottom right, #510289, #220391);
+}
+
+.publication-name {
+  color: rgb(236, 236, 236);
+  width: 92.7%;
+  height: 2rem;
+  padding-top: 20px;
+  font-size: 1.5rem;
+  font-family: sharedStyles.$font-family;
+  font-weight: 700;
+  text-align: center;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.publication-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+  .publication-card {
+    width: 90%;
+    margin-left: 15px;
+
+    .publication-name {
+      font-size: 1.2rem;
+    }
+  }
+}

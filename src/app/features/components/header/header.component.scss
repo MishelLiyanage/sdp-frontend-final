@@ -15,7 +15,7 @@
     margin: 0;
     padding: 0;
     padding-top: 1rem;
-    flex-direction: row;
+    // flex-direction: row;
     display: inline-flex;
 
     li {
@@ -40,6 +40,32 @@
         display: inline-block;
         margin: 0;
         padding: 0;
+      }
+    }
+  }
+}
+
+/* RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+  .navbar {
+    position: fixed;
+    z-index: 0;
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+
+      li {
+        margin: 0;
+        padding: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 0;
+        margin-right: 0;
       }
     }
   }
