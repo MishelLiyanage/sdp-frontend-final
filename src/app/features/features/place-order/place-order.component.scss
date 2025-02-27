@@ -47,7 +47,7 @@
 
 .order-container {
   display: flex;
-  height: 147vh;
+  height: fit-content;
   background-color: #000; // Black background
   background-image: url("../../../../assets/images/placeOrderBackground.png");
   background-size: cover;
