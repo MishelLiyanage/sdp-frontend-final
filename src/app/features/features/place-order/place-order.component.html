@@ -173,7 +173,7 @@
 
     <div class="field">
       <p class="label">Payment Method:</p>
-      <p class="inputs">{{ orderSummary.paymentMethod }}</p>
+      <p class="inputs">{{ orderSummary?.paymentMethod || 'Not Selected' }}</p>
     </div>
 
     <div class="field">
