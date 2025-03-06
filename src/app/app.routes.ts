@@ -10,6 +10,14 @@ export const routes: Routes = [
         path: 'auth',
         loadChildren: () => import('./features/auth/auth.routes').then(m => m.authRoutes),
     },
+    {
+        path: 'dashboards',
+        loadChildren: () => import('./features/dashboards/dashboards.routes').then(m => m.dashboardsRoutes),
+    },
+    {
+        path: 'features',
+        loadChildren: () => import('./features/features/features.routes').then(m => m.featuresRoutes),
+    },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: '**', redirectTo: 'home', pathMatch: 'full' }, 
     { path: 'register', component: RegistrationComponent }
