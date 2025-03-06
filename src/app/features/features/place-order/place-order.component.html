@@ -22,21 +22,23 @@
 <div class="order-container">
   <div class="order-form">
     <form [formGroup]="orderForm">
-      <div class="form-group">
-        <input
-          type="text"
-          formControlName="name"
-          id="name"
-          placeholder="School name (If Custom)"
-        />
-      </div>
-      <div class="form-group">
-        <input
-          type="email"
-          formControlName="email"
-          id="email"
-          placeholder="Email Address (If differs from current user account email)"
-        />
+      <div class="nameEmail">
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="name"
+            id="name"
+            placeholder="School name (If Custom)"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            formControlName="email"
+            id="email"
+            placeholder="Email Address (If differs from current email)"
+          />
+        </div>
       </div>
       <div class="form-group">
         <input
@@ -122,7 +124,11 @@
           <button class="button">Upload Document</button>
         </div>
         <div class="form-group">
-          <input type="text" formControlName="notes" placeholder="Any Notes regarding the transfer" />
+          <input
+            type="text"
+            formControlName="notes"
+            placeholder="Any Notes regarding the transfer"
+          />
         </div>
       </div>
     </form>
@@ -159,13 +165,13 @@
             {{ element.publicationName }}
           </td>
         </ng-container>
-  
+
         <!-- Weight Column -->
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef>Quantity</th>
           <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
         </ng-container>
-  
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
@@ -173,14 +179,14 @@
 
     <div class="field">
       <p class="label">Payment Method:</p>
-      <p class="inputs">{{ orderSummary?.paymentMethod || 'Not Selected' }}</p>
+      <p class="inputs">{{ orderSummary?.paymentMethod || "Not Selected" }}</p>
     </div>
 
     <div class="field">
       <p class="label">Notes:</p>
       <p class="inputs">{{ orderSummary.notes }}</p>
     </div>
-    
+
     <div class="field">
       <p class="totalLabel">Total Amount:</p>
       <p class="totalAmount">Rs. {{ orderSummary.totalAmount }}</p>

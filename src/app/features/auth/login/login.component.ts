@@ -23,6 +23,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+
   loginForm: FormGroup;
   errorMessage: string = '';
 
@@ -58,10 +59,19 @@ export class LoginComponent {
 
   goToRegistration() {
     try {
-    this.router.navigate(['/auth/register']);
+      this.router.navigate(['/auth/register']);
     }
     catch (error) {
-    throw new Error('Method not implemented.');
+      throw new Error('Method not implemented.');
+    }
+  }
+
+  goToDashboard() {
+    try {
+      this.router.navigate(['/dashboards/schoolDashboard']);
+    }
+    catch (error) {
+      throw new Error('Method not implemented.');
     }
   }
 }
