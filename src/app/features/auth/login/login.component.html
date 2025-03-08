@@ -6,28 +6,38 @@
     <div class="login-header">
       <p class="login-topic">Log in</p>
     </div>
+    
     <div class="login-container">
-      <form class="login-form" [formGroup]="loginForm">
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <input
-            type="username"
+            id="username"
+            type="text"
             formControlName="username"
             placeholder="Enter your username"
-            required="Username is required"
+            required
           />
+          <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error-message">
+            Username is required
+          </div>
         </div>
+
         <div class="form-group">
           <input
+            id="password"
             type="password"
             formControlName="password"
             placeholder="Enter your password"
-            required="Password is required"
+            required
           />
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+            Password is required
+          </div>
         </div>
-      </form>
 
-      <p class="forgot-password">Forgot Password?</p>
-      <button class="login-btn" (click)="goToDashboard()">Login</button>
+        <p class="forgot-password">Forgot Password?</p>
+        <button class="login-btn" type="submit" [disabled]="loginForm.invalid">Login</button>
+      </form>
 
       <div class="bottom-container">
         <p>Don't have an account?</p>

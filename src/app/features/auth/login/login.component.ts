@@ -1,77 +1,101 @@
 import { Component } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule, FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../../../services/login.service';
+import { LoginUser } from '../../../models/login-user.model';
+import { CommonModule } from '@angular/common';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
-  standalone: true,  // For standalone component
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatIconModule,
-    MatCheckboxModule
-  ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrl: './login.component.scss',
+  imports: [ReactiveFormsModule,
+    CommonModule
+  ]
 })
 export class LoginComponent {
-
   loginForm: FormGroup;
-  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    // Create the form group with validators
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      rememberMe: [false]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
-  // Method to handle form submission
-  onSubmit(): void {
+  // Map form data to LoginUser model
+  getLoginData(): LoginUser {
+    return {
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password
+    };
+  }
+
+  // Submit form data
+  onSubmit() {
     if (this.loginForm.valid) {
-      const { username, password, rememberMe } = this.loginForm.value;
-      console.log('Form submitted with:', username, password, rememberMe);
-      // Implement login logic, e.g., send data to the server
-    } else {
-      this.errorMessage = 'Please fill in all required fields with valid data.';
+      const loginData = this.getLoginData();
+
+      this.loginService.loginUser(loginData).subscribe({
+        next: (response) => {
+          console.log('Login successful:', response);
+
+          const accessToken = response.access_token;  // Check if this key is correct in the response
+
+          // Validate token before decoding
+          if (!accessToken || typeof accessToken !== 'string') {
+            console.error('Invalid or missing token:', accessToken);
+            alert('Login failed. Invalid token received.');
+            return;
+          }
+
+          localStorage.setItem('accessToken', accessToken);
+
+          try {
+            // Decode JWT token
+            const decodedToken: any = jwtDecode(accessToken);
+
+            if (!decodedToken || !decodedToken.role) {
+              throw new Error('Role not found in token');
+            }
+
+            const userRole = decodedToken.role; // Extract role from token
+
+            // Navigate based on role
+            switch (userRole) {
+              case 'ROLE_SCHOOL':
+                this.router.navigate(['/dashboards/schoolDashboard']);
+                break;
+              case 'ROLE_ADMIN':
+                this.router.navigate(['/dashboards/adminDashboard']);
+                break;
+              case 'ROLE_EMPLOYEE':
+                this.router.navigate(['/dashboards/employeeDashboard']);
+                break;
+              default:
+                console.error('Unknown role:', userRole);
+                alert('Unauthorized role.');
+            }
+          } catch (error) {
+            console.error('Error decoding token:', error);
+            alert('Login failed. Invalid token format.');
+          }
+        },
+        error: (error) => {
+          console.error('Login failed:', error);
+          alert('Invalid username or password. Please try again.');
+        }
+      });
     }
   }
 
-  // Getter for username field to easily check validation
-  get username() {
-    return this.loginForm.get('username');
-  }
-
-  // Getter for password field to easily check validation
-  get password() {
-    return this.loginForm.get('password');
-  }
-
+  // Navigate to registration page
   goToRegistration() {
-    try {
-      this.router.navigate(['/auth/register']);
-    }
-    catch (error) {
-      throw new Error('Method not implemented.');
-    }
-  }
-
-  goToDashboard() {
-    try {
-      this.router.navigate(['/dashboards/schoolDashboard']);
-    }
-    catch (error) {
-      throw new Error('Method not implemented.');
-    }
+    this.router.navigate(['/auth/register']);
   }
 }
