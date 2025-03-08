@@ -19,7 +19,7 @@ import { SchoolDashboardComponent } from "./features/dashboards/school-dashboard
     FooterComponent,
     // SchoolDashboardComponent,
     // PlaceOrderComponent,
-    // SchoolDashboardHeaderComponent,
+    SchoolDashboardHeaderComponent,
     // SchoolDashboardComponent
 ],
   templateUrl: './app.component.html',
