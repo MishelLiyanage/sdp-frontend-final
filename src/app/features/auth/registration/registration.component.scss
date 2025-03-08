@@ -24,7 +24,7 @@ html {
 body {
     background: $background-image center/cover no-repeat fixed;
     @include flex-center;
-    min-height: 100vh;
+    height: fit-content
 }
 
 .container {
