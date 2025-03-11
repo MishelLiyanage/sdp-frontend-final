@@ -31,6 +31,8 @@
   .container {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
     margin: 0%;
 
     .button-container {
@@ -70,6 +72,176 @@
       background-repeat: no-repeat;
       background-position: center;
       margin-left: 30px;
+    }
+  }
+
+  // Responsive styles
+  @media (max-width: 1440px) {
+    padding-left: 100px;
+    padding-top: 80px;
+
+    h2 {
+      font-size: 3rem;
+      margin-bottom: 70px;
+    }
+
+    p {
+      font-size: 1.4rem;
+      width: 80%;
+    }
+
+    .container {
+      flex-direction: row;
+      justify-content: space-between;
+      .button-container {
+        gap: 30px;
+        margin-right: 50px;
+      }
+
+      .childrenImg {
+        width: 420px;
+        height: 280px;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    padding-left: 50px;
+    padding-top: 60px;
+
+    h2 {
+      font-size: 2.8rem;
+      margin-bottom: 50px;
+    }
+
+    p {
+      font-size: 1.3rem;
+      width: 85%;
+    }
+
+    .container {
+      flex-direction: column;
+      align-items: center;
+
+      .button-container {
+        justify-content: center;
+        margin-right: 0;
+      }
+
+      .button {
+        width: 200px;
+        height: 55px;
+        font-size: 1.5rem;
+        margin-top: 80px;
+      }
+
+      .childrenImg {
+        width: 400px;
+        height: 260px;
+        margin-left: 0;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  @media (max-width: 932px) {
+    padding-left: 30px;
+    padding-top: 50px;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      width: 90%;
+    }
+
+    .container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .button-container {
+        gap: 20px;
+      }
+
+      .button {
+        width: 180px;
+        height: 50px;
+        font-size: 1.3rem;
+        margin-top: 60px;
+      }
+
+      .childrenImg {
+        width: 350px;
+        height: 240px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding-left: 20px;
+    padding-top: 40px;
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      width: 100%;
+    }
+
+    .container {
+      .button {
+        width: 160px;
+        height: 45px;
+        font-size: 1.2rem;
+        margin-top: 40px;
+      }
+
+      .childrenImg {
+        width: 320px;
+        height: 220px;
+      }
+    }
+  }
+
+  @media (max-width: 425px) {
+    padding-left: 10px;
+    padding-top: 20px;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    .container {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+
+      .button {
+        width: 150px;
+        height: 40px;
+        font-size: 1.1rem;
+        margin-top: 30px;
+      }
+
+      .childrenImg {
+        width: 280px;
+        height: 200px;
+      }
     }
   }
 }
