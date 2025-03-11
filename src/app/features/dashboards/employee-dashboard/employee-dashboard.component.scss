@@ -1,0 +1,163 @@
+@use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
+
+.myWork {
+  background: linear-gradient(to bottom left, #000000, #0a0a66);
+  height: fit-content;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .workContainer {
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 7rem;
+    justify-content: center;
+
+    .card {
+      height: 15rem;
+      width: auto;
+      padding: 15px;
+      background-color: hsl(0, 0%, 100%, 10%);
+      color: white;
+      font-family: sharedStyles.$font-family;
+      font-size: 1.3rem;
+      text-align: center;
+      border-radius: 15px;
+      border: solid 0.3px rgba(255, 255, 255, 0.542);
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+      p {
+        margin-bottom: 0;
+      }
+
+      .img1,
+      .img2,
+      .img3,
+      .img4,
+      .img5 {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 12rem;
+        width: 13rem;
+      }
+
+      .img1 {
+        background-image: url(../../../../assets/images/manageSchools.jpg);
+      }
+
+      .img2 {
+        background-image: url(../../../../assets/images/process\ orders.jpg);
+      }
+
+      .img3 {
+        background-image: url(../../../../assets/images/manageOrders.png);
+      }
+
+      .img4 {
+        background-image: url(../../../../assets/images/managePreparationProcess.jpg);
+      }
+
+      .img5 {
+        background-image: url(../../../../assets/images/generateDocuments.jpg);
+      }
+    }
+
+    .card:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  // Responsive styles
+  @media (max-width: 1440px) {
+    .workContainer {
+      gap: 5rem;
+    }
+
+    .card {
+      height: 14rem;
+    }
+
+    .card:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .workContainer {
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .card {
+      width: 90%;
+      height: auto;
+
+      .img1,
+      .img2,
+      .img3,
+      .img4,
+      .img5 {
+        height: 10rem;
+        width: 100%;
+      }
+    }
+
+    .card:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 932px) {
+    .card {
+      font-size: 1.1rem;
+    }
+
+    .card:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .workContainer {
+      gap: 2rem;
+    }
+
+    .card {
+      width: 95%;
+      font-size: 1rem;
+    }
+
+    .card:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 425px) {
+    .card {
+      width: 100%;
+      font-size: 0.9rem;
+
+      .img1,
+      .img2,
+      .img3,
+      .img4,
+      .img5 {
+        height: 8rem;
+      }
+    }
+
+    .card:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+}
