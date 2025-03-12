@@ -7,7 +7,7 @@ import { SchoolRegistration } from '../models/school-registration.model';
   providedIn: 'root'
 })
 export class RegistrationService {
-  private apiUrl = 'http://localhost:8082/school/sign-up'; // Backend API URL
+  private apiUrl = 'http://localhost:8083/school/sign-up'; // Backend API URL
 
   constructor(private http: HttpClient) {}
 

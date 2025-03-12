@@ -1,0 +1,48 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St. Joseph's Institute</title>
+</head>
+
+<div>
+    <div class="heading">
+        <h1>Update Profile</h1>
+    </div>
+    
+    <div class="updateForm">
+        <div class="update-form-container">
+            <div class="profilePic">
+                <div class="picture"></div>
+                <button type="submit" class="update-btn">Edit Profile</button>
+            </div>
+            <form>
+                <div class="form-group">
+                  <input type="text" formControlName="schoolName" placeholder="School name" />
+                </div>
+                <div class="form-group">
+                  <input type="email" formControlName="email" placeholder="Email address" />
+                </div>
+                <div class="form-group">
+                  <input type="text" formControlName="username" placeholder="Username" />
+                </div>
+                <div class="form-group">
+                  <input type="password" formControlName="password" placeholder="Password" />
+                </div>
+                <div class="form-group">
+                  <input type="text" formControlName="address" placeholder="School address" />
+                </div>
+                <div class="form-group">
+                  <input type="tel" formControlName="contactNo" placeholder="Contact number" />
+                </div>
+                <div class="form-group">
+                  <input type="text" formControlName="principleName" placeholder="Principle's Name" />
+                </div>
+                <div class="signature-input">
+                  <label for="signatureInput">Upload Principal's Signature</label>
+                  <input type="file" id="signatureInput" />
+                </div>
+                
+                <button type="submit" class="update-btn">Update Profile</button>
+            </form>
+        </div>
+    </div>
+</div>
