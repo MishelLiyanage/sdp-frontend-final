@@ -5,17 +5,23 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 25rem; /* Adjust based on design */
-  height: 6rem; /* Adjust based on design */
-  padding: 1rem, 1.5rem, 0rem, 1.5rem;
+  width: 25rem; /* Default width */
+  height: fit-content;
+  padding: 1rem 1.5rem 0rem 1.5rem; /* Fixed incorrect comma usage */
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border: solid 2px transparent;
   border-top-color: #510289;
   border-left-color: #510289;
   border-right-color: hsl(0, 0%, 0%, 50%);
   border-bottom-color: hsl(0, 0%, 0%, 50%);
   text-align: center;
-  background-image: linear-gradient(to bottom right, #510289, #220391);
+  background-image: linear-gradient(to bottom right, #2d034b, #170559);
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .publication-name {
@@ -23,7 +29,8 @@
   width: 92.7%;
   height: 2rem;
   padding-top: 20px;
-  font-size: 1.5rem;
+  padding-bottom: 15px;
+  font-size: 1.2rem;
   font-family: sharedStyles.$font-family;
   font-weight: 700;
   text-align: center;
@@ -31,19 +38,54 @@
   border-bottom-right-radius: 1rem;
 }
 
-.publication-card:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
+/* RESPONSIVENESS */
+
+/* Max Width: 1440px */
+@media screen and (max-width: 1440px) {
+  .publication-card {
+    width: 22rem;
+    padding: 1rem 1rem 0rem 1rem;
+  }
 }
 
-/* RESPONSIVENESS */
+/* Max Width: 1024px */
+@media screen and (max-width: 1024px) {
+  .publication-card {
+    width: 20rem;
+    padding: 0.8rem 1rem 0rem 1rem;
+  }
+}
+
+/* Max Width: 932px */
+@media screen and (max-width: 932px) {
+  .publication-card {
+    width: 18rem;
+    padding: 0.7rem 1rem 0rem 1rem;
+  }
+}
+
+/* Max Width: 768px */
 @media screen and (max-width: 768px) {
   .publication-card {
     width: 90%;
     margin-left: 15px;
+  }
 
-    .publication-name {
-      font-size: 1.2rem;
-    }
+  .publication-name {
+    font-size: 1.2rem;
+  }
+}
+
+/* Max Width: 425px */
+@media screen and (max-width: 425px) {
+  .publication-card {
+    width: 95%;
+    padding: 0.5rem;
+  }
+
+  .publication-name {
+    font-size: 1rem;
+    padding-top: 15px;
+    padding-bottom: 10px;
   }
 }

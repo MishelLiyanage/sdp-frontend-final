@@ -145,13 +145,13 @@
         cursor: pointer;
         transition: background-color 0.3s ease-in-out,
           transform 0.2s ease-in-out;
-        background-image: sharedStyles.$gradient-bg;
+          background-image: linear-gradient(to bottom right, #3c0247, #03122d);
         margin-top: 10px;
 
         &:hover {
           opacity: 0.9;
           transform: scale(1.05);
-          background-image: linear-gradient(to top left, #c961de, #2954a3);
+          background-image: linear-gradient(to top left, #3c0247, #03122d);
         }
       }
     }
@@ -230,12 +230,12 @@
         cursor: pointer;
         transition: background-color 0.3s ease-in-out,
           transform 0.2s ease-in-out;
-        background-image: sharedStyles.$gradient-bg;
+        background-image: linear-gradient(to bottom right, #3c0247, #03122d);
 
         &:hover {
           opacity: 0.9;
           transform: scale(1.05);
-          background-image: linear-gradient(to top left, #c961de, #2954a3);
+          background-image: linear-gradient(to top left, #3c0247, #03122d);
         }
       }
     }
@@ -269,7 +269,7 @@
       border-radius: 15px;
       cursor: pointer;
       transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-      background-image: sharedStyles.$gradient-bg;
+      background-image: linear-gradient(to bottom right, #3c0247, #03122d);
       margin-top: 4rem;
     }
   }
