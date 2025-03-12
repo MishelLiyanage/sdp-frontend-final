@@ -24,6 +24,13 @@
     font-style: normal;
     text-align: center;
     margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
   }
 
   p {
@@ -35,6 +42,13 @@
     font-style: normal;
     text-align: center;
     margin-top: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
   }
 
   // Responsive styles
