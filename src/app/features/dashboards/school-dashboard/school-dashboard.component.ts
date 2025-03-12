@@ -10,6 +10,10 @@ import { Router } from '@angular/router';
   styleUrl: './school-dashboard.component.scss'
 })
 export class SchoolDashboardComponent {
+  updateProfile() {
+    this.router.navigate(['/features/updateSchoolProfile']);
+  }
+
   goToMyOrders() {
     try {
       this.router.navigate(['/features/myOrders']);

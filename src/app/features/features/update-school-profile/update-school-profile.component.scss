@@ -1,0 +1,234 @@
+@use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
+
+.heading {
+  background-color: rgb(35, 1, 35);
+  color: white;
+  font-family: sharedStyles.$font-family;
+
+  h1 {
+    padding-left: 6rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+}
+
+.updateForm {
+  background-image: url(../../../../assets/images/profileBackground.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+
+  .update-form-container {
+    background-color: rgb(249, 237, 249);
+    width: 50%;
+    height: fit-content;
+    padding: 3rem;
+    margin: 2rem;
+    border: solid 2px rgba(0, 0, 0, 0.26);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .profilePic {
+      height: 100%;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+
+      .picture {
+        height: 12rem;
+        width: 12rem;
+        background-image: url("../../../../assets/images/profilePic.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .update-btn {
+        height: 2.9rem;
+        width: 10rem;
+        border-radius: 10px;
+        margin-top: 2rem;
+        border: none;
+        background-color: rgb(62, 2, 62);
+        color: white;
+        font-family: sharedStyles.$font-family;
+        font-weight: 700;
+        font-size: 17px;
+      }
+
+      .update-btn:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+      }
+    }
+
+    form {
+      width: 100%;
+
+      .form-group {
+        height: 4.5rem;
+
+        input {
+          background-color: hsla(0, 0%, 50%, 0.293);
+          height: 3rem;
+          width: 100%;
+          color: black;
+
+          &::placeholder {
+            color: rgb(0, 0, 0, 0.7);
+          }
+        }
+      }
+
+      .signature-input {
+        padding-left: 0.2rem;
+        height: 3rem;
+
+        label {
+          font-size: 1rem;
+        }
+
+        input {
+          height: 3rem;
+          width: 100%;
+          color: black;
+        }
+      }
+
+      .update-btn {
+        height: 2.9rem;
+        width: 10rem;
+        border-radius: 10px;
+        border: none;
+        background-color: rgb(62, 2, 62);
+        color: white;
+        font-family: sharedStyles.$font-family;
+        font-weight: 700;
+        font-size: 17px;
+      }
+
+      .update-btn:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 1440px) {
+  .updateForm .update-form-container {
+    width: 50%;
+    padding: 2.5rem;
+
+    .profilePic {
+        width: 60%;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .updateForm .update-form-container {
+    width: 70%;
+    flex-direction: row;
+    align-items: center;
+    padding: 2rem;
+
+    .profilePic {
+      width: 100%;
+    }
+
+    form {
+      width: 100%;
+      .form-group input,
+      .signature-input input {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 932px) {
+  .updateForm .update-form-container {
+    width: 80%;
+    padding: 1.5rem;
+  }
+
+  form {
+    .form-group input,
+    .signature-input input {
+      width: 90%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .updateForm .update-form-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .heading h1 {
+    padding-left: 3rem;
+    font-size: 2rem;
+  }
+
+  form {
+    .form-group input,
+    .signature-input input {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .heading h1 {
+    padding-left: 1rem;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .updateForm .update-form-container {
+    width: 85%;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+
+    .profilePic {
+      width: 100%;
+
+      .picture {
+        height: 10rem;
+        width: 10rem;
+      }
+    }
+
+    form {
+      width: 100%;
+
+      .form-group {
+        width: 96%;
+      }
+
+      .update-btn {
+        width: 100%;
+      }
+    }
+  }
+}
