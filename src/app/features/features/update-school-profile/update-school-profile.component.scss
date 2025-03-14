@@ -94,6 +94,14 @@
             color: rgb(0, 0, 0, 0.7);
           }
         }
+
+        /* Styles for Disabled Input Fields */
+        input:disabled {
+          background-color: rgba(200, 200, 200, 0.5);
+          color: rgba(0, 0, 0, 0.6);
+          cursor: not-allowed;
+          border: 1px solid rgba(0, 0, 0, 0.2);
+        }
       }
 
       .signature-input {
@@ -127,6 +135,16 @@
         opacity: 0.9;
         transform: scale(1.05);
       }
+
+      /* Styles for Disabled Update Button */
+      .update-btn:disabled {
+        background-color: rgba(62, 2, 62, 0.5);
+        color: rgba(255, 255, 255, 0.7);
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+        opacity: 0.7;
+      }
     }
   }
 }
@@ -138,7 +156,7 @@
     padding: 2.5rem;
 
     .profilePic {
-        width: 60%;
+      width: 60%;
     }
   }
 }

@@ -40,32 +40,34 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const loginData = this.getLoginData();
-
+  
       this.loginService.loginUser(loginData).subscribe({
         next: (response) => {
           console.log('Login successful:', response);
-
-          const accessToken = response.access_token;  // Check if this key is correct in the response
-
+  
+          const accessToken = response.access_token;  // Ensure this matches your backend response
+  
           // Validate token before decoding
           if (!accessToken || typeof accessToken !== 'string') {
             console.error('Invalid or missing token:', accessToken);
             alert('Login failed. Invalid token received.');
             return;
           }
-
+  
+          // Clear old token before storing the new one
+          localStorage.removeItem('accessToken');
           localStorage.setItem('accessToken', accessToken);
-
+  
           try {
             // Decode JWT token
             const decodedToken: any = jwtDecode(accessToken);
-
+  
             if (!decodedToken || !decodedToken.role) {
               throw new Error('Role not found in token');
             }
-
+  
             const userRole = decodedToken.role; // Extract role from token
-
+  
             // Navigate based on role
             switch (userRole) {
               case 'ROLE_SCHOOL':
@@ -92,7 +94,7 @@ export class LoginComponent {
         }
       });
     }
-  }
+  }  
 
   // Navigate to registration page
   goToRegistration() {
