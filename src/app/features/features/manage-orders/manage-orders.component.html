@@ -1,0 +1,54 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>St. Joseph's Institute</title>
+  </head>
+  
+  <div>
+      <div class="heading">
+        <h1>Manage Orders</h1>
+      </div>
+    
+      <div class="tableContainer">
+        <div class="search-container">
+          <input type="text" [(ngModel)]="searchTerm" placeholder="Search by orderId, school" />
+          <button (click)="searchOrder()">Search</button>
+        </div>
+    
+        <div class="table">
+          <table>
+              <thead>
+                <tr>
+                  <th>School Registration No</th>
+                  <th>Order ID</th>
+                  <th>School ID</th>
+                  <th>City</th>
+                  <th>Order Status</th>
+                  <th>Payment Method</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of filteredOrders">
+                    <td>{{ order.schoolRegistrationNo }}</td>
+                    <td>{{ order.orderId }}</td>
+                    <td>{{ order.schoolId }}</td>
+                    <td>{{ order.city }}</td>
+                    <td>{{ order.orderStatus }}</td>
+                    <td>{{ order.paymentMethod }}</td>
+                    <td>{{ order.date }}</td>
+                    <td>{{ order.time }}</td>
+                    <td>{{ order.amount }}</td>
+                    <td class="action-buttons">
+                      <button class="update-btn" (click)="updateOrder(order)">Update</button>
+                      <button class="delete-btn" (click)="deleteOrder(order)">Delete</button>
+                    </td>
+                  </tr>                  
+              </tbody>
+            </table>
+            <button class="print-btn">Print</button>
+        </div>
+      </div>
+  </div>  
