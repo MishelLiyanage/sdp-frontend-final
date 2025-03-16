@@ -1,0 +1,63 @@
+<div class="heading">
+    <h1>Update Task Form</h1>
+</div>
+
+<div class="background">
+    <div class="updateTaskForm">
+        <form [formGroup]="updateTaskForm" (ngSubmit)="onUpdateTask()">
+            <div class="form-group">
+                <input id="category" type="text" formControlName="category" placeholder="Enter the paper category" required />
+                <div *ngIf="updateTaskForm.get('category')?.invalid && updateTaskForm.get('category')?.touched" class="error-message">
+                    Category is required
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input id="grade" type="text" formControlName="grade" placeholder="Enter the grade" required />
+                <div *ngIf="updateTaskForm.get('grade')?.invalid && updateTaskForm.get('grade')?.touched" class="error-message">
+                    Grade is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input id="paperNo" type="text" formControlName="paperNo" placeholder="Enter the paper number" required />
+                <div *ngIf="updateTaskForm.get('paperNo')?.invalid && updateTaskForm.get('paperNo')?.touched" class="error-message">
+                    Paper number is required
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input id="partNo" type="text" formControlName="partNo" placeholder="Enter the part number" required />
+                <div *ngIf="updateTaskForm.get('partNo')?.invalid && updateTaskForm.get('partNo')?.touched" class="error-message">
+                    Part number is required
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input id="assignedDate" type="date" formControlName="assignedDate" required />
+                <div *ngIf="updateTaskForm.get('assignedDate')?.invalid && updateTaskForm.get('assignedDate')?.touched" class="error-message">
+                    Assigned date is required
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input id="deadline" type="date" formControlName="deadline" required />
+                <div *ngIf="updateTaskForm.get('deadline')?.invalid && updateTaskForm.get('deadline')?.touched" class="error-message">
+                    Deadline is required
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <select id="employee" formControlName="employee" required>
+                    <option value="" disabled>Select Employee</option>
+                    <option *ngFor="let emp of employees" [value]="emp.id">{{ emp.name }} - {{ emp.department }}</option>
+                </select>
+                <div *ngIf="updateTaskForm.get('employee')?.invalid && updateTaskForm.get('employee')?.touched" class="error-message">
+                    Employee selection is required
+                </div>
+            </div>
+            
+            <button type="submit" [disabled]="updateTaskForm.invalid">Update Task</button>
+        </form>
+    </div>
+</div>

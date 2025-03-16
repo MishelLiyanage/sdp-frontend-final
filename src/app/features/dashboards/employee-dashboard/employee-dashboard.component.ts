@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrl: './employee-dashboard.component.scss'
 })
 export class EmployeeDashboardComponent {
+  scrumboard() {
+    this.router.navigate(['/features/scrumboard']);
+  }
 
   constructor (private router: Router) {}
   
