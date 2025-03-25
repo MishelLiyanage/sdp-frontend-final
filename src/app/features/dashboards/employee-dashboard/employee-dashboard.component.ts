@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrl: './employee-dashboard.component.scss'
 })
 export class EmployeeDashboardComponent {
+  manageOrders() {
+    this.router.navigate(['/features/manageOrders']);
+  }
   scrumboard() {
     this.router.navigate(['/features/scrumboard']);
   }

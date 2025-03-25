@@ -1,0 +1,55 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St. Joseph's Institute</title>
+</head>
+
+<div>
+  <app-page-starting-container [title]="title" [description]="description">
+  </app-page-starting-container>
+</div>
+
+<div class="orderStatisticsContainer">
+  <div class="card-header">
+    <h3>Order Statistics</h3>
+  </div>
+  <div class="cardContainer">
+    <div class="cards">
+      <div class="card-body">
+        <div class="row1">
+          <div class="orderStatisticsItem">
+            <h4>Registered Schools</h4>
+            <p>{{ registeredSchools }}</p>
+          </div>
+          <div class="orderStatisticsItem">
+            <h4>Quarterly Orders</h4>
+            <p>{{ quarterlyOrders }}</p>
+          </div>
+          <div class="orderStatisticsItem">
+            <h4>Total Orders</h4>
+            <p>{{ totalOrders }}</p>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="orderStatisticsItem">
+            <h4>Grade 5 Scholarship</h4>
+            <p>{{ grade5scholarship }}</p>
+          </div>
+          <div class="orderStatisticsItem">
+            <h4>Grade 4 Scholarship</h4>
+            <p>{{ grade4scholarship }}</p>
+          </div>
+          <div class="orderStatisticsItem">
+            <h4>Orders to Process</h4>
+            <p>{{ ordersToProcess }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chart">
+      <ag-charts [options]="chartOptions"> </ag-charts>
+    </div>
+  </div>
+  <div class="button">
+    <button>View more...</button>
+  </div>
+</div>
