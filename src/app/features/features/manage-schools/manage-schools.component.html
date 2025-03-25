@@ -18,6 +18,7 @@
         <table>
             <thead>
               <tr>
+                <th>School ID</th>
                 <th>School Name</th>
                 <th>Address</th>
                 <th>Email</th>
@@ -29,12 +30,13 @@
             </thead>
             <tbody>
               <tr *ngFor="let school of filteredSchools">
+                <td>{{ school.schoolId}}</td>
                 <td>{{ school.name }}</td>
                 <td>{{ school.address }}</td>
                 <td>{{ school.email }}</td>
-                <td>{{ school.contactNumber }}</td>
+                <td>{{ school.contactNo }}</td>
                 <td>{{ school.username }}</td>
-                <td>{{ school.principalName }}</td>
+                <td>{{ school.principleName }}</td>
                 <td class="action-buttons">
                   <button class="update-btn" (click)="updateSchool(school)">Update</button>
                   <button class="delete-btn" (click)="deleteSchool(school)">Delete</button>

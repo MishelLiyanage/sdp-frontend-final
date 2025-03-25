@@ -1,0 +1,199 @@
+@use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
+
+.orderStatisticsContainer {
+  text-align: center;
+  background-image: url("../.../../../../../assets/images/orderStatisticsContainer.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: fit-content;
+  justify-content: center;
+
+  .card-header {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    font-family: sharedStyles.$font-family;
+    padding-top: 30px;
+  }
+
+  .cardContainer {
+    height: fit-content;
+    padding: 15px;
+    margin-top: 3rem;
+    color: white;
+    font-family: sharedStyles.$font-family;
+    font-size: 1.3rem;
+    text-align: center;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    padding-left: 20rem;
+    gap: 6rem;
+
+    .cards {
+        display: flex;
+        justify-content: center;
+      .card-body {
+        color: white;
+        font-family: sharedStyles.$font-family;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 30px;
+
+        .row1,
+        .row2 {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+
+          .orderStatisticsItem {
+            width: 6rem;
+            height: 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            margin-bottom: 2rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            background-color: rgba(140, 124, 230, 0.258);
+            border-radius: 15px;
+            animation: floatIn 1s ease-out forwards;
+          }
+        }
+      }
+    }
+
+    .chart {
+      ag-charts-canvas-container {
+        height: 100%;
+      }
+    }
+  }
+
+  .button {
+    button {
+      padding: 8px 12px;
+      background-color: #06068c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 10rem;
+      height: 3rem;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      font-family: sharedStyles.$font-family;
+      font-weight: 700;
+
+      &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  // Responsive Styles
+  @media (max-width: 1440px) {
+    .cardContainer {
+      gap: 3rem;
+      padding-left: 8rem;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .cardContainer {
+      flex-direction: column;
+      padding-left: 2rem;
+      gap: 2rem;
+
+        .cards .card-body {
+            flex-direction: row;
+
+            .row1, .row2 {
+                display: flex;
+
+                .orderStatisticsItem {
+                    margin-left: 0.5rem;
+                    margin-right: 0.5rem;
+                }
+                
+            }
+        }
+    }
+  }
+
+  @media (max-width: 932px) {
+    .cardContainer {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      .cards .card-body {
+        flex-direction: column;
+
+        .row1, .row2 {
+            display: flex;
+
+            .orderStatisticsItem {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+        }
+    }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .card-header {
+      font-size: 1.8rem;
+    }
+    .cardContainer {
+      font-size: 1.1rem;
+
+      .orderStatisticsItem {
+        width: 5rem;
+        height: 5rem;
+        padding: 15px;
+      }
+    }
+    
+  }
+
+  @media (max-width: 425px) {
+    .card-header {
+      font-size: 1.5rem;
+      padding-top: 20px;
+    }
+    .cardContainer {
+      padding: 10px;
+      font-size: 1rem;
+      gap: 1rem;
+    }
+    .orderStatisticsItem {
+      width: 4rem;
+      height: 4rem;
+      padding: 10px;
+    }
+    .button button {
+      width: 8rem;
+      height: 2.5rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+// Floating animation
+@keyframes floatIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SchoolService } from '../../../services/school.service';
+import { School } from '../../../models/school.model';
 
 @Component({
   selector: 'app-manage-schools',
@@ -12,43 +14,27 @@ import { FormsModule } from '@angular/forms';
 })
 export class ManageSchoolsComponent {
   searchTerm: string = '';
-  schools = [
-    {
-      name: "St. Peter's College",
-      address: "Colombo 04",
-      email: "contact@stpeters.edu",
-      contactNumber: "011-2567890",
-      username: "stpeters",
-      principalName: "Rev. Fr. John Doe"
-    },
-    {
-      name: "St. Joseph's College",
-      address: "Colombo 10",
-      email: "info@stjosephs.edu",
-      contactNumber: "011-2233445",
-      username: "stjosephs",
-      principalName: "Rev. Fr. Michael Smith"
-    },
-    {
-      name: "St. Joseph's College",
-      address: "Colombo 10",
-      email: "info@stjosephs.edu",
-      contactNumber: "011-2233445",
-      username: "stjosephs",
-      principalName: "Rev. Fr. Michael Smith"
-    },
-    {
-      name: "St. Joseph's College",
-      address: "Colombo 10",
-      email: "info@stjosephs.edu",
-      contactNumber: "011-2233445",
-      username: "stjosephs",
-      principalName: "Rev. Fr. Michael Smith"
-    }
-  ];
+  schools: School[] = [];
+  filteredSchools: School[] = [];
 
-  filteredSchools = [...this.schools];
+  constructor(private schoolService: SchoolService) {}
 
+  ngOnInit() {
+    this.loadSchools();
+  }
+
+  loadSchools() {
+    this.schoolService.getSchools().subscribe(
+      (data: School[]) => {
+        console.log('Schools:', data);
+        this.schools = data;
+        this.filteredSchools = [...this.schools];
+      },
+      (error) => {
+        console.error('Error fetching schools:', error);
+      }
+    );
+  }
   searchSchool() {
     this.filteredSchools = this.schools.filter(school =>
       school.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -60,7 +46,8 @@ export class ManageSchoolsComponent {
 
   updateSchool(school: any) {
     console.log("Update school:", school);
-    // Implement update logic here
+    
+    
   }
 
   deleteSchool(school: any) {
