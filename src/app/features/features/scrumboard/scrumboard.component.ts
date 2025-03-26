@@ -3,6 +3,9 @@ import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TaskService } from '../../../services/task.service';
+import { ModelPaper } from '../../../models/model-paper.model';
+import { Task } from '../../../models/task.model';
 
 interface Column {
   name: string;
@@ -21,7 +24,9 @@ interface Column {
   ]
 })
 export class ScrumboardComponent {
-  constructor (private router: Router) {}
+  constructor (private router: Router, 
+    private taskService: TaskService,
+  ) {}
 
   newTask: string = '';
 
@@ -49,8 +54,33 @@ export class ScrumboardComponent {
 
   addTask() {
     if (this.newTask.trim()) {
-      this.columns[0].tasks.push(this.newTask);
-      this.newTask = '';
+      let taskParts = this.newTask.split('-');
+      if (taskParts.length < 4) {
+        alert('Invalid task format. Use: Grade-Category-PaperNo-PartNo');
+        return;
+      }
+
+      let modelPaper = new ModelPaper(taskParts[0], taskParts[1], taskParts[2], taskParts[3]);
+
+      // Save Model Paper
+      this.taskService.saveModelPaper(modelPaper).subscribe(response => {
+        
+        if (response.success) {
+          let task = new Task(response.modelPaperId);
+
+          // Save Task
+          console.log("Im here")
+          this.taskService.saveTask(task).subscribe(taskResponse => {
+            if (taskResponse.success) {
+              this.columns[0].tasks.push(this.newTask);
+              this.newTask = '';
+            }
+          },
+          error => {
+            console.error('Error saving task:', error);
+          });
+        }
+      });
     }
   }
 
