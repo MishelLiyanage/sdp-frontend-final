@@ -9,15 +9,22 @@
   </div>
 
   <div class="columns">
-    <div class="column" *ngFor="let column of columns; let i = index">
+    <div class="column" *ngFor="let column of columns">
       <h3>{{ column.name }}</h3>
       <div cdkDropList 
            [cdkDropListData]="column.tasks"
            class="task-list"
            (cdkDropListDropped)="drop($event)"
-           [cdkDropListConnectedTo]="column.connectedTo"
+           [cdkDropListConnectedTo]="column.connectedTo" 
            [id]="column.id">
-        <div class="task" *ngFor="let task of column.tasks" (click)="updateTask()" cdkDrag>{{ task }}</div>
+        <div class="task" *ngFor="let task of column.tasks" (click)="updateTask()" cdkDrag>
+          <p><strong>{{ task.modelPaper.grade }}</strong></p>
+          <p><strong>{{ task.modelPaper.category }}</strong></p>
+          <p><strong>{{ task.modelPaper.paperNo }}</strong></p>
+          <p><strong>{{ task.modelPaper.partNo }}</strong></p>
+          <p><strong>Due Date:</strong> {{ task.dueDate }}</p>
+          <p><strong>Assigned Employee:</strong> {{ task.assignedEmployee }}</p>
+        </div>
       </div>
     </div>
   </div>
