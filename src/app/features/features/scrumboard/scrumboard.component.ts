@@ -126,36 +126,46 @@ export class ScrumboardComponent {
         alert('Invalid task format. Use: Grade-Category-PaperNo-PartNo');
         return;
       }
-
+  
       let modelPaper = new ModelPaper(taskParts[0], taskParts[1], taskParts[2], taskParts[3]);
-
+  
       // Save Model Paper
-      this.taskService.saveModelPaper(modelPaper).subscribe((response) => {
-        if (response.success) {
-          let task = new Task(
-            response.modelPaper, // Use modelPaper object
-            'To Do', // Default status
-            '', // No due date initially
-            '' // No assigned employee initially
-          );
-
-          // Save Task
-          this.taskService.saveTask(task).subscribe(
-            (taskResponse) => {
-              if (taskResponse.success) {
-                this.columns[0].tasks.push(task); // Add task to the "To Do" column
-                this.newTask = ''; // Clear the input field
+      this.taskService.saveModelPaper(modelPaper).subscribe(
+        (response) => {
+          if (response.success) {
+            let task = new Task(
+              response.modelPaper, // Use modelPaper object
+              'To Do', // Default status
+              '', // No due date initially
+              '' // No assigned employee initially
+            );
+  
+            // Save Task
+            this.taskService.saveTask(task).subscribe(
+              (taskResponse) => {
+                if (taskResponse.success) {
+                  this.columns[0].tasks.push(task); // Add task to the "To Do" column
+                  this.newTask = ''; // Clear the input field
+                }
+              },
+              (error) => {
+                alert('Error saving task. Please try again.');
+                console.error('Error saving task:', error);
               }
-            },
-            (error) => {
-              alert('Error saving task. Please try again.');
-              console.error('Error saving task:', error);
-            }
-          );
+            );
+          }
+        },
+        (error) => {
+          if (error.error && error.error.message === 'Model paper already exists.') {
+            alert('Error: Model paper already exists.');
+          } else {
+            alert('Error saving model paper. Please try again.');
+          }
+          console.error('Error saving model paper:', error);
         }
-      });
+      );
     }
-  }
+  }  
 
   updateTask() {
     this.router.navigate(['/features/updateTask']);

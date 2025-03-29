@@ -2,17 +2,20 @@
 
 .orderStatisticsContainer {
   text-align: center;
-  background-image: url("../.../../../../../assets/images/orderStatisticsContainer.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  // background-image: url("../.../../../../../assets/images/orderStatisticsContainer.png");
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-position: center;
+  background-color: white;
   height: fit-content;
   justify-content: center;
-
+  padding-left: 5rem;
+  padding-right: 5rem;
+  
   .card-header {
     font-size: 2rem;
-    font-weight: bold;
-    color: white;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
     font-family: sharedStyles.$font-family;
     padding-top: 30px;
   }
@@ -35,7 +38,7 @@
         display: flex;
         justify-content: center;
       .card-body {
-        color: white;
+        color: rgb(244, 245, 255);
         font-family: sharedStyles.$font-family;
         display: flex;
         flex-direction: column;
@@ -59,7 +62,7 @@
             margin-bottom: 2rem;
             margin-left: 1rem;
             margin-right: 1rem;
-            background-color: rgba(140, 124, 230, 0.258);
+            background-color: rgba(52, 0, 112, 0.966);
             border-radius: 15px;
             animation: floatIn 1s ease-out forwards;
           }
@@ -67,11 +70,12 @@
       }
     }
 
-    .chart {
-      ag-charts-canvas-container {
-        height: 100%;
-      }
-    }
+    // .chart {
+    //   ag-charts-canvas-container {
+    //     width: 50%;
+    //     height: 500px;
+    //   }
+    // }
   }
 
   .button {
