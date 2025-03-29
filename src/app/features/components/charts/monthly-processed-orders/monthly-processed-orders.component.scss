@@ -1,0 +1,11 @@
+#container {
+    width: 45%;
+    height: 500px;
+    background: #f0f0f0; /* Light background for depth */
+    border-radius: 10px;
+    box-shadow: 
+        inset 5px 5px 10px rgba(0, 0, 0, 0.2),  /* Inner shadow for depth */
+        inset -5px -5px 10px rgba(255, 255, 255, 0.8), /* Highlight for emboss effect */
+        5px 5px 15px rgba(0, 0, 0, 0.2); /* Outer shadow for a floating effect */
+    padding: 20px;
+}

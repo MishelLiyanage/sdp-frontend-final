@@ -5,6 +5,7 @@ import { PageStartingContainerComponent } from "../../components/page-starting-c
 import { AgCharts } from 'ag-charts-angular';
 // Chart Options Type Interface
 import { AgChartOptions } from 'ag-charts-community';
+import { MonthlyProcessedOrdersComponent } from "../../components/charts/monthly-processed-orders/monthly-processed-orders.component";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -12,8 +13,9 @@ import { AgChartOptions } from 'ag-charts-community';
   imports: [
     CommonModule,
     PageStartingContainerComponent,
-    AgCharts
-  ],
+    AgCharts,
+    MonthlyProcessedOrdersComponent
+],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
 })
