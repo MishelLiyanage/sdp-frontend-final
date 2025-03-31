@@ -4,7 +4,22 @@
 
 <div class="scrumboard">
   <div class="add-task">
-    <input type="text" [(ngModel)]="newTask" placeholder="Enter new task">
+    <select [(ngModel)]="selectedGrade">
+      <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
+    </select>
+  
+    <select [(ngModel)]="selectedCategory">
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+  
+    <select [(ngModel)]="selectedPaperNumber">
+      <option *ngFor="let number of paperNumbers" [value]="number">{{ number }}</option>
+    </select>
+  
+    <select [(ngModel)]="selectedPartNumber">
+      <option *ngFor="let part of partNumbers" [value]="part">{{ part }}</option>
+    </select>
+  
     <button (click)="addTask()">Add Task</button>
   </div>
 

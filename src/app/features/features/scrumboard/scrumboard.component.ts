@@ -21,7 +21,7 @@ interface Column {
   imports: [CommonModule, FormsModule, DragDropModule],
 })
 export class ScrumboardComponent {
-  constructor(private router: Router, private taskService: TaskService) {}
+  constructor(private router: Router, private taskService: TaskService) { }
 
   newTask: string = '';
 
@@ -64,6 +64,16 @@ export class ScrumboardComponent {
     },
   ];
 
+  grades: string[] = ['Grade 3', 'Grade 4', 'Grade 5'];
+  categories: string[] = ['Scholarship Tamil', 'Scholarship Sinhala'];
+  paperNumbers: number[] = Array.from({ length: 16 }, (_, i) => i + 1);
+  partNumbers: number[] = [1, 2];
+
+  selectedGrade!: string;
+  selectedCategory!: string;
+  selectedPaperNumber!: number;
+  selectedPartNumber!: number;
+
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer !== event.container) {
       transferArrayItem(
@@ -73,19 +83,86 @@ export class ScrumboardComponent {
         event.currentIndex
       );
 
-      // // Update task status after moving
-      // const movedTask = event.container.data[event.currentIndex];
-      // movedTask.status = this.columns.find((col) => col.id === event.container.id)?.name || movedTask.status;
+      // Find the moved task
+      const movedTask = event.container.data[event.currentIndex];
 
-      // // Call API to update task status in backend
-      // this.taskService.updateTaskStatus(movedTask.taskId, movedTask.status).subscribe(
-      //   () => console.log('Task status updated'),
-      //   (error) => console.error('Error updating task status:', error)
-      // );
+      // Ensure taskId is valid
+      if (movedTask.taskId === 0) {
+        console.error('Invalid taskId:', movedTask.taskId);
+        alert('Invalid task ID. Please try again.');
+
+        transferArrayItem(
+          event.container.data,
+          event.previousContainer.data,
+          event.currentIndex,
+          event.previousIndex
+        );
+
+        return; // Prevent further actions if taskId is invalid
+      }
+
+      // Determine new status based on the column ID
+      const newStatus = this.columns.find((col) => col.id === event.container.id)?.name || movedTask.status;
+
+      // Only update if the status has changed
+      if (movedTask.status !== newStatus) {
+        movedTask.status = newStatus;
+
+        if (movedTask.status === 'Printing') {
+          const token = localStorage.getItem('accessToken');
+
+          if (token) {
+            const userRole = this.getUserRoleFromToken(token);
+
+            if (userRole === 'ROLE_ADMIN') {
+              this.router.navigate(['/features/updateTask', movedTask.taskId]); //**************** */
+            } else {
+              alert('You do not have permission to access this form.');
+            }
+          } else {
+            alert('No authentication token found. Please log in.');
+          }
+        }
+
+        // Call API to update task status in backend
+        if (movedTask.taskId) {
+          this.taskService.updateTaskStatus(movedTask.taskId, newStatus).subscribe({
+            next: () => {
+              console.log('Task status updated successfully');
+              alert('Task status updated successfully!');
+            },
+            error: (error) => {
+              console.error('Error updating task status:', error);
+              alert('Error updating task status. Please try again.');
+
+              // Handle failure (optional rollback)
+              transferArrayItem(
+                event.container.data,
+                event.previousContainer.data,
+                event.currentIndex,
+                event.previousIndex
+              );
+            }
+          });
+        } else {
+          console.error('Task ID is missing for status update');
+          alert('Task ID is missing for status update. Please try again.');
+        }
+      }
     } else {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
   }
+
+  getUserRoleFromToken(token: string): string | null {
+    try {
+        const tokenPayload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
+        return tokenPayload.role || null; // Assuming 'role' field is present
+    } catch (error) {
+        console.error('Invalid token format', error);
+        return null;
+    }
+}
 
   ngOnInit() {
     this.loadTasks();
@@ -95,11 +172,15 @@ export class ScrumboardComponent {
     this.taskService.getTasks().subscribe(
       (response) => {
         if (response.success) {
-          // // Clear existing tasks before loading new ones
-          // this.columns.forEach((column) => (column.tasks = []));
-
           response.tasks.forEach((taskData) => {
             let column = this.columns.find((col) => col.name.toLowerCase() === taskData.status.toLowerCase());
+
+            if (!column) {
+              console.error('Column not found for status:', taskData.status);
+              alert('Column not found for status: ' + taskData.status);
+              return;
+            }
+
             if (column) {
               const task = new Task(
                 taskData.modelPaper, // modelPaper object
@@ -107,6 +188,7 @@ export class ScrumboardComponent {
                 taskData.dueDate,
                 taskData.assignedEmployee
               );
+              task.taskId = taskData.taskId; // Ensure taskId is assigned properly
               column.tasks.push(task);
             }
           });
@@ -120,52 +202,64 @@ export class ScrumboardComponent {
   }
 
   addTask() {
-    if (this.newTask.trim()) {
-      let taskParts = this.newTask.split('-');
-      if (taskParts.length < 4) {
-        alert('Invalid task format. Use: Grade-Category-PaperNo-PartNo');
-        return;
-      }
-  
-      let modelPaper = new ModelPaper(taskParts[0], taskParts[1], taskParts[2], taskParts[3]);
-  
-      // Save Model Paper
-      this.taskService.saveModelPaper(modelPaper).subscribe(
-        (response) => {
-          if (response.success) {
-            let task = new Task(
-              response.modelPaper, // Use modelPaper object
-              'To Do', // Default status
-              '', // No due date initially
-              '' // No assigned employee initially
-            );
-  
-            // Save Task
-            this.taskService.saveTask(task).subscribe(
-              (taskResponse) => {
-                if (taskResponse.success) {
-                  this.columns[0].tasks.push(task); // Add task to the "To Do" column
-                  this.newTask = ''; // Clear the input field
-                }
-              },
-              (error) => {
-                alert('Error saving task. Please try again.');
-                console.error('Error saving task:', error);
-              }
-            );
-          }
-        },
-        (error) => {
-          if (error.error && error.error.message === 'Model paper already exists.') {
-            alert('Error: Model paper already exists.');
-          } else {
-            alert('Error saving model paper. Please try again.');
-          }
-          console.error('Error saving model paper:', error);
-        }
-      );
+    // Ensure all dropdowns have selected values
+    if (!this.selectedGrade || !this.selectedCategory || !this.selectedPaperNumber || !this.selectedPartNumber) {
+      alert('Please select all fields before adding a task.');
+      return;
     }
-  }  
+
+    // Create a ModelPaper object
+    let modelPaper = new ModelPaper(
+      this.selectedGrade,
+      this.selectedCategory,
+      "Paper " + this.selectedPaperNumber.toString(), // Convert number to string if needed
+      "Part " + this.selectedPartNumber.toString()
+    );
+
+    // Save Model Paper
+    this.taskService.saveModelPaper(modelPaper).subscribe(
+      (response) => {
+        if (response.success) {
+          let task = new Task(
+            response.modelPaper, // Use modelPaper object
+            'To Do', // Default status
+            '', // No due date initially
+            '' // No assigned employee initially
+          );
+
+          // Save Task
+          this.taskService.saveTask(task).subscribe(
+            (taskResponse) => {
+              if (taskResponse.success) {
+                this.columns[0].tasks.push(task); // Add task to the "To Do" column
+
+                alert('Task added successfully!');
+                console.log('Task added successfully:', taskResponse.task);
+
+                // Clear the selection after adding task
+                this.selectedGrade = '';
+                this.selectedCategory = '';
+                this.selectedPaperNumber = 0;
+                this.selectedPartNumber = 0;
+              }
+            },
+            (error) => {
+              alert('Error saving task. Please try again.');
+              console.error('Error saving task:', error);
+            }
+          );
+        }
+      },
+      (error) => {
+        if (error.error && error.error.message === 'Model paper already exists.') {
+          alert('Error: Model paper already exists.');
+        } else {
+          alert('Error saving model paper. Please try again.');
+        }
+        console.error('Error saving model paper:', error);
+      }
+    );
+  }
 
   updateTask() {
     this.router.navigate(['/features/updateTask']);
