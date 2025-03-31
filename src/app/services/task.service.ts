@@ -15,7 +15,7 @@ export class TaskService {
   // Update Task
   updateTask(taskData: any): Observable<any> {
     const token = localStorage.getItem('accessToken'); // Retrieve stored token
-    console.log('Stored Token:', token);
+
     if (!token) {
       console.error('No token found in localStorage!');
       return new Observable<any>(); // Return an empty observable if no token
@@ -31,17 +31,16 @@ export class TaskService {
   // Save Model Paper
   saveModelPaper(modelPaper: ModelPaper): Observable<any> {
     const token = localStorage.getItem('accessToken'); // Retrieve stored token
-    console.log('Stored Token:', token);
+
     if (!token) {
       console.error('No token found in localStorage!');
+
       return new Observable<any>(); // Return an empty observable if no token
     }
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
     });
-
-    console.log('Headers:', headers.get('Authorization'));  // Verify header value
 
     return this.http.post<any>(`${this.baseUrl}/modelpaper/`, modelPaper, { headers });
   }
@@ -49,9 +48,10 @@ export class TaskService {
   // Save Task
   saveTask(task: Task): Observable<any> {
     const token = localStorage.getItem('accessToken'); // Retrieve stored token
-    console.log('Token:', token);
+
     if (!token) {
       console.error('No token found in localStorage!');
+      alert('Error: No token Found!');
       return new Observable<any>(); // Return an empty observable if no token
     }
 
@@ -59,25 +59,47 @@ export class TaskService {
       Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
     });
 
-    console.log('Headers:', headers.get('Authorization'));  // Verify header value
-    console.log('Taskkkk:', task);  // Verify task data
-     
     return this.http.post<any>(`${this.baseUrl}/task/`, task, { headers });
   }
 
   getTasks(): Observable<{ success: boolean; tasks: Task[] }> {
     const token = localStorage.getItem('accessToken'); // Retrieve stored token
-        console.log('Stored Token:', token);
-    
-        // if (!token) {
-        //   console.error('No token found in localStorage!');
-        //   return new Observable<School[]>(); // Return an empty observable if no token
-        // }
-    
-        const headers = new HttpHeaders({
-          Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
-        });
-        
+
+    if (!token) {
+      console.error('No token found in localStorage!');
+      return new Observable<{ success: boolean; tasks: Task[] }>(); // Return an empty observable if no token
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
+    });
+
     return this.http.get<{ success: boolean; tasks: Task[] }>(`${this.baseUrl}/task/getTasks`, { headers });
+  }
+
+  // // Method to fetch task details by the task's properties
+  // getTaskId(task: Task): Observable<number> {
+  //   return this.http.get<number>(`${this.baseUrl}/task/getTaskId/${task.modelPaper.id}`); // Adjust URL as needed
+  // }
+
+  updateTaskStatus(taskId: number, status: string): Observable<any> {
+    const token = localStorage.getItem('accessToken'); // Retrieve stored token
+    
+    if (!token) {
+      console.error('No token found in localStorage!');
+      return new Observable<any>(); // Return an empty observable if no token
+    }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
+    });
+
+    const requestPayload = {
+      taskId: taskId, // Include taskId if needed
+      status: status,
+    };
+
+    const url = `${this.baseUrl}/task/${taskId}/status?status=${encodeURIComponent(status)}`;
+
+    return this.http.patch(url, {}, { headers });
   }
 }

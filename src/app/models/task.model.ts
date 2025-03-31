@@ -10,6 +10,7 @@ export class Task {
   assignedEmployee?: string;
 
   constructor(modelPaper: ModelPaper, status: string, dueDate?: string, assignedEmployee?: string) {
+    this.taskId = 0;
     this.modelPaper = modelPaper;
     this.createdDate = new Date().toISOString().split('T')[0]; // Convert to YYYY-MM-DD format
     this.createdTime = new Date().toLocaleTimeString('en-GB', { hour12: false }); // HH:mm:ss format
