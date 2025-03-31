@@ -37,7 +37,7 @@ body {
 
 .login-topic {
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.2rem;
     color: sharedStyles.$primary-color;
     margin-bottom: 40px;
     font-weight: bold;
@@ -50,12 +50,49 @@ body {
     flex-direction: column;
     text-align: center;
     width: 100%;
-    max-width: 460px;
+    max-width: 400px;
     padding: 20px;
+    font-size: 1rem;
     background: sharedStyles.$glass-bg;
     backdrop-filter: blur(10px);
     border-radius: 30px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    .form-group {
+       
+        height: 55px;
+        margin-bottom: 20px;
+        position: relative;
+
+    input {
+        width: 24rem;
+        height: 2rem;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: transparent;
+        box-shadow: 0 0 5px rgba(0, 0, 42, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        font-size: 1rem;
+        color: black;
+        font-family: sharedStyles.$font-family;
+        color: sharedStyles.$primary-color;
+        transition: all 0.3s ease-in-out;
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 42, 0.5);
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.788);
+            font-size: 1rem;
+            font-family: sharedStyles.$font-family;
+        }
+    }
+    }
 }
 
 .forgot-password {
@@ -64,30 +101,36 @@ body {
     text-decoration: none;
     font-weight: 100;
     font-family: sharedStyles.$font-family;
+    font-size: 1rem;
 }
 
 .forgot-password:hover {
     cursor: pointer;
     font-weight: bold;
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
 }
 
 .login-btn {
-    height: 51px;
-    width: 100%;
+    height: 2.4rem;
+    width: 50%;
     border: none;
     border-radius: 10px;
     transition: background-image 2s ease-in-out;
-    background-image: sharedStyles.$gradient-bg !important;
-    // background-color: rgba(77, 77, 233);
-    font-size: 20px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 42);
+    font-size: 1.3rem;
     font-family: sharedStyles.$font-family;
-    color: sharedStyles.$primary-color;
+    font-weight: 700;
     margin-top: 25px;
 }
 
 .login-btn:hover {
     cursor: pointer;
-    background-image: linear-gradient(to top left, #C961DE, #2954A3);
+    background-color: rgb(0, 0, 42);
+    color: white;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     
 }
 
@@ -115,6 +158,8 @@ body {
 
     a:hover {
         font-weight: bold;
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
     }
 }
 
@@ -122,7 +167,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 90%;
     height: 100%;
     z-index: 0; // Send it behind everything else
     pointer-events: none;

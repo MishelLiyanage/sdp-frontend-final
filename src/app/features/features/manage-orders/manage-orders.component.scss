@@ -1,15 +1,15 @@
 @use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
 
 .heading {
-  background-color: rgb(17, 16, 41);
+  background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 3, 58));
   color: white;
   font-family: sharedStyles.$font-family;
 
   h1 {
     padding-left: 6rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    font-size: 2.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
     animation: popEffect 0.6s ease-out forwards;
   }
@@ -40,16 +40,18 @@
     }
 
     input {
+      height: 1rem;
       width: 17rem;
       font-family: sharedStyles.$font-family;
     }
 
     button {
       width: 7rem;
-      background-color: rgb(0, 8, 161);
+      background-color: rgb(0, 7, 140);
       color: white;
       border-radius: 5px;
       font-family: sharedStyles.$font-family;
+      font-size: 0.9rem;
 
       &:hover {
         opacity: 0.9;
@@ -59,14 +61,14 @@
   }
 
   .table {
-    background-color: rgb(247, 246, 255);
-    width: fit-content;
+    background-color: rgb(254, 246, 255);
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 4rem;
     padding: 2rem;
     border-radius: 15px;
-    border: 1px solid rgba(69, 3, 69, 0.268);
+    border: 1px solid rgb(0, 8, 161, 0.3);
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
     animation: floatIn 1s ease-out forwards;
     position: relative;
@@ -77,8 +79,9 @@
 
       th,
       td {
-        padding-left: 20px;
-        padding-right: 20px;
+        font-size: 0.9rem;
+        padding-left: 15px;
+        padding-right: 15px;
         padding-top: 5px;
         padding-bottom: 5px;
       }
@@ -99,7 +102,7 @@
 
         .update-btn,
         .delete-btn {
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           padding: 5px;
           width: 5rem;
         }
@@ -124,7 +127,7 @@
       right: 2rem;
       width: 7rem;
       font-size: 1rem;
-      padding: 0.7rem;
+      padding: 0.5rem;
       background-color: rgb(0, 8, 161);
       color: white;
       font-family: sharedStyles.$font-family;

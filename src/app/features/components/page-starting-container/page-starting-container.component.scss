@@ -7,15 +7,12 @@
   align-items: center;
   height: fit-content;
   background-color: #000; // Black background
-  background-image: url("../../../../assets/images/homeImg2.jpg.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-image: linear-gradient(to bottom right, #000, #010439);
   padding: 20px;
   padding-top: 3rem;
 
   h1 {
-    font-size: 7rem; // Default size
+    font-size: 5rem; // Default size
     color: sharedStyles.$primary-color;
     opacity: 0.84;
     font-family: "Quattrocento Sans", serif;
@@ -34,14 +31,14 @@
   }
 
   p {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: sharedStyles.$primary-color;
     opacity: 0.7;
     font-family: "Quattrocento Sans", serif;
     font-weight: 400;
     font-style: normal;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
@@ -108,3 +105,5 @@
     }
   }
 }
+
+

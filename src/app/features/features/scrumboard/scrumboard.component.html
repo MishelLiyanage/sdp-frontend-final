@@ -4,39 +4,74 @@
 
 <div class="scrumboard">
   <div class="add-task">
-    <select [(ngModel)]="selectedGrade">
-      <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
-    </select>
-  
-    <select [(ngModel)]="selectedCategory">
-      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-    </select>
-  
-    <select [(ngModel)]="selectedPaperNumber">
-      <option *ngFor="let number of paperNumbers" [value]="number">{{ number }}</option>
-    </select>
-  
-    <select [(ngModel)]="selectedPartNumber">
-      <option *ngFor="let part of partNumbers" [value]="part">{{ part }}</option>
-    </select>
-  
+    <div>
+      <p>Grade:</p>
+      <select [(ngModel)]="selectedGrade">
+        <option *ngFor="let grade of grades" [value]="grade">
+          {{ grade }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <p>Category:</p>
+      <select [(ngModel)]="selectedCategory">
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <p>Paper Number:</p>
+      <select [(ngModel)]="selectedPaperNumber">
+        <option *ngFor="let number of paperNumbers" [value]="number">
+          {{ number }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <p>Part Number:</p>
+      <select [(ngModel)]="selectedPartNumber">
+        <option *ngFor="let part of partNumbers" [value]="part">
+          {{ part }}
+        </option>
+      </select>
+    </div>
+
     <button (click)="addTask()">Add Task</button>
   </div>
 
   <div class="columns">
     <div class="column" *ngFor="let column of columns">
       <h3>{{ column.name }}</h3>
-      <div cdkDropList 
-           [cdkDropListData]="column.tasks"
-           class="task-list"
-           (cdkDropListDropped)="drop($event)"
-           [cdkDropListConnectedTo]="column.connectedTo" 
-           [id]="column.id">
-        <div class="task" *ngFor="let task of column.tasks" (click)="updateTask()" cdkDrag>
-          <p><strong>{{ task.modelPaper.grade }}</strong></p>
-          <p><strong>{{ task.modelPaper.category }}</strong></p>
-          <p><strong>{{ task.modelPaper.paperNo }}</strong></p>
-          <p><strong>{{ task.modelPaper.partNo }}</strong></p>
+      <div
+        cdkDropList
+        [cdkDropListData]="column.tasks"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListConnectedTo]="column.connectedTo"
+        [id]="column.id"
+      >
+        <div
+          class="task"
+          *ngFor="let task of column.tasks"
+          (click)="updateTask()"
+          cdkDrag
+        >
+          <p>
+            <strong>{{ task.modelPaper.grade }}</strong>
+          </p>
+          <p>
+            <strong>{{ task.modelPaper.category }}</strong>
+          </p>
+          <p>
+            <strong>{{ task.modelPaper.paperNo }}</strong>
+          </p>
+          <p>
+            <strong>{{ task.modelPaper.partNo }}</strong>
+          </p>
           <p><strong>Due Date:</strong> {{ task.dueDate }}</p>
           <p><strong>Assigned Employee:</strong> {{ task.assignedEmployee }}</p>
         </div>
