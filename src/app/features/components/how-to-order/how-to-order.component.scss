@@ -14,7 +14,7 @@
 
   h2 {
     color: sharedStyles.$primary-color;
-    font-size: 3rem;
+    font-size: 2rem;
     margin: 50px 0;
     font-family: sharedStyles.$font-family;
     font-weight: 700;
@@ -43,8 +43,8 @@
       border: sharedStyles.$secondary-color 2px solid;
       border-radius: 30px;
       padding: 20px;
-      max-width: 540px;
-      height: 300px;
+      max-width: 350px;
+      height: 250px;
 
       .header {
         display: flex;
@@ -53,7 +53,7 @@
 
         .title {
           color: sharedStyles.$primary-color;
-          font-size: 1.8rem;
+          font-size: 1.5rem;
           font-weight: 700;
           border-radius: 5px;
           margin-top: 100px;
@@ -61,22 +61,20 @@
 
         .subTitle {
           color: sharedStyles.$primary-color;
-          font-size: 1.3rem;
+          font-size: 1.2rem;
           font-weight: 400;
         }
 
         .image1,
         .image2,
         .image3 {
-          width: 170px;
-          height: 170px;
+          width: 150px;
+          height: 150px;
           margin-left: 3rem;
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center;
         }
-
-        
 
         .image1 {
           background-image: url(../../../../assets/images/browse.png);
@@ -101,10 +99,9 @@
         p {
           color: sharedStyles.$primary-color;
           font-family: sharedStyles.$font-family;
-          font-size: 1.3rem;
+          font-size: 1rem;
           font-weight: 400;
           line-height: 200%;
-          margin-right: 50px;
         }
       }
     }
@@ -256,5 +253,17 @@
         }
       }
     }
+  }
+}
+
+
+@keyframes floatIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

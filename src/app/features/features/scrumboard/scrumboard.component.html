@@ -57,7 +57,7 @@
         <div
           class="task"
           *ngFor="let task of column.tasks"
-          (click)="updateTask()"
+          (click)="updateTask(task.taskId ?? 0)"
           cdkDrag
         >
           <p>
