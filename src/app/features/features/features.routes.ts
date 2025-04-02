@@ -13,6 +13,6 @@ export const featuresRoutes: Routes = [
   { path: 'updateSchoolProfile', component: UpdateSchoolProfileComponent},
   { path: 'manageSchools', component: ManageSchoolsComponent},
   { path: 'scrumboard', component: ScrumboardComponent},
-  { path: 'updateTask', component: UpdateTaskComponent},
+  { path: 'updateTask/:id', component: UpdateTaskComponent },
   { path: 'manageOrders', component: ManageOrdersComponent}
 ];

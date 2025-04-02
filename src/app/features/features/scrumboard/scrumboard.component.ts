@@ -114,7 +114,7 @@ export class ScrumboardComponent {
           if (token) {
             const userRole = this.getUserRoleFromToken(token);
 
-            if (userRole === 'ROLE_ADMIN') {
+            if (userRole === 'ROLE_EMPLOYEE') {
               this.router.navigate(['/features/updateTask', movedTask.taskId]); //**************** */
             } else {
               alert('You do not have permission to access this form.');
@@ -261,7 +261,7 @@ export class ScrumboardComponent {
     );
   }
 
-  updateTask() {
-    this.router.navigate(['/features/updateTask']);
+  updateTask(taskId: number) {
+    this.router.navigate([`/features/updateTask`, taskId]);
   }
 }

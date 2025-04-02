@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ModelPaper } from '../models/model-paper.model';
 import { Task } from '../models/task.model';
+import { ModelPaper } from '../models/model-paper.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,94 +12,44 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  // Update Task
-  updateTask(taskData: any): Observable<any> {
-    const token = localStorage.getItem('accessToken'); // Retrieve stored token
-
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('accessToken');
+    console.log('Token:', token); // Debugging line to check the token value
     if (!token) {
       console.error('No token found in localStorage!');
-      return new Observable<any>(); // Return an empty observable if no token
+      throw new Error('Authentication token not found');
     }
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
-    });
-
-    return this.http.put<any>(`${this.baseUrl}/task/${taskData.id}`, taskData, { headers });
+    return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
 
   // Save Model Paper
   saveModelPaper(modelPaper: ModelPaper): Observable<any> {
-    const token = localStorage.getItem('accessToken'); // Retrieve stored token
-
-    if (!token) {
-      console.error('No token found in localStorage!');
-
-      return new Observable<any>(); // Return an empty observable if no token
-    }
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
-    });
-
-    return this.http.post<any>(`${this.baseUrl}/modelpaper/`, modelPaper, { headers });
+    return this.http.post<any>(`${this.baseUrl}/modelpaper/`, modelPaper, { headers: this.getHeaders() });
   }
 
   // Save Task
   saveTask(task: Task): Observable<any> {
-    const token = localStorage.getItem('accessToken'); // Retrieve stored token
-
-    if (!token) {
-      console.error('No token found in localStorage!');
-      alert('Error: No token Found!');
-      return new Observable<any>(); // Return an empty observable if no token
-    }
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
-    });
-
-    return this.http.post<any>(`${this.baseUrl}/task/`, task, { headers });
+    return this.http.post<any>(`${this.baseUrl}/task/`, task, { headers: this.getHeaders() });
   }
 
+  // Get All Tasks
   getTasks(): Observable<{ success: boolean; tasks: Task[] }> {
-    const token = localStorage.getItem('accessToken'); // Retrieve stored token
-
-    if (!token) {
-      console.error('No token found in localStorage!');
-      return new Observable<{ success: boolean; tasks: Task[] }>(); // Return an empty observable if no token
-    }
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
-    });
-
-    return this.http.get<{ success: boolean; tasks: Task[] }>(`${this.baseUrl}/task/getTasks`, { headers });
+    return this.http.get<{ success: boolean; tasks: Task[] }>(`${this.baseUrl}/task/getTasks`, { headers: this.getHeaders() });
   }
 
-  // // Method to fetch task details by the task's properties
-  // getTaskId(task: Task): Observable<number> {
-  //   return this.http.get<number>(`${this.baseUrl}/task/getTaskId/${task.modelPaper.id}`); // Adjust URL as needed
-  // }
+  // Get Task by ID
+  getTaskById(taskId: number): Observable<Task> {
+    return this.http.get<Task>(`${this.baseUrl}/task/${taskId}`, { headers: this.getHeaders() });
+  }
 
+  // Update Task Status
   updateTaskStatus(taskId: number, status: string): Observable<any> {
-    const token = localStorage.getItem('accessToken'); // Retrieve stored token
-    
-    if (!token) {
-      console.error('No token found in localStorage!');
-      return new Observable<any>(); // Return an empty observable if no token
-    }
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
-    });
-
-    const requestPayload = {
-      taskId: taskId, // Include taskId if needed
-      status: status,
-    };
-
     const url = `${this.baseUrl}/task/${taskId}/status?status=${encodeURIComponent(status)}`;
+    return this.http.patch(url, {}, { headers: this.getHeaders() });
+  }
 
-    return this.http.patch(url, {}, { headers });
+  // Update Task
+  updateTask(taskId: number, taskData: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/task/${taskId}`, taskData, { headers: this.getHeaders() });
   }
 }

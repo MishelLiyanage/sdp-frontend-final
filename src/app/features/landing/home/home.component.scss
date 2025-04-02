@@ -14,7 +14,7 @@
   padding: 20px;
 
   h1 {
-    font-size: 10rem; // Default size
+    font-size: 9rem; // Default size
     color: sharedStyles.$primary-color;
     opacity: 0.84;
     font-family: "Quattrocento Sans", serif;
@@ -22,17 +22,19 @@
     font-style: normal;
     text-align: center;
     margin-bottom: 20px;
+    animation: floatIn 1s ease-out forwards;
   }
 
   p {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: sharedStyles.$primary-color;
     opacity: 0.7;
     font-family: "Quattrocento Sans", serif;
     font-weight: 400;
     font-style: normal;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 20px;
+    animation: floatIn 1s ease-out forwards;
   }
 }
 
@@ -45,9 +47,9 @@
 
 .login-btn,
 .register-btn {
-  width: 230px;
-  height: 60px;
-  font-size: 1.7rem;
+  width: 180px;
+  height: 45px;
+  font-size: 1.2rem;
   margin-top: 100px;
   font-family: "Quattrocento Sans", serif;
   font-weight: 400;
@@ -84,7 +86,7 @@
   flex-direction: column;
   justify-content: center; // Centers content vertically
   align-items: center; // Centers content horizontally
-  height: 95.4vh; // Ensures full height coverage
+  height: fit-content; // Ensures full height coverage
   background-color: #000; // Black background
   background-image: url("../../../../assets/images/descriptionImg.png");
   background-size: cover;
@@ -93,7 +95,7 @@
   padding: 20px;
 
   h2 {
-    font-size: 3rem;
+    font-size: 2rem;
     color: sharedStyles.$primary-color;
     opacity: 0.84;
     font-family: "Quattrocento Sans", serif;
@@ -104,7 +106,7 @@
   }
 
   p {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: sharedStyles.$primary-color;
     opacity: 0.8;
     width: 50%;
@@ -116,7 +118,7 @@
     display: flex;
     align-items: center; // Centers text inside
     justify-content: center;
-    line-height: 170%;
+    line-height: 200%;
   }
 
   p:hover {
@@ -126,22 +128,18 @@
 }
 
 .publications {
-  min-height: 95.4vh;
-  background-color: #000;
+  min-height: fit-content;
   align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: column;
-  background-image: url("../../../../assets/images/homeImg3.jpg.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 7, 68, 1) 100%);
   padding: 40px;
   text-align: center;
 
   h2 {
     color: #fff;
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 20px;
     font-family: sharedStyles.$font-family;
     font-weight: 700;
@@ -152,22 +150,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    width: 75%;
     gap: 40px;
     margin-top: 20px;
-
-    .publication-image {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .publication-name {
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
   }
 }
 
@@ -176,7 +160,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  min-height: 95.4vh;
+  min-height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -184,9 +168,9 @@
 
   h2 {
     color: #fff;
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 20px;
-    margin-top: 70px;
+    margin-top: 40px;
     font-family: sharedStyles.$font-family;
     font-weight: 700;
   }
@@ -316,3 +300,14 @@
 }
 
 // **********add device responsiveness to how to order part
+
+@keyframes floatIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
