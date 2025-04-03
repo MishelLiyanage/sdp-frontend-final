@@ -1,0 +1,18 @@
+<header>
+    <nav [class.scrolled]="isScrolled">
+        <ul class="nav-links" [class.active]="isMenuOpen">
+            <li class="link"><a href="#home">Home</a></li>
+            <li class="link"><a href="#about">About Me</a></li>
+            <li>
+                <div class="logo"></div>
+            </li>
+            <li class="link"><a href="#work">Work</a></li>
+            <li class="link"><a href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Hamburger icon (only visible on small screens) -->
+        <div class="menu-icon" (click)="toggleMenu()">
+            <span>&#9776;</span> <!-- Hamburger icon -->
+        </div>
+    </nav>
+</header>

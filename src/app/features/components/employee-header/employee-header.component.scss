@@ -1,0 +1,117 @@
+// Variables
+$primary-color: #7e77ff;
+$background-color: #f1f1f1;
+$font-family:"Quattrocento Sans", serif;
+$navbar-scrolled-bg: linear-gradient(to bottom right, #000000, #020088); // Gradient background for navbar when scrolled
+
+// Reset default margin and padding
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Header/Navigation styling
+header {
+    background-color: transparent;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; // Ensure it stays on top of content 
+}
+
+nav {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+nav.scrolled {
+    background-image: $navbar-scrolled-bg; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    background-image: url('../../../../assets/images/logo.png');
+    background-size: cover;
+    background-position: center;
+    width: 45px; // Adjust size of the logo as needed
+    height: 45px; // Adjust size of the logo as needed
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    gap: 140px;
+
+    .link {
+        margin-top: 1rem;
+    }
+
+    .link:hover {
+        color: $primary-color;
+        transform: scale(1.1); // Slightly enlarge on hover
+        transition: transform 0.3s ease; // Smooth transition for scaling
+        font-weight: 700;
+    }
+}
+
+.nav-links li {
+    display: inline-block;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-family: $font-family;
+    font-size: 18px;
+    // transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: $primary-color;
+}
+
+// Main content area
+main {
+    margin-top: 80px; // Adjust to give space under the fixed navbar
+    padding: 20px;
+    background-color: $background-color;
+}
+
+// Responsive Styling
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; // Hide links on small screens
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: #333;
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex; // Show links when active
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    nav .menu-icon {
+        display: block;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+    }
+
+    nav .menu-icon.opened {
+        background-color: $primary-color;
+    }
+}
