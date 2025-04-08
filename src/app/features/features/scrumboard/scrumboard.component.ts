@@ -114,8 +114,8 @@ export class ScrumboardComponent {
           if (token) {
             const userRole = this.getUserRoleFromToken(token);
 
-            if (userRole === 'ROLE_EMPLOYEE') {
-              this.router.navigate(['/features/updateTask', movedTask.taskId]); //**************** */
+            if (userRole === 'ROLE_EMPLOYEE') { //****************make it === */
+              this.router.navigate(['/features/updatePrintingProgress', movedTask.taskId]);
             } else {
               alert('You do not have permission to access this form.');
             }
@@ -173,24 +173,39 @@ export class ScrumboardComponent {
       (response) => {
         if (response.success) {
           response.tasks.forEach((taskData) => {
-            let column = this.columns.find((col) => col.name.toLowerCase() === taskData.status.toLowerCase());
-
+            let column = this.columns.find(
+              (col) => col.name.toLowerCase() === taskData.status.toLowerCase()
+            );
+  
             if (!column) {
               console.error('Column not found for status:', taskData.status);
               alert('Column not found for status: ' + taskData.status);
               return;
             }
-
-            if (column) {
-              const task = new Task(
-                taskData.modelPaper, // modelPaper object
-                taskData.status,
-                taskData.dueDate,
-                taskData.assignedEmployee
-              );
-              task.taskId = taskData.taskId; // Ensure taskId is assigned properly
-              column.tasks.push(task);
-            }
+  
+            const task = new Task(
+              taskData.modelPaper,
+              taskData.status,
+              taskData.dueDate,
+              taskData.assignedEmployee
+            );
+  
+            task.taskId = taskData.taskId;
+            column.tasks.push(task);
+  
+            // 🔁 Fetch assignment details using task ID
+            this.taskService.getAssignmentByTaskId(task.taskId?? 0).subscribe(
+              (assignment) => {
+                task.assignment = {
+                  employeeId: assignment.employeeId,
+                  assignedDate: assignment.assignedDate,
+                  deadline: assignment.deadline
+                };
+              },
+              (error) => {
+                console.error(`Failed to load assignment for task ID ${task.taskId}`, error);
+              }
+            );
           });
         }
       },
@@ -199,7 +214,7 @@ export class ScrumboardComponent {
         console.error('Error loading tasks:', error);
       }
     );
-  }
+  }  
 
   addTask() {
     // Ensure all dropdowns have selected values
@@ -261,7 +276,20 @@ export class ScrumboardComponent {
     );
   }
 
-  updateTask(taskId: number) {
-    this.router.navigate([`/features/updateTask`, taskId]);
+  updateTask(task: any) {
+    console.log('Navigating to update task with object:', task);
+  
+    if (task.status === 'Printing') {
+      // const token = localStorage.getItem('accessToken');
+      // const userRole = this.getUserRoleFromToken(token ?? '');
+      // if (userRole === 'ROLE_EMPLOYEE') {
+      //   alert('You do not have permission to access this form.');
+      //   return;
+      // }
+      this.router.navigate(['/features/updatePrintingProgress', task.taskId]);
+    } else {
+      this.router.navigate(['/features/updateTask'], { state: { task } });
+    }
   }
+    
 }

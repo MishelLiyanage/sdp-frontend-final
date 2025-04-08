@@ -6,6 +6,7 @@ import { ManageSchoolsComponent } from './manage-schools/manage-schools.componen
 import { ScrumboardComponent } from './scrumboard/scrumboard.component';
 import { UpdateTaskComponent } from './update-task/update-task.component';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
+import { UpdatePrintingProgressComponent } from './update-printing-progress/update-printing-progress.component';
 
 export const featuresRoutes: Routes = [
   { path: 'placeOrder', component: PlaceOrderComponent },
@@ -13,6 +14,7 @@ export const featuresRoutes: Routes = [
   { path: 'updateSchoolProfile', component: UpdateSchoolProfileComponent},
   { path: 'manageSchools', component: ManageSchoolsComponent},
   { path: 'scrumboard', component: ScrumboardComponent},
-  { path: 'updateTask/:id', component: UpdateTaskComponent },
-  { path: 'manageOrders', component: ManageOrdersComponent}
+  { path: 'updateTask', component: UpdateTaskComponent },
+  { path: 'manageOrders', component: ManageOrdersComponent},
+  { path: 'updatePrintingProgress/:taskId', component: UpdatePrintingProgressComponent}
 ];
