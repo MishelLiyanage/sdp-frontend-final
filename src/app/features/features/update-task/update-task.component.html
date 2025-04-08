@@ -5,9 +5,6 @@
 <div class="background">
     <div class="updateTaskForm">
         <form [formGroup]="updateTaskForm" (ngSubmit)="onUpdateTask()" novalidate>
-            
-            <!-- Hidden Task ID Field -->
-            <input id="taskId" type="hidden" formControlName="taskId" />
 
             <div class="form-group">
                 <label for="category">Paper Category</label>

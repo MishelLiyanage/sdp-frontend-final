@@ -1,0 +1,46 @@
+<div class="heading">
+    <h1>Update Printing Details Form</h1>
+</div>
+
+<div class="background">
+    <div class="update-task-container">
+        <form [formGroup]="printingTaskForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="submittedDate">Submitted Date</label>
+            <input type="date" id="submittedDate" formControlName="submittedDate" />
+          </div>
+      
+          <div class="form-group">
+            <label for="deadline">Deadline</label>
+            <input type="date" id="deadline" formControlName="deadline" />
+          </div>
+      
+          <div class="form-group">
+            <label for="expectedQuantity">Expected Quantity</label>
+            <input type="number" id="expectedQuantity" formControlName="expectedQuantity" />
+          </div>
+      
+          <div class="form-group">
+            <label for="remainingToPrintQuantity">Remaining to Print Quantity</label>
+            <input type="number" id="remainingToPrintQuantity" formControlName="remainingToPrintQuantity" />
+          </div>
+      
+          <div class="checkbox-group">
+            <label>
+              Is Started
+              <input type="checkbox" formControlName="isStarted" />
+            </label>
+          </div>
+      
+          <div class="checkbox-group">
+            <label>
+              Is Sent to Inventory
+              <input type="checkbox" formControlName="isSentToInventory" />
+            </label>
+          </div>
+      
+          <button type="submit" [disabled]="!printingTaskForm.valid">Submit</button>
+        </form>
+      </div>
+      
+</div>

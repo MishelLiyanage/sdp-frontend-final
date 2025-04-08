@@ -46,6 +46,7 @@
   <div class="columns">
     <div class="column" *ngFor="let column of columns">
       <h3>{{ column.name }}</h3>
+
       <div
         cdkDropList
         [cdkDropListData]="column.tasks"
@@ -57,23 +58,25 @@
         <div
           class="task"
           *ngFor="let task of column.tasks"
-          (click)="updateTask(task.taskId ?? 0)"
+          (click)="updateTask(task)"
           cdkDrag
         >
-          <p>
-            <strong>{{ task.modelPaper.grade }}</strong>
-          </p>
-          <p>
-            <strong>{{ task.modelPaper.category }}</strong>
-          </p>
-          <p>
-            <strong>{{ task.modelPaper.paperNo }}</strong>
-          </p>
-          <p>
-            <strong>{{ task.modelPaper.partNo }}</strong>
-          </p>
-          <p><strong>Due Date:</strong> {{ task.dueDate }}</p>
-          <p><strong>Assigned Employee:</strong> {{ task.assignedEmployee }}</p>
+          <p><strong>Task ID:</strong> {{ task.taskId }}</p>
+          <p><strong>Grade:</strong> {{ task.modelPaper.grade }}</p>
+          <p><strong>Category:</strong> {{ task.modelPaper.category }}</p>
+          <p><strong>Paper No:</strong> {{ task.modelPaper.paperNo }}</p>
+          <p><strong>Part No:</strong> {{ task.modelPaper.partNo }}</p>
+
+          <!-- 🟡 Assignment Details -->
+          <div *ngIf="task.assignment">
+            <p><strong>Assigned Date:</strong> {{ task.assignment.assignedDate | date:'mediumDate' }}</p>
+            <p><strong>Deadline:</strong> {{ task.assignment.deadline | date:'mediumDate' }}</p>
+            <p><strong>Employee ID:</strong> {{ task.assignment.employeeId }}</p>
+          </div>
+
+          <div *ngIf="!task.assignment">
+            <p style="color: rgb(145, 0, 0);"><em><strong>Assign the task...</strong></em></p>
+          </div>
         </div>
       </div>
     </div>

@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TaskService } from '../../../services/task.service';
 import { EmployeeService } from '../../../services/employee.service';
 import { CommonModule } from '@angular/common';
+import { EmployeeDetails } from '../../../models/employee-details.model';
+import { TaskEmployeeAssignment } from '../../../models/task-employee-assignment.model';
 
 @Component({
   selector: 'app-update-task',
@@ -31,22 +33,32 @@ export class UpdateTaskComponent implements OnInit {
       grade: ['', Validators.required],
       paperNo: ['', Validators.required],
       partNo: ['', Validators.required],
-      assignedDate: [new Date().toISOString().split('T')[0], Validators.required], // Current Local Date
+      assignedDate: [new Date().toISOString().split('T')[0], Validators.required],
       deadline: ['', Validators.required],
       employee: ['', Validators.required]
     });
-
-    // Get Task ID from Route Parameters (If taskId is passed via route)
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('taskId');
-      console.log('Task ID from route:', id);
-      if (id) {
-        this.taskId = +id;
-        this.loadTaskDetails(this.taskId);
-      }
-    });
-
-    // Load Employees
+  
+    // Get task from navigation state
+    const task = history.state.task;
+  
+    if (task) {
+      this.taskId = task.taskId;
+      this.updateTaskForm.patchValue({
+        category: task.modelPaper.category,
+        grade: task.modelPaper.grade,
+        paperNo: task.modelPaper.paperNo,
+        partNo: task.modelPaper.partNo,
+        assignedDate: new Date().toISOString().split('T')[0],
+        deadline: task.dueDate,
+        employee: task.assignedEmployee
+      });
+    } else {
+      console.warn('No task object passed. Consider fallback or redirect.');
+      // Optional: redirect or show message
+      this.router.navigate(['/features/task-list']);
+    }
+  
+    // Load employee options
     this.loadEmployees();
   }
 
@@ -58,31 +70,43 @@ export class UpdateTaskComponent implements OnInit {
       },
       (error) => {
         console.error('Error loading task details:', error);
+        alert('Failed to load task details.');
       }
     );
   }
 
   /** 🔹 Load Employees & Bind to Select */
-  loadEmployees(): void {
-    this.employeeService.getEmployees().subscribe(
-      (data) => {
-        // Transform employees to format: "Name - Department"
-        this.employees = data.map((emp: any) => `${emp.name} - ${emp.department}`);
-      },
-      (error) => {
-        console.error('Error loading employees:', error);
-      }
-    );
-  }
+  employeesDetails: EmployeeDetails[] = [];
+
+loadEmployees(): void {
+  this.employeeService.getEmployees().subscribe(
+    (data: EmployeeDetails[]) => {
+      this.employees = data.map(employee => `${employee.id} (${employee.nameWithDepartment})`);
+    },
+    (error) => {
+      console.error('Error loading employees:', error);
+      alert('Failed to load employees.');
+    }
+  );
+}
 
   /** 🔹 Update Task */
   onUpdateTask(): void {
     if (this.updateTaskForm.valid) {
-      this.taskService.updateTask(this.taskId, this.updateTaskForm.value).subscribe(
+      
+      //set the taskId, assignedDate, and deadline in the task object
+      const taskData: TaskEmployeeAssignment = { 
+        taskId: this.taskId,
+        assignedDate: this.updateTaskForm.value.assignedDate,
+        deadline: this.updateTaskForm.value.deadline,
+        employeeId: Number(this.updateTaskForm.value.employee.split(' ')[0]) // Extract employee ID from the string
+      };
+      
+      this.taskService.updateTask(taskData).subscribe(
         (response) => {
           console.log('Task updated successfully:', response);
           alert('Task updated successfully!');
-          this.router.navigate(['/features/task-list']); // Navigate back after update
+          this.router.navigate(['/features/scrumboard']); // Navigate back after update
         },
         (error) => {
           console.error('Error updating task:', error);

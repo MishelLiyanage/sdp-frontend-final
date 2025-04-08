@@ -49,7 +49,12 @@ export class TaskService {
   }
 
   // Update Task
-  updateTask(taskId: number, taskData: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/task/${taskId}`, taskData, { headers: this.getHeaders() });
+  updateTask(taskData: any): Observable<any> {
+    console.log('data:***', taskData); // Debugging line to check the task ID and data
+    return this.http.put<any>(`${this.baseUrl}/task/assign`, taskData, { headers: this.getHeaders() });
+  }
+
+  getAssignmentByTaskId(taskId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/task/assignment/${taskId}`, { headers: this.getHeaders() });
   }
 }
