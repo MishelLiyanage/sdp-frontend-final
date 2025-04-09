@@ -3,6 +3,10 @@ import { RegistrationComponent } from './features/auth/registration/registration
 
 export const routes: Routes = [
     {
+        path: 'publicPage',
+        loadChildren: () => import('./features/public-page/public-page/publicPage.routes').then(m => m.publicPageRoutes),
+    },
+    {
         path: 'home',
         loadChildren: () => import('./features/landing/home/home.routes').then(m => m.homeRoutes),
     },
@@ -18,7 +22,7 @@ export const routes: Routes = [
         path: 'features',
         loadChildren: () => import('./features/features/features.routes').then(m => m.featuresRoutes),
     },
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: 'publicPage', pathMatch: 'full' },
     { path: '**', redirectTo: 'home', pathMatch: 'full' }, 
     { path: 'register', component: RegistrationComponent }
 ];
