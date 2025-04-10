@@ -105,7 +105,6 @@ $font-family: "Quattrocento Sans", serif;
     }
 
     .getStarted {
-      // background-image: linear-gradient(to right, #090086, #234bce);
       background-color: #234bce;
       color: white;
       padding: 0.5rem 1.5rem;
@@ -118,61 +117,245 @@ $font-family: "Quattrocento Sans", serif;
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #c484e6;
+        background-color: #0b0149;
         color: white;
       }
     }
   }
 }
 
-.welcome-container {
-  background-image: linear-gradient(to right, #09008666, #8026c969, #cb2b4075);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.intro {
   display: flex;
-  flex-direction: column;
-  padding-left: 4rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-image: linear-gradient(to right, #09008666, #8026c969, #cb2b4075);
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
-  h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    font-family: $font-family;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    animation: floatIn 1s ease-out forwards;
-    animation-delay: 0s;
+  .welcome-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 4rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: $font-family;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      animation: floatIn 1s ease-out forwards;
+      animation-delay: 0s;
+    }
+
+    .subheading {
+      font-size: 4rem;
+      font-weight: 700;
+      font-family: $font-family;
+      margin-bottom: 1.5rem;
+      animation: floatIn 1s ease-out forwards;
+      animation-delay: 0.2s;
+      width: 100%;
+    }
+
+    .description {
+      font-size: 1rem;
+      font-family: $font-family;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      animation: floatIn 1s ease-out forwards;
+      animation-delay: 0.4s;
+    }
+
+    .call-to-action {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      font-family: $font-family;
+      animation: floatIn 1s ease-out forwards;
+      animation-delay: 0.6s;
+    }
   }
 
-  .subheading {
-    font-size: 4rem;
-    font-weight: 700;
-    font-family: $font-family;
-    margin-bottom: 1.5rem;
-    animation: floatIn 1s ease-out forwards;
-    animation-delay: 0.2s;
-    width: 45%;
-  }
-
-  .description {
-    width: 50%;
-    font-size: 1rem;
-    font-family: $font-family;
-    margin-bottom: 1.2rem;
-    font-weight: 700;
+  .intro-image {
+    width: 130%;
+    height: 25rem;
+    background: url("../../../../assets/images/flat-university-backgroundjpg-removebg.png")
+      no-repeat center center;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0.5rem;
     animation: floatIn 1s ease-out forwards;
     animation-delay: 0.4s;
   }
+}
 
-  .call-to-action {
+.about-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6rem;
+  background-color: #f8f8f8;
+  padding: 3rem;
+
+  .about-images {
     display: flex;
     flex-direction: row;
-    gap: 2rem;
-    font-family: $font-family;
-    animation: floatIn 1s ease-out forwards;
-    animation-delay: 0.6s;
+    align-items: center;
+  }
+
+  .about-image,
+  .about-image-right {
+    width: 20rem;
+    height: 25rem;
+    background-size: cover;
+    background-position: center;
+    border: none;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+
+    /* Embossed effect */
+    box-shadow: inset -4px -4px 6px rgba(255, 255, 255, 0.6),
+      inset 4px 4px 6px rgba(0, 0, 0, 0.2), 2px 2px 8px rgba(0, 0, 0, 0.1);
+    filter: contrast(1.05) brightness(0.98);
+  }
+
+  .about-image {
+    background: url("../../../../assets/images/public2-2.jpg.png") no-repeat
+      center center;
+    transform: rotate(-15deg);
+  }
+
+  .about-image-right {
+    background: url("../../../../assets/images/public1-1.jpg.png") no-repeat
+      center center;
+    transform: rotate(10deg);
+    margin-top: 10rem;
+  }
+
+  .about-image::before,
+  .about-image-right::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f8f8;
+    animation: wipeReveal 1s ease-out forwards;
+    z-index: 2;
+  }
+
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 35rem;
+
+    ul {
+      padding-left: 1.2rem;
+
+      li {
+        font-size: 1.1rem;
+        font-family: $font-family;
+        animation: floatIn 1s ease-out forwards;
+        animation-delay: 0s;
+      }
+    }
+
+    .about-heading {
+      font-size: 3.5rem;
+      font-weight: 700;
+      font-family: $font-family;
+      margin-bottom: 1rem;
+      animation: floatIn 1s ease-out forwards;
+      animation-delay: 0.2s;
+
+      .heading-part {
+        font-size: 3.5rem;
+        font-weight: bold;
+        background: linear-gradient(
+          45deg,
+          #000469,
+          #6f00ff,
+          #c800ff
+        ); /* Gradient colors */
+        -webkit-background-clip: text; /* For Webkit browsers (Chrome, Safari, etc.) */
+        background-clip: text; /* For other modern browsers */
+        color: transparent;
+      }
+    }
+
+    p {
+      font-size: 1rem;
+      font-family: $font-family;
+      margin-bottom: 1.3rem;
+      font-weight: 400;
+      line-height: 140%;
+      animation: floatIn 1s ease-out forwards;
+      animation-delay: 0.4s;
+    }
+
+    .about-stats {
+      display: flex;
+      flex-direction: row;
+      gap: 4rem;
+      margin-top: 1rem;
+
+      .stat {
+        display: flex;
+        flex-direction: column;
+        // gap: 0rem;
+        align-items: center;
+        justify-content: center;
+
+        h3 {
+          font-size: 4rem;
+          font-weight: bold;
+          background: linear-gradient(
+            45deg,
+            #00d1fb,
+            #3f64fa,
+            #7907b3
+          ); /* Gradient colors */
+          -webkit-background-clip: text; /* For Webkit browsers (Chrome, Safari, etc.) */
+          background-clip: text; /* For other modern browsers */
+          color: transparent;
+          animation: floatIn 1s ease-out forwards;
+          animation-delay: 0.6s;
+        }
+
+        .icon1 {
+          background: url("../../../../assets/images/ongoing\ support.png")
+            no-repeat center center;
+          background-size: cover;
+          width: 4.5rem;
+          height: 4.5rem;
+        }
+
+        .icon2 {
+          background: url("../../../../assets/images/continuous\ improvements.png")
+            no-repeat center center;
+          background-size: cover;
+          width: 4.5rem;
+          height: 4.5rem;
+        }
+
+        p {
+          font-size: 1.2rem;
+          margin-top: 1rem;
+          font-weight: 700;
+          animation: floatIn 1s ease-out forwards;
+          animation-delay: 0.8s;
+          font-family: $font-family;
+          text-align: center;
+        }
+      }
+    }
   }
 }
 
@@ -187,6 +370,14 @@ $font-family: "Quattrocento Sans", serif;
   }
 }
 
+@keyframes wipeReveal {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 
 /* === RESPONSIVENESS STARTS HERE === */
 
