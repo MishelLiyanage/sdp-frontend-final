@@ -129,9 +129,8 @@ $font-family: "Quattrocento Sans", serif;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
   background-image: linear-gradient(to right, #09008666, #8026c969, #cb2b4075);
-  border-radius: 0.5rem;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
   .welcome-container {
@@ -262,8 +261,6 @@ $font-family: "Quattrocento Sans", serif;
       li {
         font-size: 1.1rem;
         font-family: $font-family;
-        animation: floatIn 1s ease-out forwards;
-        animation-delay: 0s;
       }
     }
 
@@ -272,8 +269,6 @@ $font-family: "Quattrocento Sans", serif;
       font-weight: 700;
       font-family: $font-family;
       margin-bottom: 1rem;
-      animation: floatIn 1s ease-out forwards;
-      animation-delay: 0.2s;
 
       .heading-part {
         font-size: 3.5rem;
@@ -290,14 +285,12 @@ $font-family: "Quattrocento Sans", serif;
       }
     }
 
-    p {
+    .p {
       font-size: 1rem;
       font-family: $font-family;
       margin-bottom: 1.3rem;
       font-weight: 400;
       line-height: 140%;
-      animation: floatIn 1s ease-out forwards;
-      animation-delay: 0.4s;
     }
 
     .about-stats {
@@ -309,7 +302,6 @@ $font-family: "Quattrocento Sans", serif;
       .stat {
         display: flex;
         flex-direction: column;
-        // gap: 0rem;
         align-items: center;
         justify-content: center;
 
@@ -325,8 +317,6 @@ $font-family: "Quattrocento Sans", serif;
           -webkit-background-clip: text; /* For Webkit browsers (Chrome, Safari, etc.) */
           background-clip: text; /* For other modern browsers */
           color: transparent;
-          animation: floatIn 1s ease-out forwards;
-          animation-delay: 0.6s;
         }
 
         .icon1 {
@@ -349,8 +339,6 @@ $font-family: "Quattrocento Sans", serif;
           font-size: 1.2rem;
           margin-top: 1rem;
           font-weight: 700;
-          animation: floatIn 1s ease-out forwards;
-          animation-delay: 0.8s;
           font-family: $font-family;
           text-align: center;
         }
@@ -359,9 +347,201 @@ $font-family: "Quattrocento Sans", serif;
   }
 }
 
+.what-we-offer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem;
+  background-color: #ebebeba5;
+
+  .container {
+    ul {
+      padding-left: 3.2rem;
+
+      li {
+        font-size: 1.1rem;
+        font-family: $font-family;
+      }
+    }
+  }
+
+  .offerings-header {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      font-family: $font-family;
+      margin-bottom: 1rem;
+      margin-left: 2rem;
+      width: 100%;
+
+      .heading-part {
+        font-size: 3rem;
+        font-weight: bold;
+        background: linear-gradient(45deg, #000469, #6f00ff, #c800ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+    }
+
+    p {
+      font-size: 1rem;
+      font-family: $font-family;
+      margin-bottom: 1.3rem;
+      font-weight: 400;
+      line-height: 140%;
+      margin-right: 3rem;
+    }
+  }
+
+  .offerings-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+
+    .offering-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      border-radius: 0.5rem;
+      padding: 2rem;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      width: 15rem;
+      height: 25rem;
+      position: relative;
+
+      &.item1 {
+        background-image: url("../../../../assets/images/QP1.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      &.item2 {
+        background-image: url("../../../../assets/images/QP1.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      &.item3 {
+        background-image: url("../../../../assets/images/QP1.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      &.item4 {
+        background-image: url("../../../../assets/images/QP1.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        font-family: $font-family;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 17rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+        font-family: $font-family;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.scrolling-text-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.scrolling-text {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  animation: scroll-left 10s linear infinite;
+}
+
+.scrolling-text span {
+  display: inline-block;
+  padding-right: 2rem;
+  font-size: 7rem;
+  font-weight: 700;
+  font-family: sans-serif;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+
+  /* Core styling for outlined gradient text */
+  color: white;
+  -webkit-text-stroke: 2px transparent; /* needed for fallback */
+  background: linear-gradient(to right, #bb1021, #0626da);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 2px transparent;
+  -webkit-text-fill-color: white;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  /* Outline using stroke */
+  -webkit-text-stroke: 4px transparent;
+  position: relative;
+}
+
+.scrolling-text span::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  -webkit-text-stroke: 2px;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(to right, #d72638, #3f51b5);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.star-icon {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: middle;
+  margin: 0 0.3rem;
+  background-image: url("../../../../assets/images/star.png") no-repeat center center;
+  background-size: cover;
+}
+
+/* Key to seamless scroll: move entire double text block */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 @keyframes floatIn {
   from {
-    transform: translateY(70px);
+    transform: translateY(80px);
     opacity: 0;
   }
   to {
@@ -377,6 +557,40 @@ $font-family: "Quattrocento Sans", serif;
   100% {
     transform: translateX(100%);
   }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.in-view {
+  animation: floatIn 1s ease-out forwards;
+  animation-delay: 0.2s;
+  transform: translateY(0);
+}
+
+.wipe-reveal.in-view {
+  animation: wipeReveal 1s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+/* custom delays for each offering-item */
+.offering-item:nth-child(1).in-view {
+  animation-delay: 0.4s;
+}
+
+.offering-item:nth-child(2).in-view {
+  animation-delay: 0.8s;
+}
+
+.offering-item:nth-child(3).in-view {
+  animation-delay: 1.2s;
+}
+
+.offering-item:nth-child(4).in-view {
+  animation-delay: 1.6s;
 }
 
 /* === RESPONSIVENESS STARTS HERE === */
