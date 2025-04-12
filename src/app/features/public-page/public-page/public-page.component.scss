@@ -125,6 +125,7 @@ $font-family: "Quattrocento Sans", serif;
 }
 
 .intro {
+  //************************
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -403,8 +404,8 @@ $font-family: "Quattrocento Sans", serif;
   }
 
   .offerings-grid {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     justify-content: center;
 
@@ -417,7 +418,7 @@ $font-family: "Quattrocento Sans", serif;
       border-radius: 0.5rem;
       padding: 2rem;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      width: 15rem;
+      // width: 13rem;
       height: 25rem;
       position: relative;
 
@@ -480,7 +481,7 @@ $font-family: "Quattrocento Sans", serif;
   display: flex;
   flex-direction: row;
   white-space: nowrap;
-  animation: scroll-left 10s linear infinite;
+  animation: scroll-left 30s linear infinite;
 }
 
 .scrolling-text span {
@@ -520,13 +521,127 @@ $font-family: "Quattrocento Sans", serif;
   background-clip: text;
 }
 
-.star-icon {
-  width: 1rem;
-  height: 1rem;
-  vertical-align: middle;
-  margin: 0 0.3rem;
-  background-image: url("../../../../assets/images/star.png") no-repeat center center;
-  background-size: cover;
+.why-choose-us {
+  padding: 4rem 2rem;
+  background-color: #010535;
+
+  ul {
+    padding-left: 3.2rem;
+
+    li {
+      font-size: 1.1rem;
+      font-family: $font-family;
+      color: white;
+    }
+  }
+
+  .tagline {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    margin-left: 2rem;
+    font-family: $font-family;
+
+    .taglinePart {
+      background: linear-gradient(45deg, #000469, #6f00ff, #c800ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+
+    .feature-card {
+      position: relative;
+      padding: 2rem;
+      height: 20rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      // Dark overlay to help text stand out
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.65),
+          rgba(0, 0, 0, 0.5)
+        );
+        z-index: 1;
+      }
+
+      h3 {
+        position: relative;
+        z-index: 2;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0;
+        color: #ffffff;
+        font-family: $font-family;
+      }
+
+      .card-overlay {
+        position: absolute;
+        bottom: -200%;
+        left: 0;
+        height: 5rem;
+        background: rgba(0, 0, 0, 0.562);
+        color: white;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: bottom 0.4s ease;
+        font-family: $font-family;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        z-index: 2;
+
+        p {
+          margin: 0;
+        }
+      }
+
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+
+        .card-overlay {
+          bottom: 0;
+        }
+      }
+
+      // Background images for each card
+      &.crafted {
+        background-image: url("../../../../assets/images/Expertly\ Crafted\ Papers.jpg");
+      }
+
+      &.payment {
+        background-image: url("../../../../assets/images/Flexible\ Payment\ Options.jpg");
+      }
+
+      &.success {
+        background-image: url("../../../../assets/images/Aiding\ Student\ Success.jpg");
+      }
+
+      &.coverage {
+        background-image: url("../../../../assets/images/Comprehensive\ Coverage.jpg");
+      }
+    }
+  }
 }
 
 /* Key to seamless scroll: move entire double text block */
@@ -535,7 +650,7 @@ $font-family: "Quattrocento Sans", serif;
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-400%);
   }
 }
 
@@ -567,7 +682,6 @@ $font-family: "Quattrocento Sans", serif;
 
 .animate-on-scroll.in-view {
   animation: floatIn 1s ease-out forwards;
-  animation-delay: 0.2s;
   transform: translateY(0);
 }
 
@@ -577,20 +691,24 @@ $font-family: "Quattrocento Sans", serif;
 }
 
 /* custom delays for each offering-item */
-.offering-item:nth-child(1).in-view {
+.offering-item:nth-child(1).in-view,
+.feature-card:nth-child(1).in-view {
+  animation-delay: 0.2s;
+}
+
+.offering-item:nth-child(2).in-view,
+.feature-card:nth-child(2).in-view {
   animation-delay: 0.4s;
 }
 
-.offering-item:nth-child(2).in-view {
+.offering-item:nth-child(3).in-view,
+.feature-card:nth-child(3).in-view {
+  animation-delay: 0.6s;
+}
+
+.offering-item:nth-child(4).in-view,
+.feature-card:nth-child(4).in-view {
   animation-delay: 0.8s;
-}
-
-.offering-item:nth-child(3).in-view {
-  animation-delay: 1.2s;
-}
-
-.offering-item:nth-child(4).in-view {
-  animation-delay: 1.6s;
 }
 
 /* === RESPONSIVENESS STARTS HERE === */
@@ -616,13 +734,29 @@ $font-family: "Quattrocento Sans", serif;
 @media (max-width: 1024px) {
   .main-navbar {
     display: flex;
-    gap: 5rem;
+    gap: 4.5rem;
     flex-direction: row;
     align-items: center;
 
     .nav-items {
       gap: 2rem;
       flex-direction: row;
+    }
+  }
+
+  .about-section {
+    gap: 2rem;
+
+    .about-image,
+    .about-image-right {
+      width: 15rem;
+      height: 22rem;
+    }
+
+    .about-container {
+      .about-stats {
+        gap: 1rem;
+      }
     }
   }
 }
@@ -674,7 +808,7 @@ $font-family: "Quattrocento Sans", serif;
   .navbar {
     flex-direction: column;
     align-items: center;
-    gap: 5rem;
+    gap: 2rem;
 
     .auth-links {
       display: none;
@@ -703,9 +837,63 @@ $font-family: "Quattrocento Sans", serif;
       }
     }
   }
+
+  .intro {
+    gap: 1rem;
+
+    .welcome-container {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .subheading {
+        font-size: 3rem;
+      }
+    }
+  }
+
+  .about-section {
+    flex-direction: column;
+    gap: 2rem;
+
+    .about-image,
+    .about-image-right {
+      width: 15rem;
+      height: 22rem;
+    }
+
+    .about-container {
+      .about-stats {
+        gap: 1rem;
+      }
+    }
+  }
 }
 
 @media (max-width: 600px) {
+  .intro {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    .welcome-container {
+      padding-right: 2rem;
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .subheading {
+        font-size: 2.5rem;
+      }
+    }
+
+    .intro-image {
+      width: 100%;
+      height: 20rem;
+    }
+  }
+
   .navbar {
     flex-direction: column;
     align-items: center;
@@ -743,6 +931,24 @@ $font-family: "Quattrocento Sans", serif;
       }
     }
   }
+
+  .what-we-offer {
+    .offerings-header {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+
+      h2 {
+        font-size: 2.5rem;
+        margin-left: 0;
+      }
+
+      p {
+        font-size: 0.9rem;
+        margin-right: 0;
+      }
+    }
+  }
 }
 
 @media (max-width: 425px) {
@@ -772,6 +978,18 @@ $font-family: "Quattrocento Sans", serif;
       }
     }
   }
+
+  .about-section {
+    .about-images {
+      display: flex;
+      flex-direction: column;
+
+      // .about-image,
+      // .about-image-right {
+      //   width: 1rem;
+      // }
+    }
+  }
 }
 
 @media (max-width: 390px) {
@@ -783,6 +1001,47 @@ $font-family: "Quattrocento Sans", serif;
       display: flex;
       flex-direction: column;
       gap: 0.2rem;
+    }
+  }
+
+  .about-section {
+    .about-images {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about-container {
+      .about-heading {
+        font-size: 2rem;
+      }
+
+      .about-stats {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  }
+  
+  .why-choose-us {
+    .tagline {
+      font-size: 2rem;
+    }
+
+    .features-grid {
+      .feature-card {
+        height: 15rem;
+        padding: 1rem;
+        padding-left: 0%;
+
+        h3 {
+          font-size: 1.5rem;
+        }
+
+        .card-overlay {
+          font-size: 0.8rem;
+          padding: 1rem;
+        }
+      }
     }
   }
 }
