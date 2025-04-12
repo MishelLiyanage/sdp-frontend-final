@@ -480,7 +480,7 @@ $font-family: "Quattrocento Sans", serif;
   display: flex;
   flex-direction: row;
   white-space: nowrap;
-  animation: scroll-left 10s linear infinite;
+  animation: scroll-left 30s linear infinite;
 }
 
 .scrolling-text span {
@@ -520,13 +520,156 @@ $font-family: "Quattrocento Sans", serif;
   background-clip: text;
 }
 
-.star-icon {
-  width: 1rem;
-  height: 1rem;
-  vertical-align: middle;
-  margin: 0 0.3rem;
-  background-image: url("../../../../assets/images/star.png") no-repeat center center;
-  background-size: cover;
+.why-choose-us {
+  padding: 4rem 2rem;
+  background-color: #010535;
+
+  ul {
+    padding-left: 3.2rem;
+
+    li {
+      font-size: 1.1rem;
+      font-family: $font-family;
+      color: white;
+    }
+  }
+
+  .tagline {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    margin-left: 2rem;
+    font-family: $font-family;
+
+    .taglinePart {
+      background: linear-gradient(45deg, #000469, #6f00ff, #c800ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+    margin-left: 1.2rem;
+  
+    .feature-card {
+      position: relative;
+      padding: 2rem;
+      height: 20rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    
+      // Dark overlay to help text stand out
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        // background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+        z-index: 1;
+      }
+    
+      h3 {
+        position: relative;
+        z-index: 2;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0;
+        // color: #ff5566;
+        font-family: $font-family;
+      }
+    
+      .card-overlay {
+        position: absolute;
+        bottom: -200%;
+        left: 0;
+        height: 5rem;
+        // background: rgba(0, 3, 103, 0.6);
+        color: white;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: bottom 0.4s ease;
+        font-family: $font-family;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        z-index: 2;
+    
+        p {
+          margin: 0;
+        }
+      }
+    
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+    
+        .card-overlay {
+          bottom: 0;
+        }
+      }
+    
+      // Background images for each card
+      &.crafted {
+        background-image: url('../../../../assets/images/Expertly\ Crafted\ Papers.jpg');
+
+        h3 {
+          color: #ff5566;
+        }
+
+        .card-overlay {
+          background: hsla(354, 85%, 57%, 0.707);
+        }
+      }
+    
+      &.payment {
+        background-image: url('../../../../assets/images/Flexible\ Payment\ Options.jpg');
+
+        h3 {
+          color: #dd34ff;
+        }
+
+        .card-overlay {
+          background: hsla(294, 78%, 52%, 0.586);
+        }
+      }
+    
+      &.success {
+        background-image: url('../../../../assets/images/Aiding\ Student\ Success.jpg');
+
+        h3 {
+          color: #2622ea;
+        }
+
+        .card-overlay {
+          background: hsla(235, 78%, 52%, 0.586);
+        }
+      }
+    
+      &.coverage {
+        background-image: url('../../../../assets/images/Comprehensive\ Coverage.jpg');
+
+        h3 {
+          color: #4ad5ff;
+        }
+
+        .card-overlay {
+          background: hsla(194, 89%, 45%, 0.762);
+        }
+      }
+    }    
+  }  
 }
 
 /* Key to seamless scroll: move entire double text block */
@@ -535,7 +678,7 @@ $font-family: "Quattrocento Sans", serif;
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-400%);
   }
 }
 
