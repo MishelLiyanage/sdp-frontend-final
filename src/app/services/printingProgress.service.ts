@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Inventory } from '../models/inventory.model';
 
 @Injectable({
     providedIn: 'root'
@@ -31,4 +32,9 @@ export class PrintingProgressService {
     updatePrintingTask(task: any): Observable<any> {
         return this.http.put<any>(`${this.baseUrl}/printing-progress/update-printing`, task, { headers: this.getHeaders() });
     }
+
+    addToInventory(inventory: Inventory) {
+        console.log('Adding to inventory:', inventory); 
+        return this.http.post(`${this.baseUrl}/inventory/add`, inventory, { headers: this.getHeaders() });
+      }
 }
