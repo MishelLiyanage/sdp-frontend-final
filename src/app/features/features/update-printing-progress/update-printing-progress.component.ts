@@ -85,19 +85,39 @@ export class UpdatePrintingProgressComponent implements OnInit {
         ...this.printingTaskForm.value,
         submittedDate: this.getTodayDate()
       };
-
+  
       console.log('Updated Printing Task:', updatedPrintingTask);
-
+  
       this.printingProgressService.updatePrintingTask(updatedPrintingTask).subscribe({
         next: () => {
           alert('Printing task updated successfully!');
-          this.router.navigate(['/features/scrumboard']);
+  
+          if (this.printingTaskForm.value.isSentToInventory) {
+            const inventoryDetails = {
+              taskId: this.taskId,
+              quantity: this.printingTaskForm.value.expectedQuantity - this.printingTaskForm.value.remainingToPrintQuantity
+            };
+  
+            console.log('Inventory Details:', inventoryDetails);
+            this.printingProgressService.addToInventory(inventoryDetails).subscribe({
+              next: () => {
+                alert('Inventory updated successfully!');
+                this.router.navigate(['/features/scrumboard']);
+              },
+              error: (error) => {
+                console.error('Failed to add to inventory:', error);
+                alert('Inventory update failed.');
+              }
+            });
+          } else {
+            this.router.navigate(['/features/scrumboard']);
+          }
         },
-        error: (error: any) => {
+        error: (error) => {
           console.error('Update failed:', error);
-          alert('Failed to update task. Please try again.');
+          alert('Failed to update task.');
         }
       });
     }
-  }
+  }  
 }
