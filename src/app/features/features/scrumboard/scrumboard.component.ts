@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { TaskService } from '../../../services/task.service';
 import { ModelPaper } from '../../../models/model-paper.model';
 import { Task } from '../../../models/task.model';
+import { PrintingProgressService } from '../../../services/printingProgress.service';
 
 interface Column {
   name: string;
@@ -21,7 +22,10 @@ interface Column {
   imports: [CommonModule, FormsModule, DragDropModule],
 })
 export class ScrumboardComponent {
-  constructor(private router: Router, private taskService: TaskService) { }
+  constructor(
+    private router: Router, 
+    private taskService: TaskService, 
+    private printingProrgessService: PrintingProgressService) { }
 
   newTask: string = '';
 
@@ -193,8 +197,8 @@ export class ScrumboardComponent {
             task.taskId = taskData.taskId;
             column.tasks.push(task);
   
-            // 🔁 Fetch assignment details using task ID
-            this.taskService.getAssignmentByTaskId(task.taskId?? 0).subscribe(
+            // 🔁 Fetch assignment details
+            this.taskService.getAssignmentByTaskId(task.taskId ?? 0).subscribe(
               (assignment) => {
                 task.assignment = {
                   employeeId: assignment.employeeId,
@@ -204,6 +208,23 @@ export class ScrumboardComponent {
               },
               (error) => {
                 console.error(`Failed to load assignment for task ID ${task.taskId}`, error);
+              }
+            );
+  
+            // 🆕 Fetch printing progress details
+            this.printingProrgessService.getPrintingProgressByTaskId(task.taskId ?? 0).subscribe(
+              (progress) => {
+                task.printingProgress = {
+                  submittedDate: progress.submittedDate,
+                  expectedQuantity: progress.expectedQuantity,
+                  remainingToPrintQuantity: progress.remainingToPrintQuantity,
+                  isStarted: progress.isStarted,
+                  isSentToInventory: progress.isSentToInventory
+                };
+                console.log('Printing progress loaded:', task.printingProgress);
+              },
+              (error) => {
+                console.error(`Failed to load printing progress for task ID ${task.taskId}`, error);
               }
             );
           });

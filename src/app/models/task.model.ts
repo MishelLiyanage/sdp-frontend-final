@@ -5,6 +5,7 @@ export class Task {
   remainingQuantity: any;
   isStarted: any;
   isSentToInventory: any;
+
   constructor(
     public modelPaper: any,
     public status: string,
@@ -18,5 +19,13 @@ export class Task {
     employeeId: number;
     assignedDate: string;
     deadline: string;
+  };
+
+  printingProgress?: {
+    submittedDate: string;
+    expectedQuantity: number;
+    remainingToPrintQuantity: number;
+    isStarted: boolean;
+    isSentToInventory: boolean;
   };
 }

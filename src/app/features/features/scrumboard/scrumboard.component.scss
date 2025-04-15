@@ -102,7 +102,7 @@
     }
 
     .task {
-      background: #6d7479;
+      background: #6d74798f;
       padding: 10px;
       border-radius: 5px;
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
@@ -113,6 +113,28 @@
 
       &:hover {
         transform: scale(1.05);
+      }
+
+      .assignment-details  {
+        align-items: center;
+        font-family: "Quattrocento Sans", serif;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: #636ca0af;
+        border-radius: 15px;
+      }
+
+      .printingProgress-details {
+        align-items: center;
+        font-family: "Quattrocento Sans", serif;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: #80639ac8;
+        border-radius: 15px;
       }
     }
   }

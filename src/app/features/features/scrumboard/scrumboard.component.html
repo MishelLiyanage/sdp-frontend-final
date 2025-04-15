@@ -68,14 +68,25 @@
           <p><strong>Part No:</strong> {{ task.modelPaper.partNo }}</p>
 
           <!-- 🟡 Assignment Details -->
-          <div *ngIf="task.assignment">
-            <p><strong>Assigned Date:</strong> {{ task.assignment.assignedDate | date:'mediumDate' }}</p>
-            <p><strong>Deadline:</strong> {{ task.assignment.deadline | date:'mediumDate' }}</p>
+          <div *ngIf="task.assignment" class="assignment-details">
+            <p><strong>Assigned Date:</strong>{{ task.assignment.assignedDate | date : "mediumDate" }}</p>
+            <p><strong>Deadline:</strong>{{ task.assignment.deadline | date : "mediumDate" }}</p>
             <p><strong>Employee ID:</strong> {{ task.assignment.employeeId }}</p>
           </div>
 
+          <!-- 🟢 Printing Progress Details -->
+          <div *ngIf="task.printingProgress" class="printingProgress-details">
+            <p><strong>Submitted Date:</strong>{{ task.printingProgress.submittedDate | date : "mediumDate" }}</p>
+            <p><strong>Expected Quantity:</strong>{{ task.printingProgress.expectedQuantity }}</p>
+            <p><strong>Remaining Quantity:</strong>{{ task.printingProgress.remainingToPrintQuantity }}</p>
+            <p><strong>Started:</strong>{{ task.printingProgress.isStarted ? "Yes" : "No" }}</p>
+            <p><strong>Sent to Inventory:</strong>{{ task.printingProgress.isSentToInventory ? "Yes" : "No" }}</p>
+          </div>
+
           <div *ngIf="!task.assignment">
-            <p style="color: rgb(145, 0, 0);"><em><strong>Assign the task...</strong></em></p>
+            <p style="color: rgb(145, 0, 0)">
+              <em><strong>Assign the task...</strong></em>
+            </p>
           </div>
         </div>
       </div>
