@@ -34,7 +34,11 @@ export class PrintingProgressService {
     }
 
     addToInventory(inventory: Inventory) {
-        console.log('Adding to inventory:', inventory); 
+        console.log('Adding to inventory:', inventory);
         return this.http.post(`${this.baseUrl}/inventory/add`, inventory, { headers: this.getHeaders() });
-      }
+    }
+
+    getPrintingProgressByTaskId(taskId: number): Observable<any> {
+        return this.http.get<any>(`${this.baseUrl}/printing-progress/${taskId}`, { headers: this.getHeaders() });
+    }
 }
