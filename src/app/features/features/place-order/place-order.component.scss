@@ -1,17 +1,17 @@
 @use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
 
 .heading-container {
-  background: url("../../../../assets/images/homeImg2.jpg.png") no-repeat center;
+  background: linear-gradient(to left top, #000751, #000);
   background-size: cover;
-  height: 30vh;
+  height: 9rem;
   display: flex;
   flex-direction: column;
 
   h2 {
     color: sharedStyles.$primary-color;
-    font-size: 5rem;
+    font-size: 3rem;
     font-family: sharedStyles.$font-family;
-    margin-top: 120px;
+    margin-top: 4.5rem;
     text-align: left;
     margin-left: 100px;
   }
@@ -25,7 +25,7 @@
 
   h2 {
     color: sharedStyles.$primary-color;
-    font-size: 3rem;
+    font-size: 2rem;
     padding-bottom: 20px;
     padding-top: 70px;
     margin-left: 100px;
@@ -53,13 +53,13 @@
   background-repeat: no-repeat;
   background-position: center;
   padding-left: 4.4rem;
-  padding-top: 4.6rem;
+  padding-top: 2rem;
   padding-bottom: 2rem;
   gap: 9rem;
 
   .order-form {
-    background-color: rgb(47, 47, 138, 0.6);
-    border-radius: 20px;
+    background-color: rgba(5, 5, 67, 0.6);
+    border-radius: 15px;
     padding: 30px;
     width: 45%;
     display: flex;
@@ -68,42 +68,82 @@
     .nameEmail {
       display: flex;
       flex-direction: row;
-      gap: 20px;
+      gap: 1rem;
+
       .form-group {
         width: 100%;
-        margin: 10px 0;
+        height: 4.5rem;
+
+        label {
+          color: sharedStyles.$primary-color;
+          font-family: sharedStyles.$font-family;
+          margin-right: 3rem;
+          font-size: 1rem;
+          font-weight: 700;
+        }
 
         #name,
         #email {
-          width: 100%;
-          padding: 5px;
+          width: 95%;
+          height: 2rem;
+          padding: 7px;
           border-radius: 10px;
           border: none;
           color: #fff;
+          font-family: sharedStyles.$font-family;
+          font-size: 1rem;
+
+          &::placeholder {
+            font-size: 1rem;
+          }
         }
       }
     }
 
     .form-group {
       width: 100%;
-      margin: 10px 0;
+      height: 4rem;
+
+      label {
+        color: sharedStyles.$primary-color;
+        font-family: sharedStyles.$font-family;
+        margin-right: 3rem;
+        font-size: 1rem;
+        font-weight: 700;
+      }
 
       #address {
-        width: 100%;
-        padding: 5px;
+        width: 97.5%;
+        padding: 7px;
+        height: 2rem;
         border-radius: 10px;
         border: none;
         color: #fff;
+        font-family: sharedStyles.$font-family;
+        font-size: 1rem;
+
+        &::placeholder {
+          font-size: 1rem;
+        }
       }
 
       #quantity {
         width: 100%;
+        height: 2rem;
+        padding: 7px;
+        border-radius: 10px;
+        font-family: sharedStyles.$font-family;
+        font-size: 1rem;
+
+        &::placeholder {
+          font-size: 1rem;
+        }
       }
     }
 
     h4 {
       color: sharedStyles.$primary-color;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-family: sharedStyles.$font-family;
       margin-top: 20px;
       font-weight: 700;
@@ -118,14 +158,14 @@
 
       #publications {
         width: 100%;
-        height: 3.7rem;
-        padding: 10px;
+        height: 2.8rem;
+        padding: 7px;
         border-radius: 10px;
         border: none;
         background-color: hsl(0, 0%, 100%, 30%);
         color: sharedStyles.$placeholder-color;
-        font-size: 1.1rem;
-        margin-top: 10px;
+        font-family: sharedStyles.$font-family;
+        font-size: 1rem;
 
         option {
           color: #000;
@@ -133,25 +173,26 @@
       }
 
       .button {
-        width: 10.5rem;
-        height: 60px;
-        font-size: 1.2rem;
+        width: 9rem;
+        height: 2.85rem;
+        font-size: 1rem;
         font-family: "Quattrocento Sans", serif;
-        font-weight: 400;
+        font-weight: 700;
         font-style: normal;
-        color: white;
+        background-color: rgb(220, 218, 246);
+        color: #000751;
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         cursor: pointer;
         transition: background-color 0.3s ease-in-out,
           transform 0.2s ease-in-out;
-          background-image: linear-gradient(to bottom right, #3c0247, #03122d);
-        margin-top: 10px;
 
         &:hover {
           opacity: 0.9;
           transform: scale(1.05);
-          background-image: linear-gradient(to top left, #3c0247, #03122d);
+          background-color: #000751;
+          color: white;
+          font-weight: 700;
         }
       }
     }
@@ -174,7 +215,7 @@
   .order-payment {
     h4 {
       color: sharedStyles.$primary-color;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-family: sharedStyles.$font-family;
       margin-top: 20px;
       font-weight: 700;
@@ -184,33 +225,37 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      gap: 20px;
-      margin-top: 20px;
+      gap: 1rem;
+      margin-top: 10px;
 
       #label {
         color: sharedStyles.$primary-color;
+        font-family: sharedStyles.$font-family;
         margin-right: 3rem;
-        font-size: 1.2rem;
-        margin-top: 20px;
+        font-size: 1rem;
       }
 
       #sublabel {
         color: sharedStyles.$primary-color;
         margin-right: 3rem;
-        font-size: 1.12rem;
+        font-size: 0.9rem;
         margin-top: 20px;
         margin-left: 1rem;
       }
 
       #paymentMethods {
-        width: 50%;
-        height: 3.7rem;
+        width: 40%;
+        height: 2.8rem;
         padding: 10px;
         border-radius: 10px;
         border: none;
         background-color: hsl(0, 0%, 100%, 30%);
         color: sharedStyles.$placeholder-color;
-        font-size: 1.1rem;
+        font-size: 1rem;
+
+        &::placeholder {
+          font-size: 1rem;
+        }
 
         option {
           color: #000;
@@ -218,60 +263,76 @@
       }
 
       .button {
-        width: 11rem;
-        height: 50px;
-        font-size: 1.12rem;
+        width: 9rem;
+        height: 2.85rem;
+        font-size: 1rem;
         font-family: "Quattrocento Sans", serif;
-        font-weight: 400;
+        font-weight: 700;
         font-style: normal;
-        color: white;
+        background-color: rgb(220, 218, 246);
+        color: #000751;
         border: none;
-        border-radius: 15px;
+        border-radius: 10px;
         cursor: pointer;
         transition: background-color 0.3s ease-in-out,
           transform 0.2s ease-in-out;
-        background-image: linear-gradient(to bottom right, #3c0247, #03122d);
 
         &:hover {
           opacity: 0.9;
           transform: scale(1.05);
-          background-image: linear-gradient(to top left, #3c0247, #03122d);
+          background-color: #000751;
+          color: white;
+          font-weight: 700;
         }
       }
     }
 
     .form-group {
       width: 100%;
-        margin: 10px 0;
+      margin: 10px 0;
       input {
         width: 97.5%;
+        height: 3rem;
+        font-size: 1rem;
+        font-family: sharedStyles.$font-family;
         padding: 10px;
-        height: 10vh;
         margin: 10px 0;
         border-radius: 10px;
         border: none;
         background-color: hsl(0, 0%, 100%, 30%);
         color: sharedStyles.$primary-color;
+
+        &::placeholder {
+          font-size: 1rem;
+        }
       }
     }
   }
 
   .place-order {
     button {
-      width: 11rem;
-      height: 50px;
-      font-size: 1.12rem;
-      font-family: "Quattrocento Sans", serif;
-      font-weight: 400;
-      font-style: normal;
-      color: white;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-      background-image: linear-gradient(to bottom right, #3c0247, #03122d);
-      margin-top: 4rem;
-    }
+      width: 9rem;
+        height: 2.85rem;
+        font-size: 1rem;
+        font-family: "Quattrocento Sans", serif;
+        font-weight: 700;
+        font-style: normal;
+        background-color: rgb(220, 218, 246);
+        color: #000751;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out,
+          transform 0.2s ease-in-out;
+          margin-top: 2.5rem;
+
+        &:hover {
+          opacity: 0.9;
+          transform: scale(1.05);
+          background-color: #000751;
+          color: white;
+          font-weight: 700;
+        }}
   }
 
   .order-summary {
@@ -281,6 +342,7 @@
       font-family: sharedStyles.$font-family;
       font-weight: 700;
       color: white;
+      font-size: 2rem;
     }
 
     .field {
@@ -290,13 +352,13 @@
 
       .label {
         font-weight: 700;
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: white;
         font-family: sharedStyles.$font-family;
       }
 
       .inputs {
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: white;
         font-family: sharedStyles.$font-family;
         font-weight: 400;
@@ -305,14 +367,14 @@
 
       .totalLabel {
         font-weight: 700;
-        font-size: 1.7rem;
+        font-size: 1.2rem;
         color: white;
         font-family: sharedStyles.$font-family;
       }
 
       .totalAmount {
         font-weight: 700;
-        font-size: 1.7rem;
+        font-size: 1.2rem;
         color: white;
         font-family: sharedStyles.$font-family;
         margin-left: 2rem;
@@ -320,10 +382,10 @@
     }
 
     h4 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: white;
       font-family: sharedStyles.$font-family;
-      margin-top: 1rem;
+      margin-top: 2rem;
       font-weight: 700;
     }
 

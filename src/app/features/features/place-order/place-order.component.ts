@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { RecentPublicationsComponent } from "../../components/recent-publications/recent-publications.component";
+import { Component, OnInit  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserService } from '../../../services/user.service';
+import { ModelPaperService } from '../../../services/modelPaper.service';
 
 export interface PublicationTable {
   publicationName: string;
@@ -13,7 +14,7 @@ export interface PublicationTable {
 
 @Component({
   selector: 'app-place-order',
-  imports: [RecentPublicationsComponent, CommonModule, MatTableModule, ReactiveFormsModule],
+  imports: [CommonModule, MatTableModule, ReactiveFormsModule],
   templateUrl: './place-order.component.html',
   styleUrl: './place-order.component.scss'
 })
@@ -22,22 +23,10 @@ export class PlaceOrderComponent {
   orderForm: FormGroup;
   orderItems: any[] = [];
   orderSummary: any = null;
-  // Define the dataSource as MatTableDataSource to dynamically update the table
+  // Definition of the dataSource as MatTableDataSource to dynamically update the table
   dataSource = new MatTableDataSource<PublicationTable>(this.orderItems);
 
-  publications = [
-    { name: 'Grade 5 Scholarship 2025 (Tamil Medium)' },
-    { name: 'Grade 4 Scholarship 2025 (Tamil Medium)' },
-    { name: 'Grade 5 Scholarship 2025 (Sinhala Medium)' },
-    { name: 'Grade 4 Scholarship 2025 (Sinhala Medium)' }
-  ];
-
-  publicationNames: string[] = [
-    'Grade 5 Scholarship 2025 (Tamil Medium)',
-    'Grade 4 Scholarship 2025 (Tamil Medium)',
-    'Grade 5 Scholarship 2025 (Sinhala Medium)',
-    'Grade 4 Scholarship 2025 (Sinhala Medium)'
-  ];
+  publicationNames: string[] = [];
 
   paymentMethods: String[] = [
     'Online',
@@ -63,7 +52,7 @@ export class PlaceOrderComponent {
 
   displayedColumns: string[] = ['publicationName', 'quantity'];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService, private modelPaperService: ModelPaperService) {
     this.orderForm = this.fb.group({
       name: [''],
       email: [''],
@@ -74,6 +63,32 @@ export class PlaceOrderComponent {
       notes: ['']
     });
   }
+
+  ngOnInit(): void {
+    this.userService.getCurrentUser().subscribe(
+      (response) => {
+        console.log('User:', response);
+        // this.setUserDetails(response); // Optional helper method
+        this.orderForm.patchValue({
+          name: response.name,
+          email: response.email, 
+          address: response.address
+        });
+      },
+      (error) => {
+        console.error('Error fetching user details:', error);
+      }
+    );
+
+    this.modelPaperService.getPublications().subscribe(
+      (data) => {
+        this.publicationNames = data.map((pub: any) => pub.gradewithcategory);
+        console.log('Publications:', this.publicationNames);
+      },
+      (error) => console.error('Error fetching publications:', error)
+    );    
+  }
+  
 
   addOrderItem() {
     const publication = this.selectedPublication; // Use selectedPublication instead of formControl
