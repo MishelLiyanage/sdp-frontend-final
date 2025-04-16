@@ -7,16 +7,6 @@
   <div class="heading-container">
     <h2>Place Order</h2>
   </div>
-
-  <div class="publications-container">
-    <h2>Our Recent Publications</h2>
-    <div class="publications-list">
-      <div *ngFor="let card of publications">
-        <app-recent-publications [publicationName]="card.name">
-        </app-recent-publications>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div class="order-container">
@@ -24,14 +14,17 @@
     <form [formGroup]="orderForm">
       <div class="nameEmail">
         <div class="form-group">
+          <label for="name">School Name: </label>
           <input
             type="text"
-            formControlName="name"
             id="name"
+            formControlName="name"
             placeholder="School name (If Custom)"
           />
         </div>
+
         <div class="form-group">
+          <label for="name">Email: </label>
           <input
             type="email"
             formControlName="email"
@@ -41,6 +34,7 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="name">School Address: </label>
         <input
           type="text"
           formControlName="address"
@@ -55,6 +49,7 @@
           id="publications"
           (change)="onSelectionChange($event)"
         >
+          <option value="" disabled selected>Select Publication</option>
           <option
             *ngFor="let publication of publicationNames"
             [value]="publication"
@@ -62,6 +57,7 @@
             {{ publication }}
           </option>
         </select>
+
         <div class="form-group">
           <input
             type="number"
@@ -113,16 +109,19 @@
             </option>
           </select>
         </div>
-        <div class="form-group-2">
-          <label for="onlinePayment" id="sublabel">1. Online Payment</label>
-          <button class="button">Pay Now</button>
+        <div class="paymentMethodsContainer">
+          <div class="form-group-2">
+            <label for="onlinePayment" id="sublabel">1. Online Payment</label>
+            <button class="button">Pay Now</button>
+          </div>
+          <div class="form-group-2">
+            <label for="onlinePayment" id="sublabel"
+              >2. Back Payment / Any Other</label
+            >
+            <button class="button">Upload Document</button>
+          </div>
         </div>
-        <div class="form-group-2">
-          <label for="onlinePayment" id="sublabel"
-            >2. Back Payment / Any Other</label
-          >
-          <button class="button">Upload Document</button>
-        </div>
+
         <div class="form-group">
           <input
             type="text"
