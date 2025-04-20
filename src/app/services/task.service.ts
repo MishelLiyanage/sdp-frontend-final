@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from '../models/task.model';
 import { ModelPaper } from '../models/model-paper.model';
+import { PaperSets } from '../models/PaperSets.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class TaskService {
   // Save Model Paper
   saveModelPaper(modelPaper: ModelPaper): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/modelpaper/`, modelPaper, { headers: this.getHeaders() });
+  }
+
+  savePaperSet(paperSet: PaperSets) {
+    return this.http.post<any>(`${this.baseUrl}/paperset/`, paperSet, { headers: this.getHeaders() });
   }
 
   // Save Task

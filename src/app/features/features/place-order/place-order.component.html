@@ -88,19 +88,28 @@
             <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
           </ng-container>
 
+          <!-- Remove Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <button mat-button (click)="removeOrderItem(i)">Remove</button>
+            </td>
+          </ng-container>
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
+
       <div class="order-payment">
-        <h4>Order Payment</h4>
         <div class="form-group-2">
           <label for="paymentType" id="label">Choose Payment Preference</label>
           <select
+            formControlName="paymentMethod"
             name="paymentMethods"
             id="paymentMethods"
-            (change)="onSelectionChange($event)"
           >
+            <option value="" disabled selected>Select Payment Method</option>
             <option
               *ngFor="let paymentMethod of paymentMethods"
               [value]="paymentMethod"
@@ -109,19 +118,6 @@
             </option>
           </select>
         </div>
-        <div class="paymentMethodsContainer">
-          <div class="form-group-2">
-            <label for="onlinePayment" id="sublabel">1. Online Payment</label>
-            <button class="button">Pay Now</button>
-          </div>
-          <div class="form-group-2">
-            <label for="onlinePayment" id="sublabel"
-              >2. Back Payment / Any Other</label
-            >
-            <button class="button">Upload Document</button>
-          </div>
-        </div>
-
         <div class="form-group">
           <input
             type="text"
@@ -171,6 +167,16 @@
           <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
         </ng-container>
 
+        <!-- Remove Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <button mat-button color="warn" (click)="removeOrderItem(i)">
+              Remove
+            </button>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
@@ -190,6 +196,32 @@
       <p class="totalLabel">Total Amount:</p>
       <p class="totalAmount">Rs. {{ orderSummary.totalAmount }}</p>
     </div>
+
+    <div class="order-payment">
+      <h4>Order Payment</h4>
+      <div class="paymentMethodsContainer">
+        <!-- Show Pay Now only if selected payment method is Online -->
+        <div
+          class="form-group-2"
+          *ngIf="orderForm.get('paymentMethod')?.value === 'Online'"
+        >
+          <label id="sublabel">1. Online Payment</label>
+          <!-- <button class="button" (click)="onlinePayment()">Pay Now</button> -->
+          <app-pay-pal></app-pay-pal>
+        </div>
+    
+        <!-- Show Upload Document only if selected payment method is Bank Payment / Any Other -->
+        <div
+          class="form-group-2"
+          *ngIf="orderForm.get('paymentMethod')?.value === 'Bank Payment / Any Other'"
+        >
+          <label id="sublabel">2. Back Payment / Any Other</label>
+          <button class="button">Upload Document</button>
+        </div>
+      </div>
+    </div>    
+
+    
 
     <div class="place-order">
       <button>Submit Order</button>

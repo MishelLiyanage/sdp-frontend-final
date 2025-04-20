@@ -55,7 +55,7 @@
   padding-left: 4.4rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  gap: 9rem;
+  gap: 4rem;
 
   .order-form {
     background-color: rgba(5, 5, 67, 0.6);
@@ -207,6 +207,29 @@
 
         td {
           color: var(--mat-table-row-color);
+
+          button {
+            width: 4.5rem;
+            height: 2rem;
+            background-color: rgb(228, 173, 173);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: "Quattrocento Sans", serif;
+            font-weight: 700;
+            color: #000751;
+            transition: background-color 0.3s ease-in-out,
+              transform 0.2s ease-in-out;
+
+            &:hover {
+              opacity: 0.9;
+              transform: scale(1.05);
+              background-color: #510000;
+              color: white;
+              font-weight: 700;
+            }
+          }
         }
       }
     }
@@ -399,6 +422,29 @@
 
         td {
           color: var(--mat-table-row-color);
+
+          button {
+            width: 4.5rem;
+            height: 2rem;
+            background-color: rgb(228, 173, 173);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: "Quattrocento Sans", serif;
+            font-weight: 700;
+            color: #000751;
+            transition: background-color 0.3s ease-in-out,
+              transform 0.2s ease-in-out;
+
+            &:hover {
+              opacity: 0.9;
+              transform: scale(1.05);
+              background-color: #510000;
+              color: white;
+              font-weight: 700;
+            }
+          }
         }
       }
     }
@@ -437,12 +483,12 @@
     padding: 1.5rem;
     // width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-top: 0%;
     gap: 40px;
 
     .order-form {
-      width: 94%;
+      width: 45%;
     }
   }
 
@@ -490,11 +536,11 @@
     padding: 1.5rem;
     // width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-top: 0%;
 
     .order-form {
-      width: 92%;
+      width: 45%;
     }
   }
 
@@ -598,9 +644,10 @@
     display: flex;
     flex-direction: column;
     margin-top: 0%;
+    gap: 10px;
 
     .order-form {
-      max-width: 90%;
+      max-width: 92%;
       padding: 20px;
 
       .publication-preference {

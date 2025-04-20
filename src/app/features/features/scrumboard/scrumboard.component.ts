@@ -7,6 +7,7 @@ import { TaskService } from '../../../services/task.service';
 import { ModelPaper } from '../../../models/model-paper.model';
 import { Task } from '../../../models/task.model';
 import { PrintingProgressService } from '../../../services/printingProgress.service';
+import { PaperSets } from '../../../models/PaperSets.model';
 
 interface Column {
   name: string;
@@ -252,15 +253,32 @@ export class ScrumboardComponent {
       "Part " + this.selectedPartNumber.toString()
     );
 
+    let paperSet = new PaperSets(
+      this.selectedGrade,
+      this.selectedCategory
+    )
+
     // Save Model Paper
     this.taskService.saveModelPaper(modelPaper).subscribe(
       (response) => {
         if (response.success) {
           let task = new Task(
-            response.modelPaper, // Use modelPaper object
+            response.modelPaper, 
             'To Do', // Default status
             '', // No due date initially
             '' // No assigned employee initially
+          );
+
+          this.taskService.savePaperSet(paperSet).subscribe(
+            (paperSetResponse) => {
+              if (paperSetResponse.success) {
+                alert('Paper set saved successfully!');
+                console.log('Paper set saved successfully:', paperSetResponse.paperSet);
+              } else {
+                alert('PaperSet already exists!');
+                console.error('Error saving paper set:', paperSetResponse.message);
+              }
+            }
           );
 
           // Save Task
