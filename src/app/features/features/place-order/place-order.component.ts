@@ -7,7 +7,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../../services/user.service';
 import { ModelPaperService } from '../../../services/modelPaper.service';
 import { OrderService } from '../../../services/order.service';
-import { PayPalComponent } from '../../components/pay-pal/pay-pal.component';
+import { PayhereService } from '../../../services/payhere.service';
+import { Order } from '../../../models/order.model';
+import { Payment } from '../../../models/payment.model';
+import { PaymentService } from '../../../services/payment.service';
 
 export interface PublicationTable {
   publicationName: string;
@@ -23,7 +26,7 @@ declare global {
 @Component({
   selector: 'app-place-order',
   standalone: true,
-  imports: [CommonModule, MatTableModule, ReactiveFormsModule, PayPalComponent],
+  imports: [CommonModule, MatTableModule, ReactiveFormsModule],
   templateUrl: './place-order.component.html',
   styleUrl: './place-order.component.scss'
 })
@@ -45,7 +48,9 @@ export class PlaceOrderComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private modelPaperService: ModelPaperService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private payhereService: PayhereService,
+    private paymentService: PaymentService
   ) {
     this.orderForm = this.fb.group({
       name: [''],
@@ -153,80 +158,113 @@ export class PlaceOrderComponent implements OnInit {
     };
   }
 
-  async onlinePayment(): Promise<void> {
-    try {
-      // Calculate the total amount before proceeding with PayPal payment
-      const amount = await this.calculateTotalAmount();
-      console.log('Calculated amount:', amount);
-  
-      // If the amount is invalid, alert the user
-      if (amount <= 0) {
-        alert("Invalid total amount for payment.");
-        return;
-      }
-  
-      // Ensure PayPal SDK is available
-      if (!window.paypal) {
-        console.error('PayPal SDK not loaded');
-        alert('Unable to load PayPal payment buttons.');
-        return;
-      }
-  
-      // If PayPal SDK is loaded, proceed with creating the PayPal button
-      window.paypal.Buttons({
-        createOrder: async (data: any, actions: any) => {
-          try {
-            // Make a call to the backend to create an order with the amount
-            console.log('Creating PayPal order with amount:', amount);
-            const orderResponse = await fetch('http://localhost:8083/paypal/create-order', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ amount: amount.toFixed(2) })
-            });
-  
-            if (!orderResponse.ok) {
-              throw new Error('Error creating order with PayPal.');
-            }
-  
-            const orderData = await orderResponse.json();
-            return orderData.id;  // Return the PayPal order ID to proceed with the payment
-          } catch (error) {
-            console.error('Error creating PayPal order:', error);
-            alert('There was an issue creating the PayPal order. Please try again.');
-            throw error; // Throw error to stop the process
-          }
-        },
-  
-        onApprove: async (data: any, actions: any) => {
-          try {
-            // Capture the order after payment is approved
-            const captureResponse = await fetch(`http://localhost:8083/paypal/capture-order/${data.orderID}`, {
-              method: 'POST',
-            });
-  
-            if (!captureResponse.ok) {
-              throw new Error('Error capturing PayPal payment.');
-            }
-  
-            const details = await captureResponse.json();
-            alert('Payment successful! Thank you ' + details.payer.name.given_name);
-            console.log(details);
-          } catch (error) {
-            console.error('Error capturing PayPal payment:', error);
-            alert('Payment failed. Please try again.');
-          }
-        },
-  
-        onError: (err: any) => {
-          console.error('PayPal Error:', err);
-          alert('Payment failed. Please try again.');
-        }
-      }).render('#paypal-button-container');  // Render the PayPal button in the container
-    } catch (error) {
-      console.error('Error during payment process:', error);
-      alert('An error occurred during the payment process. Please try again.');
+  submitOrder() {
+    if (!this.orderSummary) {
+      alert("Please place an order before submitting.");
+      return;
     }
-  }  
+
+    console.log("Order Summary:", this.orderSummary);
+
+    // get current user details
+    this.userService.getCurrentUser().subscribe(
+      (userdata) => {
+        console.log('User:', userdata);
+
+        const contactNo: string = userdata.contactNo;
+        const address: string = userdata.address;
+
+        const addressParts = address.split(',');
+        const city = addressParts[addressParts.length - 1].trim();
+
+        // Here: Prepare promises to get paperSetIds
+        const publicationUpdates = this.orderSummary.orderedPublications.map((pub: any) => {
+          return this.orderService.getPaperSetId(pub.publicationName).toPromise().then((paperSetId: number | undefined) => {
+            if (paperSetId !== undefined) {
+              pub.paperSetId = paperSetId; // Add paperSetId to each publication
+              console.log(`PublicationName: ${pub.publicationName}, PaperSetId: ${paperSetId}`);
+            } else {
+              throw new Error(`PaperSetId is undefined for publicationName: ${pub.publicationName}`);
+            }
+            return pub;
+          });
+        });
+
+        Promise.all(publicationUpdates).then((updatedPublications) => {
+          console.log('Updated Publications:', updatedPublications);
+
+          // Now create order object after paperSetIds are added
+          let order = new Order(
+            userdata.id,
+            updatedPublications,
+            this.orderSummary.notes,
+            this.orderSummary.totalAmount
+          );
+
+          this.orderService.placeOrder(order).subscribe(
+            (response) => {
+              if (response.success) {
+                console.log('Order placed successfully:', response);
+                var payment = {
+                  "sandbox": true,
+                  "merchant_id": response.merchant_id,
+                  "return_url": "http://localhost:4200/payment-success",
+                  "cancel_url": "http://localhost:4200/payment-cancel",
+                  "notify_url": "http://localhost:4200/payment-notify",
+                  "order_id": response.order_id,
+                  "items": "Question Paper Order",
+                  "amount": this.orderSummary.totalAmount,
+                  "hash_value": response.hashValue,
+                  "currency": "LKR",
+                  "first_name": this.orderSummary.schoolName,
+                  "last_name": "School",
+                  "email": this.orderSummary.email,
+                  "phone": userdata.contactNo,
+                  "address": this.orderSummary.address,
+                  "city": city,
+                  "country": "Sri Lanka",
+                };
+
+                console.log('Payment:', payment);
+                console.log('hash_value:666', response.hash_value);
+
+                this.payhereService.payNow(
+                  payment.merchant_id,
+                  payment.order_id,
+                  payment.items,
+                  parseFloat(payment.amount),
+                  payment.hash_value, 
+                  payment.first_name,
+                  payment.last_name,
+                  payment.email,
+                  payment.phone,
+                  payment.address,
+                  payment.city,
+                  payment.country,
+                  payment.currency,
+                  payment.notify_url,
+                  userdata.id,
+                  this.orderSummary.paymentMethod
+                );
+                console.log('Order placed successfully:123456', response);
+                alert("Order placed successfully. Proceeding to payment.");
+              }
+            },
+            (error) => {
+              console.error('Error placing order:', error);
+              alert("Error placing order. Please try again.");
+            }
+          );
+
+        }).catch((error) => {
+          console.error('Error fetching paperSetIds:', error);
+          alert('Error fetching paper set IDs. Please try again.');
+        });
+
+      },
+      (error) => {
+        console.error('Error fetching user details:', error);
+      }
+    );
+  }
 }
