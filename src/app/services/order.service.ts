@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { Order } from '../models/order.model';
+import { Payment } from '../models/payment.model';
 
 @Injectable({
     providedIn: 'root'
@@ -20,8 +22,21 @@ export class OrderService {
     }
 
     calculateTotalAmount(orderItems: any[]): Observable<number> {
-        console.log("order Items 123456 "+ orderItems);
+        console.log("order Items 123456 " + orderItems);
         return this.http.post<number>(`${this.baseUrl}/order/calculate-total`, orderItems, { headers: this.getHeaders() });
     }
 
+    placeOrder(order: Order): Observable<any> {
+        console.log("order summary 123456 " + order);
+        return this.http.post(`${this.baseUrl}/order/place-order`, order, { headers: this.getHeaders() });
+    }
+
+    getPaperSetId(publicationName: string) {
+        console.log(publicationName);
+        return this.http.get<number>(`${this.baseUrl}/paperset/getIdByName`, { 
+            params: { publicationName },
+            headers: this.getHeaders()
+        });
+    }
+    
 }

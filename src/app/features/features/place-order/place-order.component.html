@@ -197,20 +197,16 @@
       <p class="totalAmount">Rs. {{ orderSummary.totalAmount }}</p>
     </div>
 
-    <div class="order-payment">
+    <!-- <div class="order-payment">
       <h4>Order Payment</h4>
       <div class="paymentMethodsContainer">
-        <!-- Show Pay Now only if selected payment method is Online -->
         <div
           class="form-group-2"
           *ngIf="orderForm.get('paymentMethod')?.value === 'Online'"
         >
           <label id="sublabel">1. Online Payment</label>
-          <!-- <button class="button" (click)="onlinePayment()">Pay Now</button> -->
-          <app-pay-pal></app-pay-pal>
         </div>
     
-        <!-- Show Upload Document only if selected payment method is Bank Payment / Any Other -->
         <div
           class="form-group-2"
           *ngIf="orderForm.get('paymentMethod')?.value === 'Bank Payment / Any Other'"
@@ -219,12 +215,12 @@
           <button class="button">Upload Document</button>
         </div>
       </div>
-    </div>    
+    </div>     -->
 
     
 
     <div class="place-order">
-      <button>Submit Order</button>
+      <button (click)="submitOrder()">Submit Order</button>
     </div>
   </div>
 </div>
