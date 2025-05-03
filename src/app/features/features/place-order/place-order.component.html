@@ -197,27 +197,22 @@
       <p class="totalAmount">Rs. {{ orderSummary.totalAmount }}</p>
     </div>
 
-    <!-- <div class="order-payment">
-      <h4>Order Payment</h4>
-      <div class="paymentMethodsContainer">
-        <div
-          class="form-group-2"
-          *ngIf="orderForm.get('paymentMethod')?.value === 'Online'"
-        >
-          <label id="sublabel">1. Online Payment</label>
+    <div class="order-payment">
+      <div
+        class="paymentMethodsContainer"
+        *ngIf="
+          orderForm.get('paymentMethod')?.value === 'Bank Payment / Any Other'
+        "
+      >
+        <div class="order-payment">
+          <h4>Order Payment</h4>
         </div>
-    
-        <div
-          class="form-group-2"
-          *ngIf="orderForm.get('paymentMethod')?.value === 'Bank Payment / Any Other'"
-        >
+        <div class="form-group-2">
           <label id="sublabel">2. Back Payment / Any Other</label>
-          <button class="button">Upload Document</button>
+          <input type="file" (change)="onFileSelected($event)" *ngIf="orderSummary.paymentMethod === 'Bank Payment / Any Other'" />
         </div>
       </div>
-    </div>     -->
-
-    
+    </div>
 
     <div class="place-order">
       <button (click)="submitOrder()">Submit Order</button>

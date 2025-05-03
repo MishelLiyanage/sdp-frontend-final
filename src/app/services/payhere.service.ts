@@ -91,10 +91,6 @@ export class PayhereService {
 
     (window as any).payhere.onCompleted = (orderId: string) => {
       console.log("Payment completed. OrderID: " + orderId);
-    };
-
-    (window as any).payhere.onDismissed = () => {
-      console.log("Payment dismissed.");
 
       // Save payment details AFTER successful payment
       const paymentDetails = new Payment(
@@ -115,6 +111,10 @@ export class PayhereService {
           alert("Payment successful, but failed to save payment details.");
         }
       );
+    };
+
+    (window as any).payhere.onDismissed = () => {
+      console.log("Payment dismissed.");
     };
 
     (window as any).payhere.onError = (error: any) => {
