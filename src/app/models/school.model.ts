@@ -6,4 +6,5 @@ export interface School {
     contactNo: string;
     username: string;
     principleName: string;
+    city: string;
 }

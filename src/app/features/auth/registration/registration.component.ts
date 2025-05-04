@@ -26,6 +26,7 @@ export class RegistrationComponent {
       password: ['', Validators.required],
       address: ['', Validators.required],
       contactNo: ['', Validators.required],
+      city: ['', Validators.required],
       principleName: ['', Validators.required],
       principleSignature: [''] // File name placeholder
     });
@@ -59,6 +60,7 @@ export class RegistrationComponent {
       contact_no: this.registrationForm.value.contactNo,
       email: this.registrationForm.value.email,
       principle_name: this.registrationForm.value.principleName,
+      city: this.registrationForm.value.city,
       // principle_signature: this.registrationForm.value.principleSignature // Only file name
       principle_signature: 'defaultsignature.png'
     };
