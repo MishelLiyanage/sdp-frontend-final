@@ -40,6 +40,7 @@ export class ManageSchoolsComponent {
       school.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       school.email.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       school.address.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()) ||
+      school.city.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()) ||
       school.username.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }

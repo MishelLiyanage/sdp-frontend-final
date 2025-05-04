@@ -62,11 +62,11 @@
 
   .table {
     background-color: rgb(254, 246, 255);
-    width: 80%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 4rem;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 15px;
     border: 1px solid rgb(0, 8, 161, 0.3);
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
@@ -75,13 +75,13 @@
 
     table {
       border-collapse: collapse;
-      width: 100%;
+      max-width: 100%;
 
       th,
       td {
         font-size: 0.9rem;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 10px;
+        padding-right: 10px;
         padding-top: 5px;
         padding-bottom: 5px;
       }

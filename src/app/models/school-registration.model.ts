@@ -7,5 +7,6 @@ export interface SchoolRegistration {
     contact_no: string;
     email: string;
     principle_name: string;
+    city: string;
     principle_signature: string; // Base64-encoded string
   }
