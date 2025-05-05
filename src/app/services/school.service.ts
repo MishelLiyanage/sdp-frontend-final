@@ -10,38 +10,29 @@ import { SchoolDetails } from '../models/school-details.model';
 export class SchoolService {
   private apiUrlforGetSchools = 'http://localhost:8083/school/all';
   private apiUrlforUpdateSchool = 'http://localhost:8083/school/updateSchool';
+  private baseUrl = 'http://localhost:8083/school';
 
   constructor(private http: HttpClient) {}
 
-  getSchools(): Observable<School[]> {
-    const token = localStorage.getItem('accessToken'); // Retrieve stored token
-    console.log('Stored Token:', token);
-
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('accessToken');
+    console.log('Token:', token); // Debugging line to check the token value
     if (!token) {
-      console.error('No token found in localStorage!');
-      return new Observable<School[]>(); // Return an empty observable if no token
+        console.error('No token found in localStorage!');
+        throw new Error('Authentication token not found');
     }
+    return new HttpHeaders({ Authorization: `Bearer ${token}` });
+}
 
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}` // Send token with "Bearer" prefix
-    });
-
-    return this.http.get<School[]>(this.apiUrlforGetSchools, { headers });
+  getSchools(): Observable<School[]> {
+    return this.http.get<School[]>(this.apiUrlforGetSchools, { headers: this.getHeaders() });
   }
 
   updateSchool(school: SchoolDetails) {
-    const token = localStorage.getItem('accessToken'); // Retrieve stored token
-    console.log('Stored Token:', token);
+    return this.http.patch<any>(this.apiUrlforUpdateSchool, school, { headers: this.getHeaders() });
+  }
 
-    if (!token) {
-      console.error('No token found in localStorage!');
-      return new Observable<School[]>();
-    }
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-
-    return this.http.patch<any>(this.apiUrlforUpdateSchool, school, { headers });
+  deleteSchool(schoolEmail: String) {
+    return this.http.delete<void>(`${this.baseUrl}/${schoolEmail}`, { headers: this.getHeaders() });
   }
 }
