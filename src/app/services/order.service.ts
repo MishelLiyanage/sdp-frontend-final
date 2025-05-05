@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Order } from '../models/order.model';
-import { Payment } from '../models/payment.model';
+import { OrderDetails } from '../models/order-details.model';
 
 @Injectable({
     providedIn: 'root'
@@ -33,10 +33,22 @@ export class OrderService {
 
     getPaperSetId(publicationName: string) {
         console.log(publicationName);
-        return this.http.get<number>(`${this.baseUrl}/paperset/getIdByName`, { 
+        return this.http.get<number>(`${this.baseUrl}/paperset/getIdByName`, {
             params: { publicationName },
             headers: this.getHeaders()
         });
     }
-    
+
+    getOrders() {
+        return this.http.get<OrderDetails[]>(`${this.baseUrl}/order/getAllOrders`, { headers: this.getHeaders() });
+    }
+
+    updateOrder(order: OrderDetails): Observable<Order> {
+        console.log("order summary 123456 " + order);
+        return this.http.patch<Order>(`${this.baseUrl}/order/updateOrder`, order, { headers: this.getHeaders() });
+    }
+
+    deleteOrder(orderId: string): Observable<void> {
+        return this.http.delete<void>(`${this.baseUrl}/order/${orderId}`, { headers: this.getHeaders() });
+    }
 }

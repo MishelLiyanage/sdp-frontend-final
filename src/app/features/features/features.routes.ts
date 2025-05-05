@@ -7,6 +7,7 @@ import { ScrumboardComponent } from './scrumboard/scrumboard.component';
 import { UpdateTaskComponent } from './update-task/update-task.component';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { UpdatePrintingProgressComponent } from './update-printing-progress/update-printing-progress.component';
+import { UpdateOrderComponent } from './update-order/update-order.component';
 
 export const featuresRoutes: Routes = [
   { path: 'placeOrder', component: PlaceOrderComponent },
@@ -16,5 +17,6 @@ export const featuresRoutes: Routes = [
   { path: 'scrumboard', component: ScrumboardComponent},
   { path: 'updateTask', component: UpdateTaskComponent },
   { path: 'manageOrders', component: ManageOrdersComponent},
-  { path: 'updatePrintingProgress/:taskId', component: UpdatePrintingProgressComponent}
+  { path: 'updatePrintingProgress/:taskId', component: UpdatePrintingProgressComponent},
+  { path: 'updateOrder', component: UpdateOrderComponent}
 ];
