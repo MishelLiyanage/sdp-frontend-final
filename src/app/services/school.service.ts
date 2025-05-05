@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { School } from '../models/school.model';
+import { SchoolDetails } from '../models/school-details.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchoolService {
   private apiUrlforGetSchools = 'http://localhost:8083/school/all';
-  private apiUrlforUpdateSchool = 'http://localhost:8083/school';
+  private apiUrlforUpdateSchool = 'http://localhost:8083/school/updateSchool';
 
   constructor(private http: HttpClient) {}
 
@@ -28,7 +29,19 @@ export class SchoolService {
     return this.http.get<School[]>(this.apiUrlforGetSchools, { headers });
   }
 
-  updateSchool(schoolId: number, headers: HttpHeaders) {
-    return this.http.get<any>(`your_backend_api${schoolId}`, { headers });
+  updateSchool(school: SchoolDetails) {
+    const token = localStorage.getItem('accessToken'); // Retrieve stored token
+    console.log('Stored Token:', token);
+
+    if (!token) {
+      console.error('No token found in localStorage!');
+      return new Observable<School[]>();
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.patch<any>(this.apiUrlforUpdateSchool, school, { headers });
   }
 }

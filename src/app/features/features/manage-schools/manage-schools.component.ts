@@ -49,7 +49,7 @@ export class ManageSchoolsComponent {
     );
   }
 
-  updateSchool(school: SchoolDetails) {
+  updateSchool(school: School) {
     this.router.navigate(['/features/updateSchool'], { state: { school } });
   }
 
