@@ -1,0 +1,65 @@
+<div class="update-order-form">
+  <div class="heading">
+    <h1>Update Order - {{ orderId }}</h1>
+  </div>
+  <form [formGroup]="updateOrderForm" (ngSubmit)="onUpdateOrder()">
+    <div class="group">
+      <div class="form-group">
+        <label>School Name:</label>
+        <input type="text" formControlName="schoolName" />
+      </div>
+
+      <div class="form-group">
+        <label>City:</label>
+        <input type="text" formControlName="city" />
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="form-group">
+        <label>Payment Status:</label>
+        <select formControlName="paymentStatus">
+          <option value="Pending">Pending</option>
+          <option value="Paid">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Payment Method:</label>
+        <select id="paymentMethod" formControlName="paymentMethod" required>
+          <option value="Cash">Cash</option>
+          <option value="Online">Online</option>
+          <option value="Bank Payment / any other">
+            Bank Payment / any other
+          </option>
+          <option value="Cash">Cash</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="form-group">
+        <label>Date:</label>
+        <input type="date" formControlName="date" />
+      </div>
+
+      <div class="form-group">
+        <label>Time:</label>
+        <input type="time" formControlName="time" />
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="form-group">
+        <label>Amount:</label>
+        <input type="number" formControlName="amount" />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="updateOrderForm.invalid">Update</button>
+      <button type="button" (click)="navigateToManageOrders()">Cancel</button>
+    </div>
+  </form>
+</div>

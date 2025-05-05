@@ -1,0 +1,169 @@
+@use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
+
+.update-order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-image: linear-gradient(to right, #00096c, #000000);
+
+  .heading {
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 3, 58));
+    color: white;
+    font-family: sharedStyles.$font-family;
+
+    h1 {
+      padding-left: 6rem;
+      padding-top: 5rem;
+      padding-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      animation: popEffect 0.6s ease-out forwards;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.266);
+    border-radius: 10px;
+    margin: 2rem;
+    width: 50%;
+    align-self: center;
+
+    .group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      justify-content: center;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+
+        label {
+          color: white;
+          font-family: sharedStyles.$font-family;
+          font-size: 1rem;
+        }
+
+        input {
+          padding: 0.5rem;
+          font-size: 1rem;
+          font-family: sharedStyles.$font-family;
+          border-radius: 5px;
+          border: none;
+          background-color: rgba(255, 255, 255, 0.91);
+          color: black;
+          width: 95%;
+          max-width: 100%;
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          }
+        }
+
+        input:disabled {
+          background-color: rgba(210, 204, 204, 0.753);
+          color: rgba(0, 0, 0, 0.758);
+          cursor: not-allowed;
+        }
+
+        select {
+          padding: 0.5rem;
+          font-size: 1rem;
+          font-family: sharedStyles.$font-family;
+          border-radius: 5px;
+          border: none;
+          background-color: rgba(255, 255, 255, 0.775);
+          color: black;
+          height: 2.5rem;
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      // justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      button {
+        width: 7rem;
+        height: 2.2rem;
+        background-color: rgb(3, 20, 91);
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        border-radius: 5px;
+        font-family: sharedStyles.$font-family;
+        font-size: 1rem;
+
+        &:hover {
+          opacity: 0.9;
+          transform: scale(1.05);
+          background-color: white;
+          color: rgb(3, 20, 91);
+          transition: 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+
+  label {
+    color: white;
+    font-family: sharedStyles.$font-family;
+    font-size: 1rem;
+  }
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    margin: 2rem;
+    width: 80%;
+    align-self: center;
+
+    input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      font-family: sharedStyles.$font-family;
+      border-radius: 5px;
+      border: none;
+      background-color: white;
+      color: black;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    button {
+      width: 7rem;
+      background-color: rgb(0, 7, 140);
+      color: white;
+      border-radius: 5px;
+      font-family: sharedStyles.$font-family;
+      font-size: 1rem;
+
+      &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+      }
+    }
+  }
+}

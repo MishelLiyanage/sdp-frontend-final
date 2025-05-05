@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SchoolService } from '../../../services/school.service';
 import { School } from '../../../models/school.model';
+import { Router } from '@angular/router';
+import { SchoolDetails } from '../../../models/school-details.model';
 
 @Component({
   selector: 'app-manage-schools',
@@ -17,7 +19,9 @@ export class ManageSchoolsComponent {
   schools: School[] = [];
   filteredSchools: School[] = [];
 
-  constructor(private schoolService: SchoolService) {}
+  constructor(private schoolService: SchoolService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadSchools();
@@ -45,10 +49,8 @@ export class ManageSchoolsComponent {
     );
   }
 
-  updateSchool(school: any) {
-    console.log("Update school:", school);
-    
-    
+  updateSchool(school: SchoolDetails) {
+    this.router.navigate(['/features/updateSchool'], { state: { school } });
   }
 
   deleteSchool(school: any) {

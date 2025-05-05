@@ -1,90 +1,85 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { OrderService } from '../../../services/order.service';
+import { OrderDetails } from '../../../models/order-details.model'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-orders',
-  imports: [CommonModule,
-    FormsModule
-  ],
   templateUrl: './manage-orders.component.html',
-  styleUrl: './manage-orders.component.scss',
+  styleUrls: ['./manage-orders.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule
+  ]
 })
-export class ManageOrdersComponent {
+export class ManageOrdersComponent implements OnInit {
   searchTerm: string = '';
-  orders = [
-    {
-      schoolRegistrationNo: "LO-4031",
-      orderId: "ORD1001",
-      schoolId: "SCH001",
-      city: "Negombo",
-      orderStatus: "Pending",
-      paymentMethod: "Bank Transfer",
-      date: "2024-03-15",
-      time: "10:30 AM",
-      amount: "15000.00",
-      action: "View"
-    },
-    {
-      schoolRegistrationNo: "VP-3256",
-      orderId: "ORD1002",
-      schoolId: "SCH002",
-      city: "Colombo 10",
-      orderStatus: "Completed",
-      paymentMethod: "Cash",
-      date: "2024-03-14",
-      time: "02:15 PM",
-      amount: "20000.00",
-      action: "View"
-    },
-    {
-      schoolRegistrationNo: "LO-4032",
-      orderId: "ORD1003",
-      schoolId: "SCH002",
-      city: "Akkareipattu",
-      orderStatus: "Processing",
-      paymentMethod: "Money Order",
-      date: "2024-03-16",
-      time: "09:45 AM",
-      amount: "18000.00",
-      action: "View"
-    },
-    {
-      schoolRegistrationNo: "BH-0001",
-      orderId: "ORD1004",
-      schoolId: "SCH001",
-      city: "Colombo 04",
-      orderStatus: "Pending",
-      paymentMethod: "Online Payment",
-      date: "2024-03-17",
-      time: "04:30 PM",
-      amount: "22000.00",
-      action: "View"
-    }
-  ];  
+  orders: OrderDetails[] = [];
+  filteredOrders: OrderDetails[] = [];
 
-  filteredOrders = [...this.orders];
+  constructor(private orderService: OrderService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.loadOrders();
+  }
+
+  loadOrders() {
+    this.orderService.getOrders().subscribe(
+      (data: OrderDetails[]) => {
+        console.log('Orders:', data);
+        this.orders = data;
+        this.filteredOrders = [...this.orders];
+      },
+      (error) => {
+        console.error('Error fetching orders:', error);
+      }
+    );
+  }
+
+  formatTime(time: any): string {
+    if (!time || time[0] === undefined || time[1] === undefined) return '';
+  
+    let hour = time[0];
+    const minute = time[1];
+    const ampm = hour >= 12 ? 'P.M.' : 'A.M.';
+  
+    hour = hour % 12;
+    hour = hour === 0 ? 12 : hour;
+  
+    const formattedMinute = minute < 10 ? '0' + minute : minute;
+    return `${hour}.${formattedMinute} ${ampm}`;
+  }
 
   searchOrder() {
     this.filteredOrders = this.orders.filter(order =>
-      order.schoolRegistrationNo.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       order.orderId.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      order.schoolId.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      order.schoolName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       order.city.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      order.orderStatus.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      order.paymentStatus.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       order.paymentMethod.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
-  
-  updateOrder(order: any) {
-    console.log("Update order:", order);
-    // Implement update logic here
+
+  updateOrder(order: OrderDetails) {
+    console.log('Updating order:', order);
+    this.router.navigate(['/features/updateOrder'], { state: { order } });
   }
   
-  deleteOrder(order: any) {
-    console.log("Delete order:", order);
-    this.orders = this.orders.filter(o => o !== order);
-    this.filteredOrders = [...this.orders];
+  deleteOrder(order: OrderDetails) {
+    this.orderService.deleteOrder(order.orderId).subscribe(
+      () => {
+        console.log('Order deleted:', order);
+        this.orders = this.orders.filter(o => o.orderId !== order.orderId);
+        this.filteredOrders = [...this.orders];
+
+        alert('Order deleted successfully!');
+      },
+      (error) => console.error('Error deleting order:', error)
+    );
   }
-  
 }
