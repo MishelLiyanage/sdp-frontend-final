@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { SchoolService } from '../../../services/school.service';
 import { School } from '../../../models/school.model';
 import { Router } from '@angular/router';
-import { SchoolDetails } from '../../../models/school-details.model';
 
 @Component({
   selector: 'app-manage-schools',
@@ -53,9 +52,17 @@ export class ManageSchoolsComponent {
     this.router.navigate(['/features/updateSchool'], { state: { school } });
   }
 
-  deleteSchool(school: any) {
-    console.log("Delete school:", school);
-    this.schools = this.schools.filter(s => s !== school);
-    this.filteredSchools = [...this.schools];
-  }
+  deleteSchool(school: School) {
+    console.log('Deleting school:', school.email);
+      this.schoolService.deleteSchool(school.email).subscribe(
+        () => {
+          console.log('School deleted:', school);
+          this.schools = this.schools.filter(o => o.schoolId !== school.schoolId);
+          this.filteredSchools = [...this.schools];
+  
+          alert('Order deleted successfully!');
+        },
+        (error) => console.error('Error deleting order:', error)
+      );
+    }
 }

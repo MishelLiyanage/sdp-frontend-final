@@ -14,9 +14,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './update-school.component.scss'
 })
 export class UpdateSchoolComponent implements OnInit {
-navigateToSchoolList() {
-throw new Error('Method not implemented.');
-}
   updateSchoolForm!: FormGroup;
   schoolId!: number;
 
@@ -25,7 +22,7 @@ throw new Error('Method not implemented.');
     private schoolService: SchoolService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.updateSchoolForm = this.fb.group({
@@ -67,5 +64,9 @@ throw new Error('Method not implemented.');
         }
       );
     }
+  }
+
+  navigateToSchoolList() {
+    this.router.navigate(['/features/manageSchools']);
   }
 }
