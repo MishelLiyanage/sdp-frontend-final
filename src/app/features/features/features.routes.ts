@@ -9,6 +9,7 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { UpdatePrintingProgressComponent } from './update-printing-progress/update-printing-progress.component';
 import { UpdateOrderComponent } from './update-order/update-order.component';
 import { UpdateSchoolComponent } from './update-school/update-school.component';
+import { ProcessOrderComponent } from './process-order/process-order.component';
 
 export const featuresRoutes: Routes = [
   { path: 'placeOrder', component: PlaceOrderComponent },
@@ -20,5 +21,6 @@ export const featuresRoutes: Routes = [
   { path: 'manageOrders', component: ManageOrdersComponent},
   { path: 'updatePrintingProgress/:taskId', component: UpdatePrintingProgressComponent},
   { path: 'updateOrder', component: UpdateOrderComponent},
-  { path: 'updateSchool', component: UpdateSchoolComponent}
+  { path: 'updateSchool', component: UpdateSchoolComponent},
+  { path: 'processOrders', component: ProcessOrderComponent }
 ];

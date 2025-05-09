@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrl: './employee-dashboard.component.scss'
 })
 export class EmployeeDashboardComponent {
+  processOrders() {
+    this.router.navigate(['/features/processOrders']);
+  }
   manageOrders() {
     this.router.navigate(['/features/manageOrders']);
   }
@@ -16,12 +19,12 @@ export class EmployeeDashboardComponent {
     this.router.navigate(['/features/scrumboard']);
   }
 
-  constructor (private router: Router) {}
-  
+  constructor(private router: Router) { }
+
   manageSchools() {
     this.router.navigate(['/features/manageSchools']);
   }
-  
+
   title: string = 'Welcome To Employee Portal';
   description: string = 'Empowering with seamless access to high-quality examination resources';
 }
