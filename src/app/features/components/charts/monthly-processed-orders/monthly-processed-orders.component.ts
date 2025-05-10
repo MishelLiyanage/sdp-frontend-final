@@ -41,10 +41,10 @@ export class MonthlyProcessedOrdersComponent implements OnInit, AfterViewInit {
         type: 'line'
       },
       title: {
-        text: 'Processed Orders Per Month'
+        text: 'Orders Per Month'
       },
       subtitle: {
-        text: 'Data source: Backend API (Fallback: Hardcoded)'
+        text: ''
       },
       xAxis: {
         categories: categories,
