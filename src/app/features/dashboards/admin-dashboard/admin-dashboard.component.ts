@@ -7,6 +7,7 @@ import { OrderCategoryDistributionComponent } from "../../components/charts/orde
 import { RevenueByPaymentMethodComponent } from "../../components/charts/revenue-by-payment-method/revenue-by-payment-method.component";
 import { RevenueTrandComponent } from "../../components/charts/revenue-trand/revenue-trand.component";
 import { InventoryLevelChartComponent } from "../../components/charts/inventory-level-chart/inventory-level-chart.component";
+import { AdminDashboardService } from '../../../services/admin-dashboard.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,21 +19,30 @@ import { InventoryLevelChartComponent } from "../../components/charts/inventory-
     RevenueByPaymentMethodComponent,
     RevenueTrandComponent,
     InventoryLevelChartComponent
-],
+  ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
 })
 export class AdminDashboardComponent {
-  registeredSchools: number = 3366;
-  quarterlyOrders: number = 1234;
-  totalOrders: number = 1234;
-  grade5scholarship: number = 1234;
-  grade4scholarship: number = 1234;
-  ordersToProcess: number = 1234;
-  
-  userName: any;
+  registeredSchools: number = 0;
+  totalOrders: number = 0;
+  grade5scholarship: number = 0;
+  grade4scholarship: number = 0;
+  grade3scholarship: number = 0;
+  ordersToProcess: number = 0;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dashboardService: AdminDashboardService) { }
+
+  ngOnInit(): void {
+    // console.log('AdminDashboardComponent initialized');
+    this.dashboardService.getDashboardStats().subscribe(data => {
+      this.registeredSchools = data.registeredSchools;
+      this.totalOrders = data.totalOrders;
+      this.grade5scholarship = data.grade5scholarship;
+      this.grade4scholarship = data.grade4scholarship;
+      this.grade3scholarship = data.grade3scholarship;
+      this.ordersToProcess = data.ordersToProcess;
+    });
   }
 
   registerSchools() {
