@@ -25,7 +25,13 @@
     <p>Profile</p>
   </div>
   <div class="orderStatisticsContainer">
-      <div class="cardContainer">
+    <div class="header">
+      <h2>Admin Dashboard</h2>
+      <p>Welcome, Mishel</p>
+    </div>
+
+    <div class="stat">
+      <div class="cardContainer animate-on-scroll">
         <div class="cardHeader">
           <p>Overview</p>
         </div>
@@ -55,14 +61,35 @@
             <p>{{ ordersToProcess }}</p>
           </div>
         </div>
-    </div>
-
-    <div class="charts">
-      <div class="orderCategoryDistributionChart">
-        <app-order-category-distribution></app-order-category-distribution>
       </div>
-      <div class="monthlyProcessedOrdersChart">
-        <app-monthly-processed-orders></app-monthly-processed-orders>
+
+      <div class="charts">
+        <div class="orderCategoryDistributionChart animate-on-scroll">
+          <app-order-category-distribution></app-order-category-distribution>
+        </div>
+        <div class="monthlyProcessedOrdersChart animate-on-scroll">
+          <app-monthly-processed-orders></app-monthly-processed-orders>
+        </div>
+      </div>
+
+      <div class="charts">
+        <div class="revenueContainer animate-on-scroll">
+          <div class="revenueHeader">
+            <p>Revenue</p>
+          </div>
+          <div class="revenueTrendChart animate-on-scroll">
+            <app-revenue-trand></app-revenue-trand>
+          </div>
+          <div class="revenueBody animate-on-scroll">
+            <div class="revenueByPaymentMethod">
+              <app-revenue-by-payment-method></app-revenue-by-payment-method>
+            </div>
+            
+            <div class="inventoryLevel animate-on-scroll">
+              <app-inventory-level-chart></app-inventory-level-chart>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
