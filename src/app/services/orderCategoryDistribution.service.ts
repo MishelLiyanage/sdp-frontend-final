@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -12,25 +12,22 @@ export interface OrderCategoryData {
   providedIn: 'root'
 })
 export class OrderCategoryDistribution {
-  private baseUrl = 'https://localhost:8083/orders/distribution';
+  private baseUrl = 'http://localhost:8083/order/distribution';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('accessToken');
+    console.log('Token:', token); // Debugging line to check the token value
+    if (!token) {
+      console.error('No token found in localStorage!');
+      throw new Error('Authentication token not found');
+    }
+    return new HttpHeaders({ Authorization: `Bearer ${token}` });
+  }
 
   getOrderDistribution(): Observable<OrderCategoryData[]> {
-    const hardcodedData: OrderCategoryData[] = [
-      { category: 'Grade 5 Scholarship Sinhala', percentage: 35 },
-      { category: 'Grade 5 Scholarship Tamil', percentage: 25 },
-      { category: 'Grade 4 Scholarship Sinhala', percentage: 20 },
-      { category: 'Grade 4 Scholarship Tamil', percentage: 10 },
-      { category: 'Grade 3 Scholarship Sinhala', percentage: 7 },
-      { category: 'Grade 3 Scholarship Tamil', percentage: 3 }
-    ];
-
-    return this.http.get<OrderCategoryData[]>(this.baseUrl).pipe(
-      catchError(error => {
-        console.error('Failed to fetch distribution data:', error);
-        return of(hardcodedData);
-      })
-    );
+    console.log('Fetching order distribution data...');
+    return this.http.get<OrderCategoryData[]>(this.baseUrl, { headers: this.getHeaders() });
   }
 }

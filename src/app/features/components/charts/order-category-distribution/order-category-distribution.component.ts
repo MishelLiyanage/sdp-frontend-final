@@ -24,6 +24,7 @@ export class OrderCategoryDistributionComponent implements OnInit, AfterViewInit
 
   loadData(): void {
     this.orderCategoryDistributionService.getOrderDistribution().subscribe((data) => {
+      console.log('Order Category Distribution Data:', data); // Debugging line to check the data
       this.distributionData = data;
       this.createChart();
     });
