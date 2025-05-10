@@ -9,7 +9,7 @@ import { OrderCategoryData, OrderCategoryDistribution } from '../../../../servic
   templateUrl: './order-category-distribution.component.html',
   styleUrl: './order-category-distribution.component.scss'
 })
-export class OrderCategoryDistributionComponent implements OnInit {
+export class OrderCategoryDistributionComponent implements OnInit, AfterViewInit {
   distributionData: OrderCategoryData[] = [];
 
   constructor(private orderCategoryDistributionService: OrderCategoryDistribution) { }
@@ -18,9 +18,9 @@ export class OrderCategoryDistributionComponent implements OnInit {
     this.loadData();
   }
 
-  // ngAfterViewInit(): void {
-  //   this.createChart();
-  // }
+  ngAfterViewInit(): void {
+    this.createChart();
+  }
 
   loadData(): void {
     this.orderCategoryDistributionService.getOrderDistribution().subscribe((data) => {
