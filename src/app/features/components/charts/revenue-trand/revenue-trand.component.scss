@@ -1,5 +1,5 @@
 #revenue-trend-chart-container {
-  width: 67.5rem;
+  width: 69.5rem;
   height: 330px;
   background: #3860e433;
   border-radius: 10px;
@@ -8,4 +8,42 @@
     inset -5px -5px 10px rgba(255, 255, 255, 0.8),
     5px 5px 15px rgba(0, 0, 0, 0.2);
   padding: 20px;
+}
+
+@media (max-width: 1280px) {
+  #revenue-trend-chart-container {
+   width: 57.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  #revenue-trend-chart-container {
+    width: 43rem;
+  }
+}
+
+@media (max-width: 932px) {
+  #revenue-trend-chart-container {
+    width: 37rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #revenue-trend-chart-container {
+    width: 27rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #revenue-trend-chart-container {
+    width: 18rem;
+    height: 16rem;
+  }
+}
+
+@media (max-width: 300px) {
+  #revenue-trend-chart-container {
+    width: 13rem;
+    height: 13rem;
+  }
 }

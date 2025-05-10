@@ -9,3 +9,38 @@
     5px 5px 15px rgba(0, 0, 0, 0.2);
   padding: 20px;
 }
+
+@media (max-width: 1280px) {
+  #inventory-level-chart-container {
+   width: 26.5rem;
+   height: 21rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  #inventory-level-chart-container {
+    width: 20rem;
+    height: 15rem;
+  }
+}
+
+@media (max-width: 932px) {
+  #inventory-level-chart-container {
+    width: 27rem;
+    height: 23rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #inventory-level-chart-container {
+    width: 18rem;
+    height: 16rem;
+  }
+}
+
+@media (max-width: 300px) {
+  #inventory-level-chart-container {
+    width: 13rem;
+    height: 13rem;
+  }
+}
