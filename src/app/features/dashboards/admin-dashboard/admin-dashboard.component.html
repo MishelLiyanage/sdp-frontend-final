@@ -3,19 +3,33 @@
   <title>St. Joseph's Institute</title>
 </head>
 
-<div>
+<!-- <div>
   <app-page-starting-container [title]="title" [description]="description">
   </app-page-starting-container>
-</div>
-
-<div class="orderStatisticsContainer">
-  <div class="card-header">
-    <h3>Order Statistics</h3>
+</div> -->
+<div class="container">
+  <div class="sidebar">
+    <div class="logo-container">
+      <div class="logo"></div>
+      <h3>St. Joseph's Institute</h3>
+    </div>
+    <p>Register Employees</p>
+    <p (click)="registerSchools()">Register Schools</p>
+    <p (click)="manageSchools()">Manage Schools</p>
+    <p>Manage Employees</p>
+    <p (click)="manageOrders()">Manage Orders</p>
+    <p (click)="trackQPPreparation()">
+      Track Question Paper Preparation Process
+    </p>
+    <p>Settings</p>
+    <p>Profile</p>
   </div>
-  <div class="cardContainer">
-    <div class="cards">
-      <div class="card-body">
-        <div class="row1">
+  <div class="orderStatisticsContainer">
+      <div class="cardContainer">
+        <div class="cardHeader">
+          <p>Overview</p>
+        </div>
+        <div class="cardBody">
           <div class="orderStatisticsItem">
             <h4>Registered Schools</h4>
             <p>{{ registeredSchools }}</p>
@@ -41,16 +55,15 @@
             <p>{{ ordersToProcess }}</p>
           </div>
         </div>
+    </div>
+
+    <div class="charts">
+      <div class="orderCategoryDistributionChart">
+        <app-order-category-distribution></app-order-category-distribution>
+      </div>
+      <div class="monthlyProcessedOrdersChart">
+        <app-monthly-processed-orders></app-monthly-processed-orders>
       </div>
     </div>
-  </div>
-  <!-- <div class="chart">
-    <ag-charts [options]="chartOptions"> </ag-charts>
-  </div> -->
-  <div class="monthlyProcessedOrdersChart">
-    <app-monthly-processed-orders></app-monthly-processed-orders>
-  </div>
-  <div class="button">
-    <button>View more...</button>
   </div>
 </div>
