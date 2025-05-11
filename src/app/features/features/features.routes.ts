@@ -10,6 +10,7 @@ import { UpdatePrintingProgressComponent } from './update-printing-progress/upda
 import { UpdateOrderComponent } from './update-order/update-order.component';
 import { UpdateSchoolComponent } from './update-school/update-school.component';
 import { ProcessOrderComponent } from './process-order/process-order.component';
+import { EmployeeRegistrationComponent } from './employee-registration/employee-registration.component';
 
 export const featuresRoutes: Routes = [
   { path: 'placeOrder', component: PlaceOrderComponent },
@@ -22,5 +23,6 @@ export const featuresRoutes: Routes = [
   { path: 'updatePrintingProgress/:taskId', component: UpdatePrintingProgressComponent},
   { path: 'updateOrder', component: UpdateOrderComponent},
   { path: 'updateSchool', component: UpdateSchoolComponent},
-  { path: 'processOrders', component: ProcessOrderComponent }
+  { path: 'processOrders', component: ProcessOrderComponent },
+  { path: 'registerEmployee', component: EmployeeRegistrationComponent },
 ];

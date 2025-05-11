@@ -1,0 +1,145 @@
+@use "../../../shared/Styles/sharedStyles.scss" as styles;
+
+.registration-container {
+  background: #ffffff;
+  background: linear-gradient(
+    131deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(223, 237, 247, 1) 82%,
+    rgba(6, 20, 94, 1) 100%
+  );
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #000449, #000000);
+    padding-left: 3rem;
+
+    h2 {
+      color: white;
+      font-size: 5rem;
+      font-weight: 600;
+      font-family: styles.$font-family;
+    }
+  }
+
+  .form-container {
+    padding: 3rem;
+
+    .groupContainer {
+      display: flex;
+      flex-direction: row;
+      height: 6rem;
+      gap: 1rem;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        label {
+          display: block;
+          font-weight: 700;
+          font-size: 1rem;
+          font-family: styles.$font-family;
+          color: #000000;
+        }
+
+        input,
+        textarea {
+          padding: 10px;
+          border: 1px solid #ccccccc1;
+          border-radius: 5px;
+          font-size: 1rem;
+          font-family: styles.$font-family;
+          font-weight: 400;
+          width: 90%;
+          height: 1.5rem;
+          color: black;
+          background-color: #ffffffb5;
+
+          &::placeholder {
+            color: #282828d6;
+            font-weight: 400;
+            font-size: 1rem;
+            font-family: styles.$font-family;
+          }
+
+          .error small {
+            color: #d93025;
+            font-size: 12px;
+            margin-top: 2px;
+            display: block;
+          }
+        }
+
+        select {
+          height: 2.7rem;
+          width: 95%;
+          color: #000000;
+        }
+
+        textarea {
+          flex: 1;
+          resize: none;
+          padding: 5px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      gap: 1rem;
+
+      button {
+        width: 20%;
+        padding: 0.75rem;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+
+        &:disabled {
+          background-color: #9b9898;
+          color: black;
+          font-weight: 700;
+          font-family: styles.$font-family;
+          cursor: not-allowed;
+        }
+      }
+
+      .cancel-button {
+        background-color: #8e0b02;
+        color: white;
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: styles.$font-family;
+        border: none;
+        padding: 0.75rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #d32f2f;
+        }
+      }
+    }
+  }
+}

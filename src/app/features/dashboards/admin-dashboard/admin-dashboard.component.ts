@@ -45,6 +45,10 @@ export class AdminDashboardComponent {
     });
   }
 
+  registerEmployees() {
+this.router.navigate(['/features/registerEmployee']);
+}
+
   registerSchools() {
     this.router.navigate(['/auth/register']);
   }
