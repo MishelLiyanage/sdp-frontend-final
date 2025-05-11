@@ -143,3 +143,138 @@
     }
   }
 }
+
+// DEVICE RESPONSIVENESS
+
+// Desktop Large - 1440px
+@media (max-width: 1440px) {
+  .registration-container {
+    .header h2 {
+      font-size: 4rem;
+    }
+  }
+}
+
+// Desktop Medium - 1280px
+@media (max-width: 1280px) {
+  .registration-container {
+    .header h2 {
+      font-size: 3.5rem;
+    }
+  }
+}
+
+// Laptop - 1024px
+@media (max-width: 1024px) {
+  .registration-container {
+    grid-template-columns: 1fr;
+    .header {
+      padding: 1.5rem;
+      justify-content: center;
+      h2 {
+        font-size: 3rem;
+        text-align: center;
+      }
+    }
+
+    .form-container {
+      padding: 2rem;
+      .groupContainer {
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+
+        .form-group {
+          width: 98%;
+
+          input,
+          textarea,
+          select {
+            width: 98%;
+          }
+        }
+      }
+
+      .button-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        align-items: center;
+
+        button,
+        .cancel-button {
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
+// Tablet Large - 992px
+@media (max-width: 992px) {
+  .registration-container .header h2 {
+    font-size: 2.5rem;
+  }
+}
+
+// Tablet Medium - 932px
+@media (max-width: 932px) {
+  .registration-container .header h2 {
+    font-size: 2.3rem;
+  }
+}
+
+// Tablet - 768px
+@media (max-width: 768px) {
+  .registration-container {
+    .form-container {
+      padding: 1.5rem;
+      .form-group {
+        label {
+          font-size: 0.9rem;
+        }
+
+        input,
+        textarea,
+        select {
+          font-size: 0.9rem;
+          width: 100%;
+        }
+      }
+    }
+
+    .header h2 {
+      font-size: 2rem;
+    }
+  }
+}
+
+// Mobile Large - 600px
+@media (max-width: 600px) {
+  .registration-container .header h2 {
+    font-size: 1.7rem;
+  }
+
+  .registration-container .form-container {
+    padding: 1rem;
+  }
+}
+
+// Mobile Medium - 425px
+@media (max-width: 425px) {
+  .registration-container .header h2 {
+    font-size: 1.5rem;
+
+    .form-container {
+      .groupContainer {
+        .form-group {
+          input,
+          textarea,
+          select {
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+}
