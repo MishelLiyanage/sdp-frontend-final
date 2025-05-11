@@ -1,8 +1,7 @@
 // revenue-by-payment-method.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 export interface PaymentRevenue {
   method: string;
@@ -13,23 +12,23 @@ export interface PaymentRevenue {
   providedIn: 'root'
 })
 export class RevenueByPaymentMethodService {
-  private baseUrl = 'http://localhost:8083/payments/revenue';
+  private baseUrl = 'http://localhost:8083/payment/revenue';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('accessToken');
+    console.log('Token:', token); // Debugging line to check the token value
+    if (!token) {
+      console.error('No token found in localStorage!');
+      throw new Error('Authentication token not found');
+    }
+    return new HttpHeaders({ Authorization: `Bearer ${token}` });
+  }
+
 
   getRevenueData(): Observable<PaymentRevenue[]> {
-    const hardcodedData: PaymentRevenue[] = [
-      { method: 'Online', amount: 120000 },
-      { method: 'Bank Payment', amount: 95000 },
-      { method: 'Post Office', amount: 60000 },
-      { method: 'Hand Payment', amount: 45000 }
-    ];
-
-    return this.http.get<PaymentRevenue[]>(this.baseUrl).pipe(
-      catchError(error => {
-        console.error('Failed to fetch revenue data:', error);
-        return of(hardcodedData);
-      })
-    );
+    return this.http.get<PaymentRevenue[]>(this.baseUrl, { headers: this.getHeaders() });
   }
 }
+

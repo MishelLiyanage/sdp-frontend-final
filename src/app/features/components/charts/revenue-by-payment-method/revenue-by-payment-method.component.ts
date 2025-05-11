@@ -18,9 +18,9 @@ export class RevenueByPaymentMethodComponent implements OnInit {
     this.loadData();
   }
 
-  // ngAfterViewInit(): void {
-  //   this.createChart();
-  // }
+  ngAfterViewInit(): void {
+    this.createChart();
+  }
 
   loadData(): void {
     this.revenueService.getRevenueData().subscribe((data) => {
