@@ -14,18 +14,18 @@ export interface MonthlyOrdersData {
 export class MonthlyProcessedOrdersService {
   private baseUrl = 'http://localhost:8083/order/monthlyOrders';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private getHeaders(): HttpHeaders {
-      const token = localStorage.getItem('accessToken');
-      console.log('Token:', token); // Debugging line to check the token value
-      if (!token) {
-        console.error('No token found in localStorage!');
-        throw new Error('Authentication token not found');
-      }
-      return new HttpHeaders({ Authorization: `Bearer ${token}` });
+    const token = localStorage.getItem('accessToken');
+    console.log('Token:', token); // Debugging line to check the token value
+    if (!token) {
+      console.error('No token found in localStorage!');
+      throw new Error('Authentication token not found');
     }
-    
+    return new HttpHeaders({ Authorization: `Bearer ${token}` });
+  }
+
   getProcessedOrders(): Observable<MonthlyOrdersData[]> {
     return this.http.get<MonthlyOrdersData[]>(this.baseUrl, { headers: this.getHeaders() });
   }
