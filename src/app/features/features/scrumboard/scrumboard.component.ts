@@ -319,12 +319,12 @@ export class ScrumboardComponent {
     console.log('Navigating to update task with object:', task);
   
     if (task.status === 'Printing') {
-      // const token = localStorage.getItem('accessToken');
-      // const userRole = this.getUserRoleFromToken(token ?? '');
-      // if (userRole === 'ROLE_EMPLOYEE') {
-      //   alert('You do not have permission to access this form.');
-      //   return;
-      // }
+      const token = localStorage.getItem('accessToken');
+      const userRole = this.getUserRoleFromToken(token ?? '');
+      if (userRole === 'ROLE_EMPLOYEE') {
+        alert('You do not have permission to access this form.');
+        return;
+      }
       this.router.navigate(['/features/updatePrintingProgress', task.taskId]);
     } else {
       this.router.navigate(['/features/updateTask'], { state: { task } });
