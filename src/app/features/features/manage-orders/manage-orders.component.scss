@@ -62,7 +62,7 @@
 
   .table {
     background-color: rgb(254, 246, 255);
-    width: 80%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 4rem;
@@ -79,6 +79,8 @@
 
       th,
       td {
+        width: 0.5;
+        text-align: center;
         font-size: 0.9rem;
         padding-left: 15px;
         padding-right: 15px;
