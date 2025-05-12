@@ -22,9 +22,6 @@ export class MonthlyProcessedOrdersComponent implements OnInit, AfterViewInit {
     this.createChart();
   }
 
-  /**
-   * Load data from the service and update the chart
-   */
   loadData() {
     this.monthlyProcessedOrdersService.getProcessedOrders().subscribe((data) => {
       this.processedOrdersData = data;
