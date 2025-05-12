@@ -1,0 +1,135 @@
+@use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
+
+.container {
+  .heading {
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 3, 58));
+    color: white;
+    font-family: sharedStyles.$font-family;
+
+    h1 {
+      padding-left: 6rem;
+      padding-top: 5rem;
+      padding-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      animation: popEffect 0.6s ease-out forwards;
+    }
+  }
+
+  .tableContainer {
+  justify-content: center;
+  align-items: center;
+  background: url("../../../../assets/images/RegistrationBackground.png");
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .search-container {
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    display: flex;
+    gap: 20px;
+    height: 2rem;
+
+    input,
+    button {
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
+
+    input {
+      height: 1rem;
+      width: 17rem;
+      font-family: sharedStyles.$font-family;
+    }
+
+    button {
+      width: 7rem;
+      background-color: rgb(0, 7, 140);
+      color: white;
+      border-radius: 5px;
+      font-family: sharedStyles.$font-family;
+      font-size: 0.9rem;
+
+      &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .table {
+    background-color: rgb(254, 246, 255);
+    width: 77%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4rem;
+    padding: 1rem;
+    border-radius: 15px;
+    border: 1px solid rgb(0, 8, 161, 0.3);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    animation: floatIn 1s ease-out forwards;
+    position: relative;
+
+    table {
+      border-collapse: collapse;
+      max-width: 100%;
+
+      th,
+      td {
+        width: 8rem;
+        font-size: 0.9rem;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: center;
+      }
+
+      th {
+        background-color: rgb(0, 2, 46);
+        color: white;
+        font-family: sharedStyles.$font-family;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+        padding: 10px;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .action-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+
+        .update-btn,
+        .delete-btn {
+          font-size: 0.9rem;
+          padding: 5px;
+          width: 5rem;
+        }
+
+        .update-btn {
+          background-color: rgb(148, 152, 217);
+          border: 1.5px solid rgba(69, 2, 69, 0.315);
+          border-radius: 5px;
+        }
+
+        .delete-btn {
+          background-color: rgb(238, 160, 160);
+          border: 1.5px solid rgba(178, 0, 0, 0.438);
+          border-radius: 5px;
+        }
+      }
+    }
+
+    .backToHome {
+      color: rgb(9, 1, 102);
+      font-size: 1rem;
+      font-family: sharedStyles.$font-family;
+      font-weight: 700;
+    }
+  }
+}
+}

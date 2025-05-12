@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Employee } from '../models/employee.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,9 @@ export class EmployeeService {
 
   getDepartmentNames(): Observable<string[]> {
     return this.http.get<string[]>(`http://localhost:8083/department/all`, { headers: this.getHeaders() });
+  }
+
+  getAllEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.apiUrl}/all`, { headers: this.getHeaders() });
   }
 }

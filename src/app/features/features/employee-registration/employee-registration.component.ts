@@ -61,7 +61,7 @@ export class EmployeeRegistrationComponent implements OnInit {
         next: (response) => {
           console.log('Registration successful', response);
           alert('Employee registered successfully!');
-          this.router.navigate(['/dashboard/empl']);
+          this.router.navigate(['/dashboards/adminDashboard']);
         },
         error: (error) => {
           console.error('Registration failed', error);

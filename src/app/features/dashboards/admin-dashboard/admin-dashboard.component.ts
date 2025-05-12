@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgChartOptions } from 'ag-charts-community';
-import { MonthlyProcessedOrdersComponent } from "../../components/charts/monthly-processed-orders/monthly-processed-orders.component";
+import { MonthlyProcessedOrdersComponent } from '../../components/charts/monthly-processed-orders/monthly-processed-orders.component';
 import { Router } from '@angular/router';
-import { OrderCategoryDistributionComponent } from "../../components/charts/order-category-distribution/order-category-distribution.component";
-import { RevenueByPaymentMethodComponent } from "../../components/charts/revenue-by-payment-method/revenue-by-payment-method.component";
-import { RevenueTrandComponent } from "../../components/charts/revenue-trand/revenue-trand.component";
-import { InventoryLevelChartComponent } from "../../components/charts/inventory-level-chart/inventory-level-chart.component";
+import { OrderCategoryDistributionComponent } from '../../components/charts/order-category-distribution/order-category-distribution.component';
+import { RevenueByPaymentMethodComponent } from '../../components/charts/revenue-by-payment-method/revenue-by-payment-method.component';
+import { RevenueTrandComponent } from '../../components/charts/revenue-trand/revenue-trand.component';
+import { InventoryLevelChartComponent } from '../../components/charts/inventory-level-chart/inventory-level-chart.component';
 import { AdminDashboardService } from '../../../services/admin-dashboard.service';
 
 @Component({
@@ -18,7 +18,7 @@ import { AdminDashboardService } from '../../../services/admin-dashboard.service
     OrderCategoryDistributionComponent,
     RevenueByPaymentMethodComponent,
     RevenueTrandComponent,
-    InventoryLevelChartComponent
+    InventoryLevelChartComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
@@ -31,11 +31,14 @@ export class AdminDashboardComponent {
   grade3scholarship: number = 0;
   ordersToProcess: number = 0;
 
-  constructor(private router: Router, private dashboardService: AdminDashboardService) { }
+  constructor(
+    private router: Router,
+    private dashboardService: AdminDashboardService
+  ) {}
 
   ngOnInit(): void {
     // console.log('AdminDashboardComponent initialized');
-    this.dashboardService.getDashboardStats().subscribe(data => {
+    this.dashboardService.getDashboardStats().subscribe((data) => {
       this.registeredSchools = data.registeredSchools;
       this.totalOrders = data.totalOrders;
       this.grade5scholarship = data.grade5scholarship;
@@ -46,8 +49,8 @@ export class AdminDashboardComponent {
   }
 
   registerEmployees() {
-this.router.navigate(['/features/registerEmployee']);
-}
+    this.router.navigate(['/features/registerEmployee']);
+  }
 
   registerSchools() {
     this.router.navigate(['/auth/register']);
@@ -63,5 +66,9 @@ this.router.navigate(['/features/registerEmployee']);
 
   manageSchools() {
     this.router.navigate(['/features/manageSchools']);
+  }
+
+  manageEmployees() {
+    this.router.navigate(['/features/manageEmployees']);
   }
 }

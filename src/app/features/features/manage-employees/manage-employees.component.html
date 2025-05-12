@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="heading">
+        <h1>Manage Employees</h1>
+    </div>
+    <div class="tableContainer">
+        <div class="search-container">
+            <input type="text" [(ngModel)]="searchTerm" placeholder="Search by name, departmentName username" />
+            <button (click)="searchEmployees()">Search</button>
+        </div>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Address</th>
+                        <th>Contact No</th>
+                        <th>Department</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let emp of employees">
+                        <td>{{ emp.username }}</td>
+                        <td>{{ emp.firstName }}</td>
+                        <td>{{ emp.lastName }}</td>
+                        <td>{{ emp.address }}</td>
+                        <td>{{ emp.contactNo }}</td>
+                        <td>{{ emp.departmentName }}</td>
+                        <td class="action-buttons">
+                            <button class="update-btn" (click)="updateEmployee(emp)">Update</button>
+                            <button class="delete-btn" (click)="deleteEmployee(emp)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="backToHome">
+                <p (click)="backToHome()">Back to home</p>
+            </div>
+        </div>
+    </div>
+</div>
