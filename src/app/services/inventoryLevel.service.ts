@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 export interface InventoryItem {
-  model: string;
-  level: number;
+  modelPaperName: string;
+  quantity: number;
 }
 
 @Injectable({
@@ -16,20 +15,19 @@ export class InventoryLevelService {
 
   constructor(private http: HttpClient) {}
 
-  getInventoryLevels(): Observable<InventoryItem[]> {
-    const sampleData: InventoryItem[] = [
-      { model: 'Grade 10 Maths', level: 120 },
-      { model: 'Grade 11 Science', level: 40 },
-      { model: 'Grade 10 History', level: 25 },
-      { model: 'Grade 11 English', level: 90 },
-      { model: 'Grade 10 Sinhala', level: 60 }
-    ];
+  private getHeaders(): HttpHeaders {
+      const token = localStorage.getItem('accessToken');
+      console.log('Token:', token); // Debugging line to check the token value
+      if (!token) {
+        console.error('No token found in localStorage!');
+        throw new Error('Authentication token not found');
+      }
+      return new HttpHeaders({ Authorization: `Bearer ${token}` });
+    }
 
-    return this.http.get<InventoryItem[]>(this.baseUrl).pipe(
-      catchError(error => {
-        console.error('Failed to fetch inventory levels:', error);
-        return of(sampleData);
-      })
-    );
+  getInventoryLevels(): Observable<InventoryItem[]> {
+    return this.http.get<InventoryItem[]>(this.baseUrl, { headers: this.getHeaders() });
   }
 }
+
+

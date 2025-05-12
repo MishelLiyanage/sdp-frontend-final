@@ -20,6 +20,7 @@ export class InventoryLevelChartComponent implements OnInit {
 
   loadInventoryData(): void {
     this.inventoryService.getInventoryLevels().subscribe((data) => {
+      console.log("inventory levels:", data);
       this.inventoryData = data;
       this.createChart();
     });
@@ -29,11 +30,11 @@ export class InventoryLevelChartComponent implements OnInit {
     const container = document.getElementById('inventory-level-chart-container');
     if (!container || this.inventoryData.length === 0) return;
 
-    const categories = this.inventoryData.map(item => item.model);
+    const categories = this.inventoryData.map(item => item.modelPaperName);
     const data = this.inventoryData.map(item => ({
-      name: item.model,
-      y: item.level,
-      color: item.level < this.threshold ? 'red' : '#2f7ed8'
+      name: item.modelPaperName,
+      y: item.quantity,
+      color: item.quantity < this.threshold ? 'red' : '#2f7ed8'
     }));
 
     Highcharts.chart(container, {
