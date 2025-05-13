@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { RegistrationComponent } from './features/auth/registration/registration.component';
+import { AuthGuard } from './features/auth/auth.guard';
 
 export const routes: Routes = [
     {
@@ -23,6 +24,6 @@ export const routes: Routes = [
         loadChildren: () => import('./features/features/features.routes').then(m => m.featuresRoutes),
     },
     { path: '', redirectTo: 'publicPage', pathMatch: 'full' },
-    { path: '**', redirectTo: 'home', pathMatch: 'full' }, 
+    { path: '**', redirectTo: 'publicPage', pathMatch: 'full' }, 
     { path: 'register', component: RegistrationComponent }
 ];

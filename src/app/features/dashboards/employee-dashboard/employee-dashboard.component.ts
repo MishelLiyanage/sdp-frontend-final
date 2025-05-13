@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { PageStartingContainerComponent } from "../../components/page-starting-container/page-starting-container.component";
 import { Router } from '@angular/router';
 import { OrderCategoryDistributionComponent } from "../../components/charts/order-category-distribution/order-category-distribution.component";
 import { MonthlyProcessedOrdersComponent } from "../../components/charts/monthly-processed-orders/monthly-processed-orders.component";
 import { RevenueByPaymentMethodComponent } from "../../components/charts/revenue-by-payment-method/revenue-by-payment-method.component";
 import { InventoryLevelChartComponent } from "../../components/charts/inventory-level-chart/inventory-level-chart.component";
 import { AdminDashboardService } from '../../../services/admin-dashboard.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-employee-dashboard',
-  imports: [PageStartingContainerComponent, OrderCategoryDistributionComponent, MonthlyProcessedOrdersComponent, RevenueByPaymentMethodComponent, InventoryLevelChartComponent],
+  imports: [OrderCategoryDistributionComponent, MonthlyProcessedOrdersComponent, RevenueByPaymentMethodComponent, InventoryLevelChartComponent],
   templateUrl: './employee-dashboard.component.html',
   styleUrl: './employee-dashboard.component.scss'
 })
@@ -22,7 +22,8 @@ export class EmployeeDashboardComponent {
   ordersToProcess: number = 0;
 
   constructor(private router: Router,
-    private dashboardService: AdminDashboardService
+    private dashboardService: AdminDashboardService,
+    private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +63,6 @@ export class EmployeeDashboardComponent {
   }
 
   logout() {
-    throw new Error('Method not implemented.');
+    this.loginService.logout();
   }
 }

@@ -8,6 +8,7 @@ import { RevenueByPaymentMethodComponent } from '../../components/charts/revenue
 import { RevenueTrandComponent } from '../../components/charts/revenue-trand/revenue-trand.component';
 import { InventoryLevelChartComponent } from '../../components/charts/inventory-level-chart/inventory-level-chart.component';
 import { AdminDashboardService } from '../../../services/admin-dashboard.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -33,7 +34,8 @@ export class AdminDashboardComponent {
 
   constructor(
     private router: Router,
-    private dashboardService: AdminDashboardService
+    private dashboardService: AdminDashboardService,
+    private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
@@ -77,6 +79,6 @@ export class AdminDashboardComponent {
   }
 
   logout() {
-    throw new Error('Method not implemented.');
+    this.loginService.logout();
   }
 }
