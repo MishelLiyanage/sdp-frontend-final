@@ -1,108 +1,39 @@
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>St. Joseph's Institute</title>
-</head>
-
-<div class="publications">
-  <div class="heading-container">
-    <h2>My Orders</h2>
+<div class="orders-container">
+  <div class="heading">
+    <h1>Your Orders</h1>
   </div>
-  <div class="tabs">
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-      <mat-tab label="Ongoing">
-        <div class="tab-content">
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <!-- Publication Column -->
-            <ng-container matColumnDef="publication">
-              <th mat-header-cell *matHeaderCellDef>Publication</th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.publication }}
-              </td>
-            </ng-container>
-
-            <!-- Ordered Date Column -->
-            <ng-container matColumnDef="orderedDate">
-              <th mat-header-cell *matHeaderCellDef>Ordered Date</th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.orderedDate }}
-              </td>
-            </ng-container>
-
-            <!-- Payment Status Column -->
-            <ng-container matColumnDef="paymentStatus">
-              <th mat-header-cell *matHeaderCellDef>Payment Status</th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.paymentStatus }}
-              </td>
-            </ng-container>
-
-            <!-- Amount Column -->
-            <ng-container matColumnDef="amount">
-              <th mat-header-cell *matHeaderCellDef>Amount</th>
-              <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
-            </ng-container>
-
-            <!-- Track Order Column -->
-            <ng-container matColumnDef="action" id="button-container">
-              <th mat-header-cell *matHeaderCellDef>Action</th>
-              <td mat-cell *matCellDef="let element">
-                <div class="buttonContainer">
-                  <button mat-button class="trackButton">Track Order</button>
-                  <Button mat-button class="cancelButton">Cancel Order</Button>
-                </div>
-              </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-          </table>
-        </div>
-      </mat-tab>
-
-      <mat-tab label="Completed">
-        <div class="tab-content">
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <!-- Publication Column -->
-            <ng-container matColumnDef="publication">
-              <th mat-header-cell *matHeaderCellDef>Publication</th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.publication }}
-              </td>
-            </ng-container>
-
-            <!-- Ordered Date Column -->
-            <ng-container matColumnDef="orderedDate">
-              <th mat-header-cell *matHeaderCellDef>Ordered Date</th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.orderedDate }}
-              </td>
-            </ng-container>
-
-            <!-- Payment Status Column -->
-            <ng-container matColumnDef="paymentStatus">
-              <th mat-header-cell *matHeaderCellDef>Payment Status</th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.paymentStatus }}
-              </td>
-            </ng-container>
-
-            <!-- Amount Column -->
-            <ng-container matColumnDef="amount">
-              <th mat-header-cell *matHeaderCellDef>Amount</th>
-              <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
-            </ng-container>
-
-            <tr
-              mat-header-row
-              *matHeaderRowDef="displayedCompletedColumns"
-            ></tr>
-            <tr
-              mat-row
-              *matRowDef="let row; columns: displayedCompletedColumns"
-            ></tr>
-          </table>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+  <div class="tableContainer">
+    <div class="table">
+      <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Order Items</th>
+          <th>Ordered Date</th>
+          <th>Payment Status</th>
+          <th>Order Status</th>
+          <th>Amount</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of schoolOrders">
+          <td>{{ order.orderId }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let item of order.orderItems">{{ item }}</li>
+            </ul>
+          </td>
+          <td>{{ order.date }}</td>
+          <td>{{ order.paymentStatus }}</td>
+          <td>{{ order.orderStatus }}</td>
+          <td>{{ order.amount | currency : "LKR" : "symbol" }}</td>
+          <td class="action-buttons">
+            <button class="delete-btn" (click)="deleteOrder(order)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
   </div>
 </div>
