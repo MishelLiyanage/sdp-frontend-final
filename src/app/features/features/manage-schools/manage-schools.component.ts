@@ -20,7 +20,7 @@ export class ManageSchoolsComponent {
 
   constructor(private schoolService: SchoolService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadSchools();
@@ -54,15 +54,39 @@ export class ManageSchoolsComponent {
 
   deleteSchool(school: School) {
     console.log('Deleting school:', school.email);
-      this.schoolService.deleteSchool(school.email).subscribe(
-        () => {
-          console.log('School deleted:', school);
-          this.schools = this.schools.filter(o => o.schoolId !== school.schoolId);
-          this.filteredSchools = [...this.schools];
-  
-          alert('Order deleted successfully!');
-        },
-        (error) => console.error('Error deleting order:', error)
-      );
-    }
+    this.schoolService.deleteSchool(school.email).subscribe(
+      () => {
+        console.log('School deleted:', school);
+        this.schools = this.schools.filter(o => o.schoolId !== school.schoolId);
+        this.filteredSchools = [...this.schools];
+
+        alert('Order deleted successfully!');
+      },
+      (error) => console.error('Error deleting order:', error)
+    );
+  }
+
+  goToHome() {
+      const token = localStorage.getItem('accessToken');
+
+      if (token) {
+          const userRole = this.getUserRoleFromToken(token);
+
+          if (userRole === 'ROLE_EMPLOYEE') {
+            this.router.navigate(['/dashboards/employeeDashboard']);
+          } else if (userRole === 'ROLE_ADMIN') {
+            this.router.navigate(['/dashboards/adminDashboard']);
+          }
+      }
+  }
+
+  getUserRoleFromToken(token: string): string | null {
+      try {
+          const tokenPayload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
+          return tokenPayload.role || null; // Assuming 'role' field is present
+      } catch (error) {
+          console.error('Invalid token format', error);
+          return null;
+      }
+  }
 }
