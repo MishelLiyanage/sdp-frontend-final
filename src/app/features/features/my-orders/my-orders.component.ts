@@ -27,7 +27,7 @@ interface OrderResponse {
 })
 export class MyOrdersComponent {
   schoolOrders: OrderResponse[] = [];
-  currentUserId: number = 0; 
+  currentUserId: number = 0;
   orders: OrderResponse[] = [];
 
   constructor(private http: HttpClient,
@@ -68,19 +68,23 @@ export class MyOrdersComponent {
   deleteOrder(order: OrderResponse) {
     const token = localStorage.getItem('accessToken');
     const userRole = this.getUserRoleFromToken(token ?? '');
-    if (userRole === 'ROLE_SCHOOL') {
-      this.orderService.deleteOrder(order.orderId).subscribe(
-        () => {
-          console.log('Order deleted:', order);
-          this.orders = this.orders.filter(o => o.orderId !== order.orderId);
-          this.schoolOrders = [...this.orders];
 
-          alert('Order deleted successfully!');
-        },
-        (error) => console.error('Error deleting order:', error)
-      );
+    if (userRole === 'ROLE_SCHOOL') {
+      if (order.orderStatus === 'Processed') {
+        alert("You cannot delete an order that is already processed.");
+      } else {
+        console.log("status: ", order.orderStatus);
+        this.orderService.deleteOrder(order.orderId).subscribe(
+          () => {
+            console.log('Order deleted:', order);
+            this.schoolOrders = this.schoolOrders.filter(o => o.orderId !== order.orderId);
+            alert('Order deleted successfully!');
+          },
+          (error) => console.error('Error deleting order:', error)
+        );
+      }
     } else {
-      alert("You do not have permission to delete an order.")
+      alert("You do not have permission to delete an order.");
     }
   }
 
