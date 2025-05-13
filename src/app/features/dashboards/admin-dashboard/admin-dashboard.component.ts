@@ -34,7 +34,7 @@ export class AdminDashboardComponent {
   constructor(
     private router: Router,
     private dashboardService: AdminDashboardService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // console.log('AdminDashboardComponent initialized');
@@ -70,5 +70,13 @@ export class AdminDashboardComponent {
 
   manageEmployees() {
     this.router.navigate(['/features/manageEmployees']);
+  }
+
+  processOrders() {
+    this.router.navigate(['/features/processOrders']);
+  }
+
+  logout() {
+    throw new Error('Method not implemented.');
   }
 }
