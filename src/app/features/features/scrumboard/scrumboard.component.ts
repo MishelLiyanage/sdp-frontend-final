@@ -24,8 +24,8 @@ interface Column {
 })
 export class ScrumboardComponent {
   constructor(
-    private router: Router, 
-    private taskService: TaskService, 
+    private router: Router,
+    private taskService: TaskService,
     private printingProrgessService: PrintingProgressService) { }
 
   newTask: string = '';
@@ -161,13 +161,13 @@ export class ScrumboardComponent {
 
   getUserRoleFromToken(token: string): string | null {
     try {
-        const tokenPayload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
-        return tokenPayload.role || null; // Assuming 'role' field is present
+      const tokenPayload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
+      return tokenPayload.role || null; // Assuming 'role' field is present
     } catch (error) {
-        console.error('Invalid token format', error);
-        return null;
+      console.error('Invalid token format', error);
+      return null;
     }
-}
+  }
 
   ngOnInit() {
     this.loadTasks();
@@ -181,23 +181,23 @@ export class ScrumboardComponent {
             let column = this.columns.find(
               (col) => col.name.toLowerCase() === taskData.status.toLowerCase()
             );
-  
+
             if (!column) {
               console.error('Column not found for status:', taskData.status);
               alert('Column not found for status: ' + taskData.status);
               return;
             }
-  
+
             const task = new Task(
               taskData.modelPaper,
               taskData.status,
               taskData.dueDate,
               taskData.assignedEmployee
             );
-  
+
             task.taskId = taskData.taskId;
             column.tasks.push(task);
-  
+
             // 🔁 Fetch assignment details
             this.taskService.getAssignmentByTaskId(task.taskId ?? 0).subscribe(
               (assignment) => {
@@ -211,7 +211,7 @@ export class ScrumboardComponent {
                 console.error(`Failed to load assignment for task ID ${task.taskId}`, error);
               }
             );
-  
+
             // 🆕 Fetch printing progress details
             this.printingProrgessService.getPrintingProgressByTaskId(task.taskId ?? 0).subscribe(
               (progress) => {
@@ -236,7 +236,7 @@ export class ScrumboardComponent {
         console.error('Error loading tasks:', error);
       }
     );
-  }  
+  }
 
   addTask() {
     // Ensure all dropdowns have selected values
@@ -263,7 +263,7 @@ export class ScrumboardComponent {
       (response) => {
         if (response.success) {
           let task = new Task(
-            response.modelPaper, 
+            response.modelPaper,
             'To Do', // Default status
             '', // No due date initially
             '' // No assigned employee initially
@@ -317,7 +317,7 @@ export class ScrumboardComponent {
 
   updateTask(task: any) {
     console.log('Navigating to update task with object:', task);
-  
+
     if (task.status === 'Printing') {
       const token = localStorage.getItem('accessToken');
       const userRole = this.getUserRoleFromToken(token ?? '');
@@ -330,5 +330,5 @@ export class ScrumboardComponent {
       this.router.navigate(['/features/updateTask'], { state: { task } });
     }
   }
-    
+
 }
