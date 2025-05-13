@@ -2,36 +2,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>St. Joseph's Institute</title>
 </head>
+<div class="container">
+  <div class="sidebar">
+    <div class="logo-container">
+      <div class="logo"></div>
+      <h3>St. Joseph's Institute</h3>
+    </div>
+    <p (click)="registerSchools()">Register Schools</p>
+    <p (click)="manageSchools()">Manage Schools</p>
+    <p (click)="manageOrders()">Manage Orders</p>
+    <p (click)="placeOrder()">Place an Order</p>
+    <p (click)="processOrders()">Process Orders</p>
+    <p (click)="trackQPPreparation()">
+      Track Question Paper Preparation Process
+    </p>
+    <p>Generate Documents</p>
+    <p>Profile</p>
+  </div>
+  <div class="orderStatisticsContainer">
+    <div class="header">
+      <h2>Employee Dashboard</h2>
+      <p>Welcome, Mishel</p>
+      <p (click)="logout()">Log Out</p>
+    </div>
 
-<div>
-    <app-page-starting-container [title]="title" [description]="description">
-    </app-page-starting-container>
-</div>
+    <div class="stat">
+      <div class="cardContainer animate-on-scroll">
+        <div class="cardHeader">
+          <p>Overview</p>
+        </div>
+        <div class="cardBody">
+          <div class="orderStatisticsItem">
+            <h4>Registered Schools</h4>
+            <p>{{ registeredSchools }}</p>
+          </div>
+          <div class="orderStatisticsItem">
+            <h4>Total Orders</h4>
+            <p>{{ totalOrders }}</p>
+          </div>
+          <div class="orderStatisticsItem">
+            <h4>Grade 5 Scholarship</h4>
+            <p>{{ grade5scholarship }}</p>
+          </div>
+          <div class="orderStatisticsItem">
+            <h4>Grade 4 Scholarship</h4>
+            <p>{{ grade4scholarship }}</p>
+          </div>
+          <div class="orderStatisticsItem">
+            <h4>Grade 3 Scholarship</h4>
+            <p>{{ grade3scholarship }}</p>
+          </div>
+          <div class="orderStatisticsItem">
+            <h4>Orders to Process</h4>
+            <p>{{ ordersToProcess }}</p>
+          </div>
+        </div>
+      </div>
 
-<div class="myWork">
-  <div class="workContainer">
-    <div class="card" (click)="manageSchools()">
-      <div class="img1"></div>
-      <p>Manage Schools</p>
-    </div>
-    <div class="card" (click)="processOrders()">
-      <div class="img2"></div>
-      <p>Process Orders</p>
-    </div>
-    <div class="card" (click)="manageOrders()">
-      <div class="img3"></div>
-      <p>Manage Orders</p>
-    </div>
-    <div class="card" (click)="scrumboard()">
-      <div class="img4"></div>
-      <p>
-        Manage Question <br />
-        Paper Preparation
-      </p>
-    </div>
-    <div class="card">
-      <div class="img5"></div>
-      <p>Generate Documents</p>
+      <div class="charts">
+        <div class="orderCategoryDistributionChart animate-on-scroll">
+          <app-order-category-distribution></app-order-category-distribution>
+        </div>
+        <div class="monthlyProcessedOrdersChart animate-on-scroll">
+          <app-monthly-processed-orders></app-monthly-processed-orders>
+        </div>
+      </div>
+
+      <div class="charts">
+        <div class="revenueContainer animate-on-scroll">
+          <div class="revenueHeader">
+            <p>Revenue</p>
+          </div>
+          <div class="revenueBody animate-on-scroll">
+            <div class="revenueByPaymentMethod">
+              <app-revenue-by-payment-method></app-revenue-by-payment-method>
+            </div>
+            
+            <div class="inventoryLevel animate-on-scroll">
+              <app-inventory-level-chart></app-inventory-level-chart>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

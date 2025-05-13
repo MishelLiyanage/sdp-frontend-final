@@ -1,166 +1,313 @@
 @use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
 
-.myWork {
-  background: linear-gradient(to bottom left, #000000, #0a0a66);
-  height: fit-content;
-  padding: 20px;
+.container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
 
-  .workContainer {
-    height: fit-content;
+  .sidebar {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 5rem;
-    padding-top: 15px;
-    padding-bottom: 20px;
-    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+    width: 25%;
+    background-color: #020277;
+    padding-right: 1rem;
 
-    .card {
-      height: 12rem;
-      width: auto;
-      padding: 15px;
-      background-color: hsl(0, 0%, 100%, 10%);
+    .logo-container {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+
+      .logo {
+        background: url("../.../../../../../assets/images/logo.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 3.4rem;
+        height: 3rem;
+        margin-left: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      h3 {
+        margin-top: 1.8rem;
+        font-family: sharedStyles.$font-family;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: white;
+      }
+    }
+
+    p {
+      margin-left: 1.5rem;
       color: white;
       font-family: sharedStyles.$font-family;
-      font-size: 1.3rem;
-      text-align: center;
-      border-radius: 15px;
-      border: solid 0.3px rgba(255, 255, 255, 0.542);
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      font-size: 1rem;
+
+      &:hover {
+        font-weight: 700;
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .orderStatisticsContainer {
+    background-color: #cadff7;
+    height: fit-content;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      background-color: white;
+      // width: 100%;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      h2 {
+        font-family: sharedStyles.$font-family;
+        font-size: 1.5rem;
+        margin-left: 1rem;
+        color: #020277;
+      }
 
       p {
-        margin-bottom: 0;
+        font-family: sharedStyles.$font-family;
+        font-size: 1.1rem;
+        margin-right: 1.5rem;
+        color: #020277;
+      }
+    }
+
+    .stat {
+      padding-left: 2rem;
+      padding-right: 2rem;
+
+      .cardContainer {
+        height: fit-content;
+        padding: 1rem;
+        margin-top: 1rem;
+        color: white;
+        background-color: white;
+        font-family: sharedStyles.$font-family;
         font-size: 1rem;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
+        border: #00004d 1px solid;
+        animation: floatIn 1s ease-out forwards;
+        // animation-delay: 0.2s;
+
+        .cardHeader {
+          display: flex;
+          margin: 0%;
+          padding: 0%;
+          p {
+            font-family: sharedStyles.$font-family;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #020277;
+          }
+        }
+
+        .cardBody {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          width: 100%;
+          height: 100%;
+          padding-top: 1rem;
+
+          .orderStatisticsItem {
+            width: 6rem;
+            height: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 2, 112, 0.966);
+            border-radius: 15px;
+            animation: floatIn 1s ease-out forwards;
+          }
+        }
       }
 
-      .img1,
-      .img2,
-      .img3,
-      .img4,
-      .img5 {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        height: 10rem;
-        width: 11rem;
-      }
-
-      .img1 {
-        background-image: url(../../../../assets/images/manageSchools.jpg);
-      }
-
-      .img2 {
-        background-image: url(../../../../assets/images/process\ orders.jpg);
-      }
-
-      .img3 {
-        background-image: url(../../../../assets/images/manageOrders.png);
-      }
-
-      .img4 {
-        background-image: url(../../../../assets/images/managePreparationProcess.jpg);
-      }
-
-      .img5 {
-        background-image: url(../../../../assets/images/generateDocuments.jpg);
-      }
-    }
-
-    .card:hover {
-      opacity: 0.8;
-      transform: scale(1.05);
-    }
-  }
-
-  // Responsive styles
-  @media (max-width: 1440px) {
-    .workContainer {
-      gap: 5rem;
-    }
-
-    .card {
-      height: 14rem;
-    }
-
-    .card:hover {
-      opacity: 0.8;
-      transform: scale(1.05);
-    }
-  }
-
-  @media (max-width: 1024px) {
-    .workContainer {
-      align-items: center;
-      gap: 3rem;
-    }
-
-    .card {
-      width: 90%;
-      height: auto;
-
-      .img1,
-      .img2,
-      .img3,
-      .img4,
-      .img5 {
-        height: 10rem;
+      .charts {
+        display: flex;
+        flex-direction: row;
+        gap: 3rem;
+        margin-top: 1rem;
         width: 100%;
+
+        .orderCategoryDistributionChart {
+          animation: floatIn 1s ease-out forwards;
+          animation-delay: 0.2s;
+        }
+
+        .monthlyProcessedOrdersChart {
+          animation: floatIn 1s ease-out forwards;
+          animation-delay: 0.2s;
+        }
+
+        .revenueContainer {
+          padding: 1rem;
+          border: #00004d 1px solid;
+          background-color: white;
+          border-radius: 15px;
+          display: flex;
+          flex-direction: column;
+          animation: floatIn 1s ease-out forwards;
+          animation-delay: 0.4s;
+
+          .revenueHeader {
+            display: flex;
+            margin: 0%;
+            padding-bottom: 1rem;
+            p {
+              font-family: sharedStyles.$font-family;
+              font-size: 1.2rem;
+              font-weight: 700;
+              color: #020277;
+            }
+          }
+
+          .revenueBody {
+            animation: floatIn 1s ease-out forwards;
+            animation-delay: 0.4s;
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+
+            .revenueByPaymentMethod {
+              background-color: white;
+              border-radius: 15px;
+              animation: floatIn 1s ease-out forwards;
+              animation-delay: 0.8s;
+            }
+
+            .inventoryLevel {
+              display: flex;
+              background-color: white;
+              border-radius: 15px;
+              animation: floatIn 1s ease-out forwards;
+              animation-delay: 0.8s;
+            }
+          }
+        }
       }
     }
+  }
+}
 
-    .card:hover {
-      opacity: 0.8;
-      transform: scale(1.05);
+
+// Responsive styles
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.in-view {
+  animation: floatIn 1s ease-out forwards;
+  transform: translateY(0);
+}
+
+// Responsive Styles
+@media (max-width: 1440px) {
+  .cardContainer {
+    gap: 3rem;
+    padding-left: 8rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  .orderStatisticsContainer {
+    .stat {
+      .charts {
+        display: flex;
+        gap: 2rem;
+      }
     }
   }
+}
 
-  @media (max-width: 932px) {
-    .card {
-      font-size: 1.1rem;
-    }
+@media (max-width: 932px) {
+  .orderStatisticsContainer {
+    .stat {
+      .charts {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1rem !important;
 
-    .card:hover {
-      opacity: 0.8;
-      transform: scale(1.05);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .workContainer {
-      gap: 2rem;
-    }
-
-    .card {
-      width: 95%;
-      font-size: 1rem;
-    }
-
-    .card:hover {
-      opacity: 0.8;
-      transform: scale(1.05);
+        .revenueContainer {
+          .revenueBody {
+            flex-direction: column !important;
+            align-items: center !important;
+          }
+        }
+      }
     }
   }
+}
 
-  @media (max-width: 425px) {
-    .card {
+@media (max-width: 425px) {
+  .container {
+    flex-direction: column;
+    
+    .sidebar{
       width: 100%;
-      font-size: 0.9rem;
+      flex-direction: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      padding-bottom: 1rem;
 
-      .img1,
-      .img2,
-      .img3,
-      .img4,
-      .img5 {
-        height: 8rem;
+      .logo-container {
+        justify-content: center;
+        margin-left: 0;
       }
     }
 
-    .card:hover {
-      opacity: 0.8;
-      transform: scale(1.05);
+    .orderStatisticsContainer {
+      .header {
+        visibility: hidden;
+      }
     }
+  }
+}
+
+@media (max-width: 300px) {
+  .container {
+    .sidebar {
+      width: 5rem;
+    }
+    .orderStatisticsContainer {
+      .stat {
+        .cardContainer {
+          .cardBody {
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          }
+        }
+      }
+    }
+  }
+}
+
+// Floating animation
+@keyframes floatIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
