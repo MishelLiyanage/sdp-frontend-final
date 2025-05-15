@@ -17,10 +17,10 @@ export class UpdateSchoolProfileComponent implements OnInit {
     this.updateForm = this.fb.group({
       id: [{ value: '', disabled: true }],
       username: [{ value: '', disabled: true }],
-      password: [{ value: '', disabled: true }],
       role: [{ value: '', disabled: true }],
       name: [{ value: '', disabled: true }],
       address: [{ value: '', disabled: true }],
+      city: [{ value: '', disabled: true }],
       contact_no: [{ value: '', disabled: true }],
       email: [{ value: '', disabled: true }],
       principle_name: [{ value: '', disabled: true }],
@@ -49,10 +49,10 @@ export class UpdateSchoolProfileComponent implements OnInit {
         const mappedData = {
           id: userData.id,
           username: userData.username,
-          password: userData.password,
           role: userData.role,
           name: userData.name,
           address: userData.address,
+          city: userData.city,
           contact_no: userData.contactNo,
           email: userData.email,
           principle_name: userData.principleName,
