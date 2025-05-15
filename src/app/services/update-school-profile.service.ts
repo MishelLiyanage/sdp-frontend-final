@@ -15,7 +15,6 @@ export class UpdateSchoolProfileService {
   }
 
   updateProfile(formData: any, headers: HttpHeaders): Observable<any> {
-    console.log('Sending Token:', headers.get('Authorization')); // Debugging
     return this.http.put('http://localhost:8083/school/update-profile', formData, { headers });
   }
 }
