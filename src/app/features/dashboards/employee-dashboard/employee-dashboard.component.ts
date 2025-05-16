@@ -43,7 +43,7 @@ export class EmployeeDashboardComponent {
   }
   
   registerSchools() {
-    throw new Error('Method not implemented.');
+    this.router.navigate(['/features/schoolRegistration']);
   }
 
   manageSchools() {
@@ -56,10 +56,6 @@ export class EmployeeDashboardComponent {
 
   manageOrders() {
     this.router.navigate(['/features/manageOrders']);
-  }
-
-  placeOrder() {
-    this.router.navigate(['/features/placeOrder']);
   }
 
   logout() {
