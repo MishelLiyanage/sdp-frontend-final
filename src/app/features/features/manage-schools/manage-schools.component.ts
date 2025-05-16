@@ -52,19 +52,19 @@ export class ManageSchoolsComponent {
     this.router.navigate(['/features/updateSchool'], { state: { school } });
   }
 
-  deleteSchool(school: School) {
-    console.log('Deleting school:', school.email);
-    this.schoolService.deleteSchool(school.email).subscribe(
-      () => {
-        console.log('School deleted:', school);
-        this.schools = this.schools.filter(o => o.schoolId !== school.schoolId);
-        this.filteredSchools = [...this.schools];
+  // deleteSchool(school: School) {
+  //   console.log('Deleting school:', school.email);
+  //   this.schoolService.deleteSchool(school.email).subscribe(
+  //     () => {
+  //       console.log('School deleted:', school);
+  //       this.schools = this.schools.filter(o => o.schoolId !== school.schoolId);
+  //       this.filteredSchools = [...this.schools];
 
-        alert('Order deleted successfully!');
-      },
-      (error) => console.error('Error deleting order:', error)
-    );
-  }
+  //       alert('Order deleted successfully!');
+  //     },
+  //     (error) => console.error('Error deleting order:', error)
+  //   );
+  // }
 
   goToHome() {
       const token = localStorage.getItem('accessToken');

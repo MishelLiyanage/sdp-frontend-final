@@ -1,0 +1,356 @@
+// Variables
+$primary-color: #001278;
+$secondary-color: #f5f5f5;
+$text-color: #2c2c2c;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$border-radius: 15px;
+$transition-speed: 0.3s;
+$font-family: "Quattrocento Sans", serif;
+
+// Global Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  font-family: $font-family;
+  background: #ffffff;
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(215, 227, 252, 1) 80%,
+    rgba(49, 123, 235, 1) 100%
+  );
+  color: $text-color;
+  line-height: 1.15;
+}
+
+// Container Styles
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+  height: fit-content;
+}
+
+// Registration Header
+.registration-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-top: 2rem;
+
+  .registration-topic {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: $primary-color;
+    position: relative;
+    display: inline-block;
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: $primary-color;
+      border-radius: 2px;
+    }
+  }
+}
+
+// Registration Container
+.registration-container {
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: 0 5px 20px $shadow-color;
+  padding: 2.5rem;
+
+  .registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .form-group {
+      display: flex;
+      gap: 1rem;
+
+      input {
+        flex: 1;
+        padding: 0.9rem 1rem;
+        border: 1px solid #949494;
+        border-radius: $border-radius;
+        font-size: 1rem;
+        transition: border-color $transition-speed, box-shadow $transition-speed;
+
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+        }
+
+        &::placeholder {
+          color: #aaa;
+        }
+      }
+    }
+
+    .signature-input {
+      label {
+        display: block;
+        margin-bottom: 0.6rem;
+        font-weight: 500;
+        color: $text-color;
+      }
+
+      input[type="file"] {
+        background-color: $secondary-color;
+        border: 1px dashed #ccc;
+        padding: 1rem;
+        width: 100%;
+        border-radius: $border-radius;
+        cursor: pointer;
+
+        &::-webkit-file-upload-button {
+          background: $primary-color;
+          color: white;
+          border: 0;
+          padding: 0.5rem 1rem;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-right: 1rem;
+          transition: background-color $transition-speed;
+
+          &:hover {
+            background-color: darken($primary-color, 10%);
+          }
+        }
+      }
+    }
+
+    .login-btn {
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: $border-radius;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color $transition-speed,
+        transform $transition-speed;
+      margin-top: 1rem;
+
+      &:hover {
+        background-color: darken($primary-color, 5%);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      &:disabled {
+        background-color: #afafaf;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+
+    .bottom-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+
+      p {
+        color: #777;
+      }
+
+      a {
+        color: $primary-color;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color $transition-speed;
+
+        &:hover {
+          color: darken($primary-color, 15%);
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media screen and (max-width: 1440px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .container {
+    max-width: 1000px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    max-width: 900px;
+    margin: 2rem auto;
+  }
+
+  .registration-header {
+    .registration-topic {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 936px) {
+  .container {
+    max-width: 800px;
+  }
+
+  .registration-container {
+    padding: 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 650px;
+    margin: 1.5rem auto;
+  }
+
+  .registration-container {
+    padding: 1.5rem;
+  }
+
+  .registration-form {
+    .form-group {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    max-width: 500px;
+    padding: 0 1rem;
+    margin: 1rem auto;
+  }
+
+  .registration-header {
+    .registration-topic {
+      font-size: 1.8rem;
+    }
+  }
+
+  .registration-container {
+    padding: 1.2rem;
+  }
+
+  .registration-form {
+    gap: 1.2rem;
+
+    .login-btn {
+      padding: 0.9rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .container {
+    max-width: 380px;
+    padding: 0 0.8rem;
+  }
+
+  .registration-header {
+    margin-bottom: 1.5rem;
+
+    .registration-topic {
+      font-size: 1.6rem;
+    }
+  }
+
+  .registration-container {
+    padding: 1rem;
+  }
+
+  .registration-form {
+    .form-group {
+      input {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    .signature-input {
+      label {
+        font-size: 0.9rem;
+      }
+
+      input[type="file"] {
+        padding: 0.8rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .container {
+    max-width: 350px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .container {
+    max-width: 280px;
+    padding: 0 0.5rem;
+  }
+
+  .registration-header {
+    .registration-topic {
+      font-size: 1.4rem;
+    }
+  }
+
+  .registration-container {
+    padding: 0.8rem;
+  }
+
+  .registration-form {
+    gap: 1rem;
+
+    .form-group {
+      input {
+        padding: 0.7rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    .login-btn {
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .bottom-container {
+      flex-direction: column;
+      gap: 0.3rem;
+
+      p,
+      a {
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
