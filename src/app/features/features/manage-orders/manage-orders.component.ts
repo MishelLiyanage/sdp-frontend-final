@@ -61,7 +61,8 @@ export class ManageOrdersComponent implements OnInit {
       order.schoolName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       order.city.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       order.paymentStatus.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      order.paymentMethod.toLowerCase().includes(this.searchTerm.toLowerCase())
+      order.paymentMethod.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      order.orderStatus.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
@@ -70,16 +71,19 @@ export class ManageOrdersComponent implements OnInit {
     this.router.navigate(['/features/updateOrder'], { state: { order } });
   }
   
-  deleteOrder(order: OrderDetails) {
-    this.orderService.deleteOrder(order.orderId).subscribe(
-      () => {
-        console.log('Order deleted:', order);
-        this.orders = this.orders.filter(o => o.orderId !== order.orderId);
-        this.filteredOrders = [...this.orders];
+  // deleteOrder(order: OrderDetails) {
+  //   this.orderService.deleteOrder(order.orderId).subscribe(
+  //     () => {
+  //       console.log('Order deleted:', order);
+  //       this.orders = this.orders.filter(o => o.orderId !== order.orderId);
+  //       this.filteredOrders = [...this.orders];
 
-        alert('Order deleted successfully!');
-      },
-      (error) => console.error('Error deleting order:', error)
-    );
-  }
+  //       alert('Order deleted successfully!');
+  //     },
+  //     (error) =>  {
+  //       console.error('Error deleting order:', error);
+  //       alert("You don't have permission to delete an order.");
+  //     }
+  //   );
+  // }
 }
