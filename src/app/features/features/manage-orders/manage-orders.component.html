@@ -25,8 +25,9 @@
             <th>Order ID</th>
             <th>School ID</th>
             <th>City</th>
-            <th>Order Status</th>
+            <th>Payment Status</th>
             <th>Payment Method</th>
+            <th>Order Status</th>
             <th>Date</th>
             <th>Time</th>
             <th>Amount</th>
@@ -40,6 +41,7 @@
             <td>{{ order.city }}</td>
             <td>{{ order.paymentStatus }}</td>
             <td>{{ order.paymentMethod }}</td>
+            <td>{{ order.orderStatus }}</td>
             <td>{{ order.date | date : "yyyy-MM-dd" }}</td>
             <td>{{ formatTime(order.time) }}</td>
             <td>{{ order.amount }}</td>
@@ -47,9 +49,9 @@
               <button class="update-btn" (click)="updateOrder(order)">
                 Update
               </button>
-              <button class="delete-btn" (click)="deleteOrder(order)">
+              <!-- <button class="delete-btn" (click)="deleteOrder(order)">
                 Delete
-              </button>
+              </button> -->
             </td>
           </tr>
         </tbody>

@@ -4,6 +4,7 @@ export interface OrderDetails {
     city: string;
     paymentStatus: string;
     paymentMethod: string;
+    orderStatus: string;
     date: string;
     time: string;
     amount: string;
