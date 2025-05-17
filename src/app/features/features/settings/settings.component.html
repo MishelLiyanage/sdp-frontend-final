@@ -1,0 +1,156 @@
+<div class="header">
+      <h2>Admin Dashboard</h2>
+      <p>Welcome, Mishel</p>
+      <p (click)="logout()">Log Out</p>
+    </div>
+<div class="body">
+  <div class="sidebar">
+    <div class="logo-container">
+      <div class="logo"></div>
+      <h3>St. Joseph's Institute</h3>
+    </div>
+    <p (click)="registerEmployees()">Register Employees</p>
+    <p (click)="registerSchools()">Register Schools</p>
+    <p (click)="manageSchools()">Manage Schools</p>
+    <p (click)="manageEmployees()">Manage Employees</p>
+    <p (click)="manageOrders()">Manage Orders</p>
+    <p (click)="processOrders()">Process Orders</p>
+    <p (click)="trackQPPreparation()">
+      Track Question Paper Preparation Process
+    </p>
+    <p (click)="settings()">Settings</p>
+    <p>Profile</p>
+  </div>
+
+  <div class="container">
+    <h2>Paper Processing Form</h2>
+
+    <div *ngIf="submitSuccess" class="alert alert-success">
+      Paper processing data submitted successfully!
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="paperProcessingForm" (ngSubmit)="onSubmit()">
+      <div class="inputs">
+        <div class="form-group">
+          <label for="grade">Grade</label>
+          <input
+            type="text"
+            id="grade"
+            formControlName="grade"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['grade'].errors }"
+          />
+          <div *ngIf="submitted && f['grade'].errors" class="invalid-feedback">
+            <div *ngIf="f['grade'].errors['required']">Grade is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input
+            type="text"
+            id="category"
+            formControlName="category"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['category'].errors }"
+          />
+          <div
+            *ngIf="submitted && f['category'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['category'].errors['required']">
+              Category is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fromPaperNo">From Paper No.</label>
+          <input
+            type="number"
+            id="fromPaperNo"
+            formControlName="fromPaperNo"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && (f['fromPaperNo'].errors || paperProcessingForm.errors?.['fromGreaterThanTo']) }"
+          />
+          <div
+            *ngIf="submitted && f['fromPaperNo'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['fromPaperNo'].errors['required']">
+              From Paper No. is required
+            </div>
+            <div *ngIf="f['fromPaperNo'].errors['min']">
+              From Paper No. must be greater than 0
+            </div>
+          </div>
+          <div
+            *ngIf="submitted && paperProcessingForm.errors?.['fromGreaterThanTo']"
+            class="invalid-feedback"
+          >
+            From Paper No. must be less than To Paper No.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="toPaperNo">To Paper No.</label>
+          <input
+            type="number"
+            id="toPaperNo"
+            formControlName="toPaperNo"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && (f['toPaperNo'].errors || paperProcessingForm.errors?.['fromGreaterThanTo']) }"
+          />
+          <div
+            *ngIf="submitted && f['toPaperNo'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['toPaperNo'].errors['required']">
+              To Paper No. is required
+            </div>
+            <div *ngIf="f['toPaperNo'].errors['min']">
+              To Paper No. must be greater than 0
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sequenceNo">Sequence No.</label>
+          <input
+            type="number"
+            id="sequenceNo"
+            formControlName="sequenceNo"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['sequenceNo'].errors }"
+          />
+          <div
+            *ngIf="submitted && f['sequenceNo'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['sequenceNo'].errors['required']">
+              Sequence No. is required
+            </div>
+            <div *ngIf="f['sequenceNo'].errors['min']">
+              Sequence No. must be greater than 0
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button
+          type="button"
+          class="btn btn-secondary ml-2"
+          (click)="resetForm()"
+        >
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
