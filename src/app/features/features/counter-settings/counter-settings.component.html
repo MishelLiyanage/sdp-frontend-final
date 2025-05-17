@@ -1,0 +1,77 @@
+<div class="counter-form-container">
+  <h2>Counter Information</h2>
+
+  <form [formGroup]="counterForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+    <div class="formGroup-wrapper">
+      <div class="form-group">
+        <label for="counterNumber">Counter Number</label>
+        <input
+          id="counterNumber"
+          type="number"
+          formControlName="counterNumber"
+          placeholder="Enter counter number"
+          min="1"
+        />
+        <div
+          *ngIf="
+            counterForm.get('counterNumber')?.invalid &&
+            counterForm.get('counterNumber')?.touched
+          "
+          class="error-message"
+        >
+          <span *ngIf="counterForm.get('counterNumber')?.errors?.['required']"
+            >Counter number is required</span
+          >
+          <span *ngIf="counterForm.get('counterNumber')?.errors?.['min']"
+            >Counter number must be positive</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="grade">Grade</label>
+        <input
+          type="text"
+          id="grade"
+          formControlName="grade"
+          placeholder="Enter grade"
+        />
+        <div
+          *ngIf="
+            counterForm.get('grade')?.invalid &&
+            counterForm.get('grade')?.touched
+          "
+          class="error-message"
+        >
+          <span>Grade is required</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input
+          type="text"
+          id="category"
+          formControlName="category"
+          placeholder="Enter category"
+        />
+        <div
+          *ngIf="
+            counterForm.get('category')?.invalid &&
+            counterForm.get('category')?.touched
+          "
+          class="error-message"
+        >
+          <span>Category is required</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="submit-btn">Save Counter</button>
+      <button type="button" class="reset-btn" (click)="counterForm.reset()">
+        Reset
+      </button>
+    </div>
+  </form>
+</div>

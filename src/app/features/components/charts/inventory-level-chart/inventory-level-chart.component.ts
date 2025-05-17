@@ -10,7 +10,7 @@ import { InventoryItem, InventoryLevelService } from '../../../../services/inven
 })
 export class InventoryLevelChartComponent implements OnInit {
   inventoryData: InventoryItem[] = [];
-  threshold = 50;
+  threshold = 2000;
 
   constructor(private inventoryService: InventoryLevelService) {}
 

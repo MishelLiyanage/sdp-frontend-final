@@ -1,0 +1,273 @@
+@use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
+
+.counter-form-container {
+  max-width: 950px;
+  height: fit-content;
+  border-radius: 15px;
+  margin-top: 2rem;
+  border: 1px solid rgb(40, 40, 40);
+  background-color: #c0c3cb;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-family: sharedStyles.$font-family;
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .formGroup-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #555;
+      }
+
+      input {
+        width: 15rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+        height: 2.5rem;
+        color: black;
+        font-family: sharedStyles.$font-family;
+
+        &:focus {
+          outline: none;
+          border-color: #007bff;
+          box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        &::placeholder {
+            color: rgb(69, 69, 69);
+        }
+      }
+
+      select {
+        cursor: pointer;
+        background-color: white;
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+
+    button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.1s;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+
+    .submit-btn {
+      background-color: #007bff;
+      color: white;
+      //   flex: 1;
+
+      &:hover {
+        background-color: #0069d9;
+      }
+    }
+
+    .reset-btn {
+      background-color: #6c757d;
+      color: white;
+
+      &:hover {
+        background-color: #5a6268;
+      }
+    }
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+  }
+}
+
+// Responsive breakpoints
+// 1440px
+@media (max-width: 1440px) {
+  .counter-form-container {
+    max-width: 950px;
+  }
+}
+
+// 1280px
+@media (max-width: 1280px) {
+  .counter-form-container {
+    max-width: 950px;
+  }
+}
+
+// 1024px
+@media (max-width: 1024px) {
+  .counter-form-container {
+    max-width: 750px;
+    padding: 1.25rem;
+  }
+}
+
+// 960px
+@media (max-width: 960px) {
+  .counter-form-container {
+    max-width: 680px;
+  }
+}
+
+// 786px
+@media (max-width: 786px) {
+  .counter-form-container {
+    max-width: 500px;
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .form-group {
+    input,
+    select {
+      padding: 0.7rem;
+    }
+  }
+
+  .form-actions {
+    button {
+      padding: 0.7rem 1.3rem;
+    }
+  }
+}
+
+// 600px
+@media (max-width: 600px) {
+  .counter-form-container {
+    max-width: 350px;
+    padding: 1rem;
+
+    h2 {
+      font-size: 1.35rem;
+    }
+  }
+
+  .form-wrapper {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    .formGroup-wrapper {
+      gap: 1rem;
+      display: flex;
+      flex-direction: column;
+
+      .form-group {
+        input {
+          width: 20.5rem;
+        }
+
+        select {
+          width: 21.5rem;
+        }
+      }
+    }
+  }
+
+  .form-actions {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+// 420px
+@media (max-width: 420px) {
+  .counter-form-container {
+    padding: 0.8rem;
+
+    h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .form-group {
+    label {
+      font-size: 0.9rem;
+    }
+
+    input,
+    select {
+      padding: 0.6rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// 390px
+@media (max-width: 390px) {
+  .form-group {
+    label {
+      font-size: 0.85rem;
+    }
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+  }
+}
+
+// 300px
+@media (max-width: 300px) {
+  .counter-form-container {
+    padding: 0.6rem;
+
+    h2 {
+      font-size: 1.1rem;
+    }
+  }
+
+  .form-group {
+    input,
+    select {
+      padding: 0.5rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  .form-actions {
+    button {
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+}
