@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { CommonModule, NgFor } from '@angular/common';
-import { PublicationCardComponent } from '../../components/publication-card/publication-card.component';
+import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { HowToOrderComponent } from "../../components/how-to-order/how-to-order.component";
 
@@ -10,9 +9,7 @@ import { HowToOrderComponent } from "../../components/how-to-order/how-to-order.
   standalone: true,
   imports: [
     CommonModule,
-    NgFor,
     RouterModule,
-    PublicationCardComponent,
     MatCardModule,
     HowToOrderComponent
 ],

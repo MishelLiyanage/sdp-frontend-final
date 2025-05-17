@@ -4,12 +4,12 @@ import { PaperProcessingService } from '../../../services/paper-processing.servi
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../services/login.service';
+import { CounterSettingsComponent } from "../counter-settings/counter-settings.component";
 
 @Component({
   selector: 'app-settings',
   imports: [CommonModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule, CounterSettingsComponent],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss'
 })

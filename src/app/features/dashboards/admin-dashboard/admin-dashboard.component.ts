@@ -78,6 +78,10 @@ export class AdminDashboardComponent {
     this.router.navigate(['/features/processOrders']);
   }
 
+  settings() {
+    this.router.navigate(['/features/settings']);
+  }
+
   logout() {
     this.loginService.logout();
   }

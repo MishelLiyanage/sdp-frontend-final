@@ -13,6 +13,7 @@ import { ProcessOrderComponent } from './process-order/process-order.component';
 import { EmployeeRegistrationComponent } from './employee-registration/employee-registration.component';
 import { ManageEmployeesComponent } from './manage-employees/manage-employees.component';
 import { SchoolRegistrationComponent } from './school-registration/school-registration.component';
+import { SettingsComponent } from './settings/settings.component';
 
 export const featuresRoutes: Routes = [
   { path: 'placeOrder', component: PlaceOrderComponent },
@@ -28,5 +29,6 @@ export const featuresRoutes: Routes = [
   { path: 'processOrders', component: ProcessOrderComponent },
   { path: 'registerEmployee', component: EmployeeRegistrationComponent },
   { path: 'manageEmployees', component: ManageEmployeesComponent},
-  { path: 'schoolRegistration', component: SchoolRegistrationComponent}
+  { path: 'schoolRegistration', component: SchoolRegistrationComponent},
+  { path: 'settings', component: SettingsComponent}
 ];
