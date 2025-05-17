@@ -18,7 +18,7 @@
         </select>
 
         <label>Date Ordered</label>
-        <input type="date" formControlName="dateOrdered" readonly/>
+        <input type="date" formControlName="dateOrdered" readonly />
 
         <label>Total Amount (Rs.)</label>
         <input type="text" formControlName="totalValue" readonly />
@@ -58,7 +58,7 @@
       <div class="section">
         <label>Number of Students</label>
         <div class="student-numbers">
-          <input type="number" formControlName="Quantity" readonly/>
+          <input type="number" formControlName="Quantity" readonly />
         </div>
 
         <label>Processed Quantity</label>
@@ -130,25 +130,18 @@
         <div class="counter-rows">
           <div class="counter-row">
             <label>From:</label>
-            <ng-container *ngFor="let c of countersFrom; index as i">
-              <input
-                type="number"
-                [(ngModel)]="countersFrom[i]"
-                name="counterFrom{{ i }}"
-              />
+            <ng-container
+              *ngFor="let control of countersFromControls; index as i"
+            >
+              <input type="number" [formControl]="control" />
             </ng-container>
           </div>
           <div class="counter-row">
             <label class="to">To:</label>
             <ng-container
-              *ngFor="let c of countersTo; index as i"
-              class="to-row"
+              *ngFor="let control of countersToControls; index as i"
             >
-              <input
-                type="number"
-                [(ngModel)]="countersTo[i]"
-                name="counterTo{{ i }}"
-              />
+              <input type="number" [formControl]="control" />
             </ng-container>
           </div>
         </div>

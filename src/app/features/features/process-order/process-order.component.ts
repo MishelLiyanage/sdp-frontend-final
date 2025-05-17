@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { ProcessOrderService } from '../../../services/process-order.service';
 import { PaperProcessingService } from '../../../services/paper-processing.service';
 
@@ -14,9 +21,6 @@ import { PaperProcessingService } from '../../../services/paper-processing.servi
 export class ProcessOrderComponent {
   orderForm: FormGroup;
   paperCheckboxes: boolean[] = new Array(16).fill(false);
-  countersFrom: number[] = new Array(16).fill(0);
-  countersTo: number[] = new Array(16).fill(0);
-
   scholarshipTamilOrderIds: string[] = [];
 
   constructor(
@@ -43,8 +47,16 @@ export class ProcessOrderComponent {
       dateSent: [''],
       timeSent: [''],
       paperFrom: [0],
-      paperTo: [0]
+      paperTo: [0],
+      countersFrom: this.fb.array([]),
+      countersTo: this.fb.array([])
     });
+
+    // Initialize with 16 counters
+    for (let i = 0; i < 16; i++) {
+      (this.orderForm.get('countersFrom') as FormArray).push(new FormControl(0));
+      (this.orderForm.get('countersTo') as FormArray).push(new FormControl(0));
+    }
   }
 
   ngOnInit() {
@@ -69,14 +81,13 @@ export class ProcessOrderComponent {
 
     this.processOrderService.getOrderDetails(selectedId).subscribe({
       next: (details) => {
-        // Format and patch order details
         let formattedDate = '';
         if (details.dateOrdered) {
           const dateObj = new Date(details.dateOrdered);
           formattedDate = dateObj.toISOString().split('T')[0];
         }
 
-        let processedQuantity = Math.ceil(details.numberOfStudents * 1.1);
+        const processedQuantity = Math.ceil(details.numberOfStudents * 1.1);
 
         const now = new Date();
         const currentDate = now.toISOString().split('T')[0];
@@ -100,25 +111,41 @@ export class ProcessOrderComponent {
         const grade = 'Grade 5';
         const category = 'Scholarship Tamil';
 
-        // Step 1: Get paper processing range
         this.paperProcessingService.getProcessingDetails(grade, category).subscribe({
           next: (processing) => {
             console.log("Received processing details:", processing);
             const from = processing.fromPaperNo;
             const to = processing.toPaperNo;
+            const sequenceNo = processing.sequenceNo;
 
-            // Step 2: Check checkboxes in range
-            this.paperCheckboxes = this.paperCheckboxes.map((_, index) => {
-              return (index + 1) >= from && (index + 1) <= to;
+            // Patch the sequence number into the form control
+            const formattedSeq = sequenceNo.toString().padStart(2, '0');
+            this.orderForm.patchValue({
+              seqOfIssue: formattedSeq
             });
 
-            // Step 3: Get counter number and assign to countersFrom[]
+            for (let i = from; i <= to; i++) {
+              const checkbox = document.querySelector(`input[type="checkbox"][value="${i}"]`) as HTMLInputElement;
+              if (checkbox) {
+                checkbox.checked = true;
+              }
+            }
+
             this.paperProcessingService.getCounterNumber(grade, category).subscribe({
               next: (counterData) => {
+                console.log("Received counterData details:", counterData);
                 const counterNumber = counterData.counterNumber;
 
+                const countersFromArray = this.orderForm.get('countersFrom') as FormArray;
+                const countersToArray = this.orderForm.get('countersTo') as FormArray;
+                const processedQuantity = this.orderForm.get('processedQuantity')?.value || 0;
+
                 for (let i = from - 1; i < to; i++) {
-                  this.countersFrom[i] = counterNumber;
+                  const fromValue = counterNumber;
+                  const toValue = fromValue + processedQuantity;
+
+                  countersFromArray.at(i).setValue(fromValue);
+                  countersToArray.at(i).setValue(toValue);
                 }
               },
               error: (err) => {
@@ -137,10 +164,16 @@ export class ProcessOrderComponent {
     });
   }
 
+  get countersFromControls(): FormControl[] {
+    return (this.orderForm.get('countersFrom') as FormArray).controls as FormControl[];
+  }
+
+  get countersToControls(): FormControl[] {
+    return (this.orderForm.get('countersTo') as FormArray).controls as FormControl[];
+  }
+
   onSubmit() {
-    console.log(this.orderForm.getRawValue()); // getRawValue to include disabled fields like totalValue
+    console.log(this.orderForm.getRawValue());
     console.log('Paper checkboxes:', this.paperCheckboxes);
-    console.log('Counter From:', this.countersFrom);
-    console.log('Counter To:', this.countersTo);
   }
 }
