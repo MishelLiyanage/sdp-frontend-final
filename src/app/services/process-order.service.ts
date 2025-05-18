@@ -28,4 +28,10 @@ export class ProcessOrderService {
     getOrderDetails(orderId: string): Observable<any> {
         return this.http.get<any>(`${this.baseUrl}/processOrder/order-details/${orderId}`, { headers: this.getHeaders() });
     }
+
+    saveOrderAndSchoolDetails(payload: any): Observable<any> {
+        console.log("Processed order details", payload);
+        
+      return this.http.post(`${this.baseUrl}/processOrder/save`, payload, { headers: this.getHeaders() });
+    }
 }
