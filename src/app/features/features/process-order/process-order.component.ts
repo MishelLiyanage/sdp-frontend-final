@@ -22,6 +22,7 @@ export class ProcessOrderComponent {
   orderForm: FormGroup;
   paperCheckboxes: boolean[] = new Array(16).fill(false);
   scholarshipTamilOrderIds: string[] = [];
+  toValue: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -142,10 +143,10 @@ export class ProcessOrderComponent {
 
                 for (let i = from - 1; i < to; i++) {
                   const fromValue = counterNumber;
-                  const toValue = fromValue + processedQuantity;
+                  this.toValue = fromValue + processedQuantity;
 
                   countersFromArray.at(i).setValue(fromValue);
-                  countersToArray.at(i).setValue(toValue);
+                  countersToArray.at(i).setValue(this.toValue);
                 }
               },
               error: (err) => {
@@ -172,8 +173,83 @@ export class ProcessOrderComponent {
     return (this.orderForm.get('countersTo') as FormArray).controls as FormControl[];
   }
 
-  onSubmit() {
-    console.log(this.orderForm.getRawValue());
-    console.log('Paper checkboxes:', this.paperCheckboxes);
+  save() {
+    const formData = this.orderForm.getRawValue();
+
+    // Step 1: Collect checked paper numbers
+    const checkboxes = document.querySelectorAll('.checkbox') as NodeListOf<HTMLInputElement>;
+    const checkedNumbers: number[] = [];
+
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        checkedNumbers.push(Number(checkbox.value));
+      }
+    });
+
+    const actualFromPaperNo = checkedNumbers.length > 0 ? Math.min(...checkedNumbers) : 0;
+    const actualToPaperNo = checkedNumbers.length > 0 ? Math.max(...checkedNumbers) : 0;
+
+    // Step 2: Get the original full 16-length counter arrays
+    const allFromCounters: number[] = formData.countersFrom || new Array(16).fill(0);
+    const allToCounters: number[] = formData.countersTo || new Array(16).fill(0);
+
+    // Step 3: Only update the values between fromPaperNo and toPaperNo
+    const finalFromCounters: number[] = [];
+    const finalToCounters: number[] = [];
+
+    for (let i = 0; i < 16; i++) {
+      const paperNo = i + 1;
+      if (paperNo >= actualFromPaperNo && paperNo <= actualToPaperNo) {
+        finalFromCounters.push(allFromCounters[i]);
+        finalToCounters.push(allToCounters[i]);
+      } else {
+        // Retain original value or set 0 if empty
+        finalFromCounters.push(0);
+        finalToCounters.push(0);
+      }
+    }
+
+    // Step 4: Prepare processed order
+    const processedOrderData = {
+      orderId: formData.registeredNo,
+      grade: "Grade 5",
+      category: "Scholarship Tamil",
+      lastCounterNumber: this.toValue,
+      processedQuantity: checkedNumbers.length,
+      sequenceNo: formData.seqOfIssue,
+      dateProcessed: formData.dateSent,
+      timeProcessed: formData.timeSent,
+      fromPaperNo: actualFromPaperNo,
+      toPaperNo: actualToPaperNo,
+      counterFromNumbers: finalFromCounters,
+      counterToNumbers: finalToCounters
+    };
+
+    // Step 5: School details
+    const schoolData = {
+      name: formData.name,
+      address: formData.address,
+      contactNo: formData.tel,
+      email: formData.email,
+      city: formData.city
+    };
+
+    const payload = {
+      order: processedOrderData,
+      school: schoolData
+    };
+
+    // Step 6: Send to backend
+    this.processOrderService.saveOrderAndSchoolDetails(payload).subscribe({
+      next: (response) => {
+        console.log('Processed order and school details saved successfully:', response);
+        alert('Processed order and school details saved successfully:');
+
+        this.orderForm.reset();
+      },
+      error: (err) => {
+        console.error('Error saving processed order and school details:', err);
+      }
+    });
   }
 }
