@@ -76,7 +76,14 @@ export class ManageEmployeesComponent {
     throw new Error('Method not implemented.');
   }
 
-  backToHome() {
-    this.router.navigate(['/dashboards/adminDashboard']);
+  print() {
+    const printContents = document.getElementById('print-section')?.innerHTML;
+    if (printContents) {
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContents;
+      window.print();
+      document.body.innerHTML = originalContents;
+      window.location.reload(); // Reload to restore original state
+    }
   }
 }

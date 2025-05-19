@@ -100,19 +100,14 @@ export class ManageOrdersComponent implements OnInit {
     this.router.navigate(['/features/updateOrder'], { state: { order } });
   }
 
-  // deleteOrder(order: OrderDetails) {
-  //   this.orderService.deleteOrder(order.orderId).subscribe(
-  //     () => {
-  //       console.log('Order deleted:', order);
-  //       this.orders = this.orders.filter(o => o.orderId !== order.orderId);
-  //       this.filteredOrders = [...this.orders];
-
-  //       alert('Order deleted successfully!');
-  //     },
-  //     (error) =>  {
-  //       console.error('Error deleting order:', error);
-  //       alert("You don't have permission to delete an order.");
-  //     }
-  //   );
-  // }
+  print() {
+    const printContents = document.getElementById('print-section')?.innerHTML;
+    if (printContents) {
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContents;
+      window.print();
+      document.body.innerHTML = originalContents;
+      window.location.reload(); // Reload to restore original state
+    }
+  }
 }
