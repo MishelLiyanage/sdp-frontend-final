@@ -23,7 +23,7 @@
   <p (click)="logout()">Log Out</p>
 </div>
 
-<div>
+<div id="print-section">
   <div class="heading">
     <h1>Manage Schools</h1>
   </div>
@@ -50,7 +50,7 @@
             <th>Contact Number</th>
             <th>Username</th>
             <th>Principal's Name</th>
-            <th>Actions</th>
+            <th id="action">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -72,7 +72,7 @@
           </tr>
         </tbody>
       </table>
-      <button class="print-btn" (click)="goToHome()">Home</button>
+      <button class="print-btn" (click)="print()">Print</button>
     </div>
   </div>
 </div>

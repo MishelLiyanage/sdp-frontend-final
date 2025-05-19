@@ -76,7 +76,6 @@ $font-family: "Quattrocento Sans", serif;
 .registration-header {
   text-align: center;
   margin-bottom: 2rem;
-  padding-top: 2rem;
 
   .registration-topic {
     font-size: 2.2rem;
@@ -104,12 +103,12 @@ $font-family: "Quattrocento Sans", serif;
   background-color: white;
   border-radius: $border-radius;
   box-shadow: 0 5px 20px $shadow-color;
-  padding: 2.5rem;
+  padding: 2rem;
 
   .registration-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.3rem;
 
     .form-group {
       display: flex;

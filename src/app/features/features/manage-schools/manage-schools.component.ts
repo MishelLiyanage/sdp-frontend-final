@@ -96,17 +96,14 @@ export class ManageSchoolsComponent {
   //   );
   // }
 
-  goToHome() {
-    const token = localStorage.getItem('accessToken');
-
-    if (token) {
-      const userRole = this.getUserRoleFromToken(token);
-
-      if (userRole === 'ROLE_EMPLOYEE') {
-        this.router.navigate(['/dashboards/employeeDashboard']);
-      } else if (userRole === 'ROLE_ADMIN') {
-        this.router.navigate(['/dashboards/adminDashboard']);
-      }
+  print() {
+    const printContents = document.getElementById('print-section')?.innerHTML;
+    if (printContents) {
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContents;
+      window.print();
+      document.body.innerHTML = originalContents;
+      window.location.reload(); // Reload to restore original state
     }
   }
 
