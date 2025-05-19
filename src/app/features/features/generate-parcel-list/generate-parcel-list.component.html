@@ -1,0 +1,105 @@
+<div class="header">
+  <div class="topic">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    <h2 (click)="goToDashboard()">Dashboard</h2>
+  </div>
+
+  <p>Welcome, {{ username }}</p>
+  <p (click)="logout()">Log Out</p>
+</div>
+
+<div id="print-section">
+  <div class="heading">
+    <h1>Generate Parcel List</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="order-management-container">
+    <div *ngIf="page === 'entry'" class="entry-page">
+      <h1 class="title">Order Lookup</h1>
+
+      <div class="input-container">
+        <div class="input-group">
+          <input
+            type="text"
+            [(ngModel)]="currentOrderId"
+            (keyup.enter)="handleAddOrder()"
+            placeholder="Enter Order ID"
+            class="order-input"
+          />
+          <button (click)="handleAddOrder()" class="enter-button">
+            <span class="icon">+</span>
+            <span>Enter</span>
+          </button>
+        </div>
+
+        <div class="order-list-container">
+          <h2 class="subtitle">Entered Order IDs ({{ orderIds.length }}/16)</h2>
+          <div *ngIf="orderIds.length > 0" class="order-chips">
+            <div *ngFor="let id of orderIds; let i = index" class="order-chip">
+              <span>{{ id }}</span>
+              <button (click)="handleRemoveOrder(i)" class="remove-button">
+                ×
+              </button>
+            </div>
+          </div>
+          <p *ngIf="orderIds.length === 0" class="no-orders">
+            No order IDs entered yet
+          </p>
+        </div>
+      </div>
+
+      <div class="action-container">
+        <button
+          (click)="handleViewDetails()"
+          [disabled]="orderIds.length === 0"
+          class="view-button"
+        >
+          <span class="icon">🔍</span>
+          View Order Details
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="page === 'details'" class="details-page" id="print-section">
+      <div class="header">
+        <h1 class="title">Order Details</h1>
+        <button (click)="print()" class="back-button">
+          Print
+        </button>
+        <button (click)="handleBack()" class="back-button">
+          Back to Search
+        </button>
+      </div>
+
+      <div>
+        
+      </div>
+      <div class="order-details-grid" id="order-print-section">
+        <div *ngFor="let order of orderDetails" class="order-card" id="print-section">
+          <h2 class="order-title">Order ID: {{ order.orderId }}</h2>
+          <div class="order-info">
+            <p>
+              <span class="label">Principal:</span> {{ order.principalName }}
+            </p>
+            <p><span class="label">School:</span> {{ order.schoolName }}</p>
+            <p><span class="label">Address:</span> {{ order.address }}</p>
+            <p><span class="label">Contact:</span> {{ order.contactNo }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

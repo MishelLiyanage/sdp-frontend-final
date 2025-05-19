@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Order } from '../models/order.model';
 import { OrderDetails } from '../models/order-details.model';
+import { OrderDetail } from '../models/order-detail.model';
 
 @Injectable({
     providedIn: 'root'
@@ -50,5 +51,9 @@ export class OrderService {
 
     deleteOrder(orderId: string): Observable<void> {
         return this.http.delete<void>(`${this.baseUrl}/order/${orderId}`, { headers: this.getHeaders() });
+    }
+
+    getOrderDetailsByIds(orderIds: string[]): Observable<OrderDetail[]> {
+        return this.http.post<OrderDetail[]>(`${this.baseUrl}/parcelList/by-ids`, orderIds, { headers: this.getHeaders() });
     }
 }

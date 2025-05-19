@@ -50,6 +50,10 @@ export class EmployeeDashboardComponent {
     });
   }
 
+  generateParcelList() {
+    this.router.navigate(['/features/generateParcelList']);
+  }
+
   trackQPPreparation() {
     this.router.navigate(['/features/scrumboard']);
   }
