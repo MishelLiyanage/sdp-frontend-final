@@ -1,27 +1,19 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-import { ProcessOrderService } from '../../../services/process-order.service';
-import { PaperProcessingService } from '../../../services/paper-processing.service';
+import { FormGroup, FormBuilder, FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../services/login.service';
+import { PaperProcessingService } from '../../../services/paper-processing.service';
+import { ProcessOrderService } from '../../../services/process-order.service';
 import { UserService } from '../../../services/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-process-order',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
-  templateUrl: './process-order.component.html',
-  styleUrl: './process-order.component.scss'
+  selector: 'app-process-order-grade3-scholarship-tamil',
+  imports: [ReactiveFormsModule, CommonModule],
+  templateUrl: './process-order-grade3-scholarship-tamil.component.html',
+  styleUrl: './process-order-grade3-scholarship-tamil.component.scss'
 })
-export class ProcessOrderComponent {
+export class ProcessOrderGrade3ScholarshipTamilComponent {
   role: string = "";
   username: string = "";
   orderForm: FormGroup;
@@ -81,7 +73,7 @@ export class ProcessOrderComponent {
       }
     );
 
-    this.processOrderService.getScholarshipTamilOrders().subscribe({
+    this.processOrderService.getGrade3ScholarshipTamilOrders().subscribe({
       next: (data) => {
         this.scholarshipTamilOrderIds = data;
       },
@@ -140,7 +132,7 @@ export class ProcessOrderComponent {
 
         this.orderForm.get('totalValue')?.setValue(details.totalAmount || '');
 
-        const grade = 'Grade 5';
+        const grade = 'Grade 3';
         const category = 'Scholarship Tamil';
 
         this.paperProcessingService.getProcessingDetails(grade, category).subscribe({
@@ -243,7 +235,7 @@ export class ProcessOrderComponent {
     // Step 4: Prepare processed order
     const processedOrderData = {
       orderId: formData.registeredNo,
-      grade: "Grade 5",
+      grade: "Grade 3",
       category: "Scholarship Tamil",
       lastCounterNumber: this.toValue,
       processedQuantity: formData.processedQuantity,
@@ -333,7 +325,7 @@ export class ProcessOrderComponent {
 
     const processedOrderData = {
       orderId: formData.registeredNo,
-      grade: "Grade 5",
+      grade: "Grade 3",
       category: "Scholarship Tamil",
       lastCounterNumber: this.toValue,
       processedQuantity: formData.processedQuantity,
@@ -366,3 +358,4 @@ export class ProcessOrderComponent {
     this.router.navigate(['/components/viewSummary'], { state: { payload } });
   }
 }
+
