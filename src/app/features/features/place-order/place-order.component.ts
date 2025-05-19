@@ -55,7 +55,6 @@ export class PlaceOrderComponent implements OnInit {
     private modelPaperService: ModelPaperService,
     private orderService: OrderService,
     private payhereService: PayhereService,
-    private paymentService: PaymentService,
     @Inject(Storage) private storage: Storage
   ) {
     this.orderForm = this.fb.group({

@@ -25,13 +25,16 @@ export class ProcessOrderService {
         return this.http.get<string[]>(`${this.baseUrl}/processOrder/pending-scholarship-tamil`, { headers: this.getHeaders() });
     }
 
+    getGrade3ScholarshipTamilOrders(): Observable<string[]> {
+        return this.http.get<string[]>(`${this.baseUrl}/processOrder/pending-grade3-scholarship-tamil`, { headers: this.getHeaders() });
+    }
+
     getOrderDetails(orderId: string): Observable<any> {
         return this.http.get<any>(`${this.baseUrl}/processOrder/order-details/${orderId}`, { headers: this.getHeaders() });
     }
 
     saveOrderAndSchoolDetails(payload: any): Observable<any> {
-        console.log("Processed order details", payload);
-        
+        console.log("order payload 123456 ", payload);
       return this.http.post(`${this.baseUrl}/processOrder/save`, payload, { headers: this.getHeaders() });
     }
 }

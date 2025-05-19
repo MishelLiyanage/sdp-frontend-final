@@ -91,7 +91,7 @@ export class AdminDashboardComponent {
   }
 
   processOrders() {
-    this.router.navigate(['/features/processOrders']);
+    this.router.navigate(['/features/processOrderNavigator']);
   }
 
   settings() {
