@@ -4,6 +4,8 @@ import { Employee } from '../../../models/employee.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginService } from '../../../services/login.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-manage-employees',
@@ -12,20 +14,48 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './manage-employees.component.scss',
 })
 export class ManageEmployeesComponent {
+  role: string = "";
+  username: string = "";
   searchTerm: string = '';
   employees: Employee[] = [];
   filteredEmployees: Employee[] = [];
 
   constructor(
     private employeeService: EmployeeService,
-    private router: Router
+    private router: Router,
+        private userService: UserService,
+        private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
+    this.userService.getCurrentUser().subscribe(
+      (userdata) => {
+        console.log('User:', userdata);
+        this.username = userdata.username;
+        this.role = userdata.role;
+      },
+      (error) => {
+        console.error('Failed to fetch user data', error);
+      }
+    );
+
     this.employeeService.getAllEmployees().subscribe({
       next: (data) => (this.employees = data),
       error: (err) => console.error('Error loading employees', err),
     });
+  }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  goToDashboard() {
+    if (this.role === "ROLE_ADMIN") {
+      this.router.navigate(['/dashboards/adminDashboard']);
+    } else {
+      this.router.navigate(['/dashboards/employeeDashboard']);
+    }
+    
   }
 
   searchEmployees() {

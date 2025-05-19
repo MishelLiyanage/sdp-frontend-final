@@ -1,5 +1,42 @@
 @use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+
+  .topic {
+    display: flex;
+    flex-direction: row;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      color: #020277;
+    }
+
+    h2 {
+      font-family: sharedStyles.$font-family;
+      font-size: 1.5rem;
+      margin-left: 0.3rem;
+      color: #020277;
+    }
+  }
+
+  p {
+    font-family: sharedStyles.$font-family;
+    font-size: 1.1rem;
+    margin-right: 3rem;
+    color: #020277;
+  }
+}
+
 .container {
   .heading {
     background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 3, 58));
@@ -8,7 +45,7 @@
 
     h1 {
       padding-left: 6rem;
-      padding-top: 5rem;
+      padding-top: 1rem;
       padding-bottom: 1.5rem;
       font-size: 2rem;
       font-weight: 700;

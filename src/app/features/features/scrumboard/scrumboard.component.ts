@@ -8,6 +8,8 @@ import { ModelPaper } from '../../../models/model-paper.model';
 import { Task } from '../../../models/task.model';
 import { PrintingProgressService } from '../../../services/printingProgress.service';
 import { PaperSets } from '../../../models/PaperSets.model';
+import { LoginService } from '../../../services/login.service';
+import { UserService } from '../../../services/user.service';
 
 interface Column {
   name: string;
@@ -26,7 +28,12 @@ export class ScrumboardComponent {
   constructor(
     private router: Router,
     private taskService: TaskService,
-    private printingProrgessService: PrintingProgressService) { }
+    private printingProrgessService: PrintingProgressService,
+    private userService: UserService,
+    private loginService: LoginService) { }
+
+  role: string = "";
+  username: string = "";
 
   newTask: string = '';
 
@@ -170,7 +177,30 @@ export class ScrumboardComponent {
   }
 
   ngOnInit() {
+    this.userService.getCurrentUser().subscribe(
+      (userdata) => {
+        console.log('User:', userdata);
+        this.username = userdata.username;
+        this.role = userdata.role;
+      },
+      (error) => {
+        console.error('Failed to fetch user data', error);
+      }
+    );
+
     this.loadTasks();
+  }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  goToDashboard() {
+    if (this.role === "ROLE_ADMIN") {
+      this.router.navigate(['/dashboards/adminDashboard']);
+    } else {
+      this.router.navigate(['/dashboards/employeeDashboard']);
+    }
   }
 
   loadTasks() {
