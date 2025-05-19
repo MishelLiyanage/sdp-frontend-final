@@ -9,6 +9,7 @@ import { RevenueTrandComponent } from '../../components/charts/revenue-trand/rev
 import { InventoryLevelChartComponent } from '../../components/charts/inventory-level-chart/inventory-level-chart.component';
 import { AdminDashboardService } from '../../../services/admin-dashboard.service';
 import { LoginService } from '../../../services/login.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -25,6 +26,7 @@ import { LoginService } from '../../../services/login.service';
   styleUrl: './admin-dashboard.component.scss',
 })
 export class AdminDashboardComponent {
+  username: string = "";
   registeredSchools: number = 0;
   totalOrders: number = 0;
   grade5scholarship: number = 0;
@@ -35,11 +37,21 @@ export class AdminDashboardComponent {
   constructor(
     private router: Router,
     private dashboardService: AdminDashboardService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    // console.log('AdminDashboardComponent initialized');
+    this.userService.getCurrentUser().subscribe(
+      (userdata) => {
+        console.log('User:', userdata);
+        this.username = userdata.username; 
+      },
+      (error) => {
+        console.error('Failed to fetch user data', error);
+      }
+    );
+    
     this.dashboardService.getDashboardStats().subscribe((data) => {
       this.registeredSchools = data.registeredSchools;
       this.totalOrders = data.totalOrders;

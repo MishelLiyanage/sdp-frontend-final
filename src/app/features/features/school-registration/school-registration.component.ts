@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SchoolRegistration } from '../../../models/school-registration.model';
 import { RegistrationService } from '../../../services/registration.service';
+import { LoginService } from '../../../services/login.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-school-registration',
@@ -10,14 +12,18 @@ import { RegistrationService } from '../../../services/registration.service';
   templateUrl: './school-registration.component.html',
   styleUrl: './school-registration.component.scss'
 })
-export class SchoolRegistrationComponent {
+export class SchoolRegistrationComponent implements OnInit{
+  role: string = "";
+  username: string = "";
   registrationForm: FormGroup;
   selectedFileName: string = ''; // Store the uploaded file name
 
   constructor(
     private fb: FormBuilder,
     private registrationService: RegistrationService,
-    private router: Router
+    private router: Router,
+        private userService: UserService,
+        private loginService: LoginService
   ) {
     this.registrationForm = this.fb.group({
       schoolName: ['', Validators.required],
@@ -30,6 +36,31 @@ export class SchoolRegistrationComponent {
       principleName: ['', Validators.required],
       principleSignature: [''] // File name placeholder
     });
+  }
+
+  ngOnInit() {
+    this.userService.getCurrentUser().subscribe(
+      (userdata) => {
+        console.log('User:', userdata);
+        this.username = userdata.username;
+        this.role = userdata.role;
+      },
+      (error) => {
+        console.error('Failed to fetch user data', error);
+      }
+    );
+  }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  goToDashboard() {
+    if (this.role === "ROLE_ADMIN") {
+      this.router.navigate(['/dashboards/adminDashboard']);
+    } else {
+      this.router.navigate(['/dashboards/employeeDashboard']);
+    }
   }
 
   // Handle file upload (store only the file name for now)

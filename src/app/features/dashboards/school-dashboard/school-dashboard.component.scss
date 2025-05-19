@@ -1,5 +1,29 @@
 @use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  // width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  h2 {
+    font-family: sharedStyles.$font-family;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    color: #020277;
+  }
+
+  p {
+    font-family: sharedStyles.$font-family;
+    font-size: 1.1rem;
+    margin-right: 1.5rem;
+    color: #020277;
+  }
+}
+
 .orderButtons-container {
   display: flex;
   flex-direction: column;
@@ -57,10 +81,10 @@
     }
 
     .button {
-      width: 230px;
-      height: 60px;
-      font-size: 1.7rem;
-      margin-top: 100px;
+      width: 200px;
+      height: 55px;
+      font-size: 1.2rem;
+      margin-top: 70px;
       font-family: "Quattrocento Sans", serif;
       font-weight: 400;
       font-style: normal;
@@ -87,12 +111,12 @@
       background-position: center;
       margin-left: 30px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
-    &:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
     }
   }
 

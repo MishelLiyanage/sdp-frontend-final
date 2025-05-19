@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { SchoolService } from '../../../services/school.service';
 import { School } from '../../../models/school.model';
 import { Router } from '@angular/router';
+import { LoginService } from '../../../services/login.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-manage-schools',
@@ -14,16 +16,44 @@ import { Router } from '@angular/router';
   ]
 })
 export class ManageSchoolsComponent {
+  role: string = "";
+  username: string = "";
   searchTerm: string = '';
   schools: School[] = [];
   filteredSchools: School[] = [];
 
   constructor(private schoolService: SchoolService,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
+    this.userService.getCurrentUser().subscribe(
+      (userdata) => {
+        console.log('User:', userdata);
+        this.username = userdata.username;
+        this.role = userdata.role;
+      },
+      (error) => {
+        console.error('Failed to fetch user data', error);
+      }
+    );
+
     this.loadSchools();
+  }
+
+  goToDashboard() {
+    if (this.role === "ROLE_ADMIN") {
+      this.router.navigate(['/dashboards/adminDashboard']);
+    } else {
+      this.router.navigate(['/dashboards/employeeDashboard']);
+    }
+
+  }
+
+  logout() {
+    this.loginService.logout();
   }
 
   loadSchools() {
@@ -67,26 +97,26 @@ export class ManageSchoolsComponent {
   // }
 
   goToHome() {
-      const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('accessToken');
 
-      if (token) {
-          const userRole = this.getUserRoleFromToken(token);
+    if (token) {
+      const userRole = this.getUserRoleFromToken(token);
 
-          if (userRole === 'ROLE_EMPLOYEE') {
-            this.router.navigate(['/dashboards/employeeDashboard']);
-          } else if (userRole === 'ROLE_ADMIN') {
-            this.router.navigate(['/dashboards/adminDashboard']);
-          }
+      if (userRole === 'ROLE_EMPLOYEE') {
+        this.router.navigate(['/dashboards/employeeDashboard']);
+      } else if (userRole === 'ROLE_ADMIN') {
+        this.router.navigate(['/dashboards/adminDashboard']);
       }
+    }
   }
 
   getUserRoleFromToken(token: string): string | null {
-      try {
-          const tokenPayload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
-          return tokenPayload.role || null; // Assuming 'role' field is present
-      } catch (error) {
-          console.error('Invalid token format', error);
-          return null;
-      }
+    try {
+      const tokenPayload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
+      return tokenPayload.role || null; // Assuming 'role' field is present
+    } catch (error) {
+      console.error('Invalid token format', error);
+      return null;
+    }
   }
 }

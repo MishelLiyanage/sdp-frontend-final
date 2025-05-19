@@ -1,13 +1,56 @@
 @use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+
+  .topic {
+    display: flex;
+    flex-direction: row;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      color: #020277;
+    }
+
+    h2 {
+      font-family: sharedStyles.$font-family;
+      font-size: 1.5rem;
+      margin-left: 0.3rem;
+      color: #020277;
+    }
+  }
+
+  p {
+    font-family: sharedStyles.$font-family;
+    font-size: 1.1rem;
+    margin-right: 3rem;
+    color: #020277;
+  }
+}
+
 .heading {
-  background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 3, 58));
+  background: #084196;
+  background: linear-gradient(
+    150deg,
+    rgba(8, 65, 150, 1) 0%,
+    rgba(0, 14, 87, 1) 52%,
+    rgba(7, 69, 140, 1) 100%
+  );
   color: white;
   font-family: sharedStyles.$font-family;
 
   h1 {
     padding-left: 6rem;
-    padding-top: 5rem;
+    padding-top: 1rem;
     padding-bottom: 1.5rem;
     font-size: 2rem;
     font-weight: 700;
@@ -18,7 +61,8 @@
 .tableContainer {
   justify-content: center;
   align-items: center;
-  background: url("../../../../assets/images/RegistrationBackground.png");
+  // background: url("../../../../assets/images/RegistrationBackground.png");
+  background-color: #dce9fb;
   display: flex;
   flex-direction: column;
   background-size: cover;
@@ -110,7 +154,7 @@
         }
 
         .update-btn {
-          background-color: rgb(167, 123, 185);
+          background-color: rgba(129, 157, 213, 0.875);
           border: 1.5px solid rgb(10, 2, 50, 0.315);
           border-radius: 5px;
         }

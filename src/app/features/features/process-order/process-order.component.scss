@@ -1,16 +1,59 @@
 @use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+
+  .topic {
+    display: flex;
+    flex-direction: row;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      color: #020277;
+    }
+
+    h2 {
+      font-family: sharedStyles.$font-family;
+      font-size: 1.5rem;
+      margin-left: 0.3rem;
+      color: #020277;
+    }
+  }
+
+  p {
+    font-family: sharedStyles.$font-family;
+    font-size: 1.1rem;
+    margin-right: 3rem;
+    color: #020277;
+  }
+}
+
 .order-entry {
   font-family: Arial, sans-serif;
 
   .heading {
-    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 3, 58));
+    background: #084196;
+    background: linear-gradient(
+      150deg,
+      rgba(8, 65, 150, 1) 0%,
+      rgba(0, 14, 87, 1) 52%,
+      rgba(7, 69, 140, 1) 100%
+    );
     color: white;
     font-family: sharedStyles.$font-family;
 
     h1 {
       padding-left: 6rem;
-      padding-top: 2rem;
+      padding-top: 1rem;
       padding-bottom: 1.5rem;
       font-size: 2rem;
       font-weight: 700;
@@ -23,8 +66,13 @@
     flex-direction: row;
     gap: 1rem;
     padding: 2rem;
-    // background-color: #dcdcdca3;
-    background: linear-gradient(to right, #01063ee1, #7a9ece);
+    background: #b6d8f0;
+    background: linear-gradient(
+      150deg,
+      rgba(182, 216, 240, 1) 1%,
+      rgba(217, 223, 252, 1) 52%,
+      rgba(163, 199, 240, 1) 100%
+    );
 
     .form-row {
       display: flex;
@@ -37,7 +85,7 @@
         min-width: 120px;
         font-family: sharedStyles.$font-family;
         font-size: 1rem;
-        color: #dfdfdf;
+        color: #1c1c1c;
         font-weight: 700;
       }
 
@@ -46,6 +94,8 @@
       textarea {
         flex: 1;
         padding: 5px;
+        border-radius: 5px;
+        border: 0.5px solid rgb(38, 38, 38);
       }
     }
 
@@ -65,7 +115,7 @@
           min-width: 120px;
           font-family: sharedStyles.$font-family;
           font-size: 1rem;
-          color: #dfdfdf;
+          color: #1c1c1c;
           font-weight: 700;
         }
 
@@ -74,6 +124,8 @@
         textarea {
           flex: 1;
           padding: 5px;
+          border-radius: 5px;
+          border: 0.5px solid rgb(38, 38, 38);
         }
       }
     }
@@ -89,7 +141,7 @@
         min-width: 120px;
         font-family: sharedStyles.$font-family;
         font-size: 1rem;
-        color: #dfdfdf;
+        color: #1c1c1c;
         font-weight: 700;
         padding: 0%;
       }
@@ -99,6 +151,8 @@
       textarea {
         flex: 1;
         padding: 5px;
+        border-radius: 5px;
+        border: 0.5px solid rgb(52, 52, 52);
       }
 
       .checkbox {
@@ -122,7 +176,7 @@
         padding-right: 1rem;
         font-family: sharedStyles.$font-family;
         font-size: 1rem;
-        color: #dfdfdf;
+        color: #1c1c1c;
         font-weight: 700;
       }
 
@@ -135,6 +189,8 @@
           width: 4rem;
           height: 1.2rem;
           margin-right: 1rem;
+          border-radius: 5px;
+          border: 0.5px solid rgb(38, 38, 38);
         }
       }
 
@@ -146,6 +202,7 @@
         .checkbox {
           width: 1rem;
           height: 1rem;
+          border-radius: 5px;
         }
       }
     }
@@ -161,7 +218,7 @@
         padding-right: 1rem;
         font-family: sharedStyles.$font-family;
         font-size: 1rem;
-        color: #dfdfdf;
+        color: #1c1c1c;
         font-weight: 700;
       }
 
@@ -178,6 +235,8 @@
         input {
           width: 3rem;
           height: 1.3rem;
+          border-radius: 5px;
+          border: 0.5px solid rgb(38, 38, 38);
         }
 
         .to {

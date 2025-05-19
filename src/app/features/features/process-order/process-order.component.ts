@@ -11,6 +11,8 @@ import {
 import { ProcessOrderService } from '../../../services/process-order.service';
 import { PaperProcessingService } from '../../../services/paper-processing.service';
 import { Router } from '@angular/router';
+import { LoginService } from '../../../services/login.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-process-order',
@@ -20,6 +22,8 @@ import { Router } from '@angular/router';
   styleUrl: './process-order.component.scss'
 })
 export class ProcessOrderComponent {
+  role: string = "";
+  username: string = "";
   orderForm: FormGroup;
   paperCheckboxes: boolean[] = new Array(16).fill(false);
   scholarshipTamilOrderIds: string[] = [];
@@ -30,7 +34,9 @@ export class ProcessOrderComponent {
     private fb: FormBuilder,
     private processOrderService: ProcessOrderService,
     private paperProcessingService: PaperProcessingService,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
+    private loginService: LoginService
   ) {
     this.orderForm = this.fb.group({
       registeredNo: [''],
@@ -64,6 +70,17 @@ export class ProcessOrderComponent {
   }
 
   ngOnInit() {
+    this.userService.getCurrentUser().subscribe(
+      (userdata) => {
+        console.log('User:', userdata);
+        this.username = userdata.username;
+        this.role = userdata.role;
+      },
+      (error) => {
+        console.error('Failed to fetch user data', error);
+      }
+    );
+
     this.processOrderService.getScholarshipTamilOrders().subscribe({
       next: (data) => {
         console.log('Scholarship Tamil Grade 5 pending orders:', data);
@@ -73,6 +90,18 @@ export class ProcessOrderComponent {
         console.error('Error fetching order IDs:', err);
       }
     });
+  }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  goToDashboard() {
+    if (this.role === "ROLE_ADMIN") {
+      this.router.navigate(['/dashboards/adminDashboard']);
+    } else {
+      this.router.navigate(['/dashboards/employeeDashboard']);
+    }
   }
 
   processOrder() {
@@ -318,21 +347,21 @@ export class ProcessOrderComponent {
       counterToNumbers: finalToCounters
     };
 
-  
 
 
-  const schoolData = {
-    name: formData.name,
-    address: formData.address,
-    contactNo: formData.tel,
-    email: formData.email,
-    city: formData.city
-  };
 
-  const payload = {
-    order: processedOrderData,
-    school: schoolData
-  };
+    const schoolData = {
+      name: formData.name,
+      address: formData.address,
+      contactNo: formData.tel,
+      email: formData.email,
+      city: formData.city
+    };
+
+    const payload = {
+      order: processedOrderData,
+      school: schoolData
+    };
 
     // Navigate with payload as navigation extras
     this.router.navigate(['/components/viewSummary'], { state: { payload } });
