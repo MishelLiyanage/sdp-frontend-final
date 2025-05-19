@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { ProcessOrderService } from '../../../services/process-order.service';
 import { PaperProcessingService } from '../../../services/paper-processing.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-process-order',
@@ -23,11 +24,13 @@ export class ProcessOrderComponent {
   paperCheckboxes: boolean[] = new Array(16).fill(false);
   scholarshipTamilOrderIds: string[] = [];
   toValue: number = 0;
+  processedQuantity: number = 0;
 
   constructor(
     private fb: FormBuilder,
     private processOrderService: ProcessOrderService,
-    private paperProcessingService: PaperProcessingService
+    private paperProcessingService: PaperProcessingService,
+    private router: Router
   ) {
     this.orderForm = this.fb.group({
       registeredNo: [''],
@@ -251,5 +254,87 @@ export class ProcessOrderComponent {
         console.error('Error saving processed order and school details:', err);
       }
     });
+  }
+
+  viewSummary() {
+    const formData = this.orderForm.getRawValue();
+
+    // Step 1: Collect checked paper numbers
+    const checkboxes = document.querySelectorAll('.checkbox') as NodeListOf<HTMLInputElement>;
+    const checkedNumbers: number[] = [];
+
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        checkedNumbers.push(Number(checkbox.value));
+      }
+    });
+
+    const actualFromPaperNo = checkedNumbers.length > 0 ? Math.min(...checkedNumbers) : 0;
+    const actualToPaperNo = checkedNumbers.length > 0 ? Math.max(...checkedNumbers) : 0;
+
+    const allFromCounters: number[] = formData.countersFrom || new Array(16).fill(0);
+    const allToCounters: number[] = formData.countersTo || new Array(16).fill(0);
+
+    const finalFromCounters: number[] = [];
+    const finalToCounters: number[] = [];
+
+    for (let i = 0; i < 16; i++) {
+      const paperNo = i + 1;
+      if (paperNo >= actualFromPaperNo && paperNo <= actualToPaperNo) {
+        finalFromCounters.push(allFromCounters[i]);
+        finalToCounters.push(allToCounters[i]);
+      } else {
+        finalFromCounters.push(0);
+        finalToCounters.push(0);
+      }
+    }
+
+
+
+    this.processOrderService.getOrderDetails(formData.registeredNo).subscribe({
+      next: (details) => {
+        let formattedDate = '';
+        if (details.dateOrdered) {
+          const dateObj = new Date(details.dateOrdered);
+          formattedDate = dateObj.toISOString().split('T')[0];
+        }
+
+        this.processedQuantity = Math.ceil(details.numberOfStudents * 1.1);
+      }
+    });
+
+    const processedOrderData = {
+      orderId: formData.registeredNo,
+      grade: "Grade 5",
+      category: "Scholarship Tamil",
+      lastCounterNumber: this.toValue,
+      processedQuantity: this.processedQuantity,
+      sequenceNo: formData.seqOfIssue,
+      dateProcessed: formData.dateSent,
+      timeProcessed: formData.timeSent,
+      fromPaperNo: actualFromPaperNo,
+      toPaperNo: actualToPaperNo,
+      counterFromNumbers: finalFromCounters,
+      counterToNumbers: finalToCounters
+    };
+
+  
+
+
+  const schoolData = {
+    name: formData.name,
+    address: formData.address,
+    contactNo: formData.tel,
+    email: formData.email,
+    city: formData.city
+  };
+
+  const payload = {
+    order: processedOrderData,
+    school: schoolData
+  };
+
+    // Navigate with payload as navigation extras
+    this.router.navigate(['/components/viewSummary'], { state: { payload } });
   }
 }
