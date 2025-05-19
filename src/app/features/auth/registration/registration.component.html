@@ -4,56 +4,79 @@
       <p class="registration-topic">Join With Us</p>
     </div>
     <div class="registration-container">
-      <form class="registration-form" (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
+      <form
+        class="registration-form"
+        (ngSubmit)="onSubmit()"
+        [formGroup]="registrationForm"
+      >
         <div class="form-group">
-          <input type="text" formControlName="schoolName" placeholder="School name" />
-          <input type="email" formControlName="email" placeholder="Email address" />
+          <input
+            type="text"
+            formControlName="schoolName"
+            placeholder="School name"
+          />
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Email address"
+          />
         </div>
         <div class="form-group">
-          <input type="text" formControlName="username" placeholder="Username" />
-          <input type="password" formControlName="password" placeholder="Password" />
+          <input
+            type="text"
+            formControlName="username"
+            placeholder="Username"
+          />
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+          />
         </div>
         <div class="form-group">
-          <input type="text" formControlName="address" placeholder="School address" />
-          <input type="tel" formControlName="contactNo" placeholder="Contact number" />
+          <input
+            type="text"
+            formControlName="address"
+            placeholder="School address"
+          />
+          <input
+            type="tel"
+            formControlName="contactNo"
+            placeholder="Contact number"
+          />
         </div>
         <div class="form-group">
           <input type="text" formControlName="city" placeholder="city" />
-          <input type="text" formControlName="principleName" placeholder="Principle's Name" />
+          <input
+            type="text"
+            formControlName="principleName"
+            placeholder="Principle's Name"
+          />
         </div>
         <div class="signature-input">
           <label for="signatureInput">Upload Principal's Signature</label>
-          <input type="file" id="signatureInput" (change)="onFileChange($event)" />
+          <input
+            type="file"
+            id="signatureInput"
+            (change)="onFileChange($event)"
+          />
         </div>
-        
-        <button type="submit" class="login-btn" [disabled]="registrationForm.invalid">Sign Up</button>
+
+        <div class="button">
+          <button
+            type="submit"
+            class="login-btn"
+            [disabled]="registrationForm.invalid"
+          >
+            Sign Up
+          </button>
+        </div>
+
         <div class="bottom-container">
           <p>Already have an account?</p>
           <a (click)="goToLogin()">Sign In</a>
         </div>
       </form>
     </div>
-    <ul class="bg-bubbles">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
   </div>
 </body>
