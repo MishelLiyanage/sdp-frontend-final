@@ -1,0 +1,179 @@
+<div class="header">
+  <div class="topic">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    <h2 (click)="goToDashboard()">Dashboard</h2>
+  </div>
+
+  <p>Welcome, {{ username }}</p>
+  <p (click)="logout()">Log Out</p>
+</div>
+
+<div class="order-entry">
+  <div class="heading">
+    <h1>Process Grade 3 Scholarship Tamil Orders</h1>
+  </div>
+
+  <form [formGroup]="orderForm">
+    <div class="formInputs">
+      <div class="form-row">
+        <label>Registered No</label>
+        <select
+          formControlName="registeredNo"
+          *ngIf="scholarshipTamilOrderIds.length > 0"
+        >
+          <option value="" disabled selected>Select registration number</option>
+          <option *ngFor="let id of scholarshipTamilOrderIds" [value]="id">
+            {{ id }}
+          </option>
+        </select>
+
+        <label>Date Ordered</label>
+        <input type="date" formControlName="dateOrdered" readonly />
+
+        <label>Total Amount (Rs.)</label>
+        <input type="text" formControlName="totalValue" readonly />
+      </div>
+
+      <div class="section1">
+        <div class="input-group">
+          <label>School name</label>
+          <input type="text" formControlName="name" />
+        </div>
+
+        <div class="input-group">
+          <label>Address</label>
+          <textarea formControlName="address" rows="2"></textarea>
+        </div>
+
+        <div class="input-group">
+          <label>Tel No(s)</label>
+          <input type="text" formControlName="tel" />
+        </div>
+
+        <div class="input-group">
+          <label>Email Address</label>
+          <input type="email" formControlName="email" />
+        </div>
+
+        <div class="input-group">
+          <label>City Name</label>
+          <input type="text" formControlName="city" />
+        </div>
+      </div>
+
+      <br />
+      <hr />
+      <br />
+
+      <div class="section">
+        <label>Number of Students</label>
+        <div class="student-numbers">
+          <input type="number" formControlName="Quantity" readonly />
+        </div>
+
+        <label>Processed Quantity</label>
+        <input type="number" formControlName="processedQuantity" />
+
+        <label>Seq. of Issue</label>
+        <select formControlName="seqOfIssue">
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+        </select>
+      </div>
+
+      <div class="section">
+        <label>Date Sent</label>
+        <input type="date" formControlName="dateSent" />
+
+        <label>Time</label>
+        <input type="time" formControlName="timeSent" />
+      </div>
+
+      <br />
+      <hr />
+      <br />
+
+      <div class="section-papers">
+        <label>Papers</label>
+        <div class="checkboxes">
+          <label><input type="checkbox" value="1" class="checkbox" /> 1</label>
+          <label><input type="checkbox" value="2" class="checkbox" /> 2</label>
+          <label><input type="checkbox" value="3" class="checkbox" /> 3</label>
+          <label><input type="checkbox" value="4" class="checkbox" /> 4</label>
+          <label><input type="checkbox" value="5" class="checkbox" /> 5</label>
+          <label><input type="checkbox" value="6" class="checkbox" /> 6</label>
+          <label><input type="checkbox" value="7" class="checkbox" /> 7</label>
+          <label><input type="checkbox" value="8" class="checkbox" /> 8</label>
+          <label><input type="checkbox" value="9" class="checkbox" /> 9</label>
+          <label
+            ><input type="checkbox" value="10" class="checkbox" /> 10</label
+          >
+          <label
+            ><input type="checkbox" value="11" class="checkbox" /> 11</label
+          >
+          <label
+            ><input type="checkbox" value="12" class="checkbox" /> 12</label
+          >
+          <label
+            ><input type="checkbox" value="13" class="checkbox" /> 13</label
+          >
+          <label
+            ><input type="checkbox" value="14" class="checkbox" /> 14</label
+          >
+          <label
+            ><input type="checkbox" value="15" class="checkbox" /> 15</label
+          >
+          <label
+            ><input type="checkbox" value="16" class="checkbox" /> 16</label
+          >
+        </div>
+      </div>
+
+      <br />
+      <hr />
+      <br />
+
+      <div class="section-counter">
+        <label>Counter</label>
+        <div class="counter-rows">
+          <div class="counter-row">
+            <label>From:</label>
+            <ng-container
+              *ngFor="let control of countersFromControls; index as i"
+            >
+              <input type="number" [formControl]="control" />
+            </ng-container>
+          </div>
+          <div class="counter-row">
+            <label class="to">To:</label>
+            <ng-container
+              *ngFor="let control of countersToControls; index as i"
+            >
+              <input type="number" [formControl]="control" />
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button type="submit" (click)="processOrder()">Process</button>
+      <button type="submit" (click)="save()">Save</button>
+      <button type="button">Delete</button>
+      <button type="button" (click)="viewSummary()">View</button>
+    </div>
+  </form>
+</div>
