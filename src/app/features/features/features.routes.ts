@@ -15,6 +15,8 @@ import { ManageEmployeesComponent } from './manage-employees/manage-employees.co
 import { SchoolRegistrationComponent } from './school-registration/school-registration.component';
 import { SettingsComponent } from './settings/settings.component';
 import { GenerateParcelListComponent } from './generate-parcel-list/generate-parcel-list.component';
+import { ProcessOrderNavigatorComponent } from './process-order-navigator/process-order-navigator.component';
+import { ProcessOrderGrade3ScholarshipTamilComponent } from './process-order-grade3-scholarship-tamil/process-order-grade3-scholarship-tamil.component';
 
 export const featuresRoutes: Routes = [
   { path: 'placeOrder', component: PlaceOrderComponent },
@@ -28,6 +30,8 @@ export const featuresRoutes: Routes = [
   { path: 'updateOrder', component: UpdateOrderComponent},
   { path: 'updateSchool', component: UpdateSchoolComponent},
   { path: 'processOrders', component: ProcessOrderComponent },
+  { path: 'processOrdersGrade3ScholarshipTamil', component: ProcessOrderGrade3ScholarshipTamilComponent },
+  { path: 'processOrderNavigator', component: ProcessOrderNavigatorComponent},
   { path: 'registerEmployee', component: EmployeeRegistrationComponent },
   { path: 'manageEmployees', component: ManageEmployeesComponent},
   { path: 'schoolRegistration', component: SchoolRegistrationComponent},

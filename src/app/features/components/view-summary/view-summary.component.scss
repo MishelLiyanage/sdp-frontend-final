@@ -4,10 +4,10 @@
   margin: 1rem;
   .header {
     background-color: rgb(1, 24, 69);
-    padding: 2rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
+    gap: 0.5rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
 
@@ -45,8 +45,8 @@
     font-family: sharedStyles.$font-family;
     padding-left: 2rem;
     padding-right: 2rem;
-    padding-bottom: 2rem;
-    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
 
     .section {
       display: flex;
@@ -78,8 +78,8 @@
       .order-metadata {
         display: flex;
         flex-direction: wrap;
-        justify-content: center;
-        gap: 34rem;
+        padding-left: 2rem;
+        gap: 24rem;
       }
 
       .meta-item {
@@ -98,8 +98,8 @@
       .groupContainer {
         display: flex;
         flex-direction: wrap;
-        justify-content: center;
-        gap: 9rem;
+        padding-left: 2rem;
+        gap: 7rem;
 
         .item {
           display: flex;
