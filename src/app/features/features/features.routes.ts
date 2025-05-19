@@ -14,6 +14,7 @@ import { EmployeeRegistrationComponent } from './employee-registration/employee-
 import { ManageEmployeesComponent } from './manage-employees/manage-employees.component';
 import { SchoolRegistrationComponent } from './school-registration/school-registration.component';
 import { SettingsComponent } from './settings/settings.component';
+import { GenerateParcelListComponent } from './generate-parcel-list/generate-parcel-list.component';
 
 export const featuresRoutes: Routes = [
   { path: 'placeOrder', component: PlaceOrderComponent },
@@ -30,5 +31,6 @@ export const featuresRoutes: Routes = [
   { path: 'registerEmployee', component: EmployeeRegistrationComponent },
   { path: 'manageEmployees', component: ManageEmployeesComponent},
   { path: 'schoolRegistration', component: SchoolRegistrationComponent},
-  { path: 'settings', component: SettingsComponent}
+  { path: 'settings', component: SettingsComponent},
+  { path: 'generateParcelList', component: GenerateParcelListComponent}
 ];

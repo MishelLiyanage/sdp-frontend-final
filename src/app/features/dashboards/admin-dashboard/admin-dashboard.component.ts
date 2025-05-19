@@ -45,13 +45,13 @@ export class AdminDashboardComponent {
     this.userService.getCurrentUser().subscribe(
       (userdata) => {
         console.log('User:', userdata);
-        this.username = userdata.username; 
+        this.username = userdata.username;
       },
       (error) => {
         console.error('Failed to fetch user data', error);
       }
     );
-    
+
     this.dashboardService.getDashboardStats().subscribe((data) => {
       this.registeredSchools = data.registeredSchools;
       this.totalOrders = data.totalOrders;
@@ -60,6 +60,10 @@ export class AdminDashboardComponent {
       this.grade3scholarship = data.grade3scholarship;
       this.ordersToProcess = data.ordersToProcess;
     });
+  }
+
+  generateParcelList() {
+    this.router.navigate(['/features/generateParcelList']);
   }
 
   registerEmployees() {
