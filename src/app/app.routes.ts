@@ -23,6 +23,10 @@ export const routes: Routes = [
         path: 'features',
         loadChildren: () => import('./features/features/features.routes').then(m => m.featuresRoutes),
     },
+    {
+        path: 'components',
+        loadChildren: () => import('./features/components/components.routes').then(m => m.componentsRoute),
+    },
     { path: '', redirectTo: 'publicPage', pathMatch: 'full' },
     { path: '**', redirectTo: 'publicPage', pathMatch: 'full' }, 
     { path: 'register', component: RegistrationComponent }
