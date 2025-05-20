@@ -13,6 +13,7 @@ import { PaymentService } from '../../../services/payment.service';
 import { supabase } from '../../../enviroments/supabase';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../services/login.service';
+import { Payment } from '../../../models/payment.model';
 
 export interface PublicationTable {
   publicationName: string;
@@ -43,7 +44,7 @@ export class PlaceOrderComponent implements OnInit {
   displayedColumns: string[] = ['publicationName', 'quantity', 'actions'];
 
   publicationNames: string[] = [];
-  paymentMethods: string[] = ['Online', 'Bank Payment / Any Other'];
+  paymentMethods: string[] = ['Online', 'Bank Payment / Any Other', 'Cash'];
 
   selectedPublication: string = '';
   selectedPaymentMethod: string = '';
@@ -306,6 +307,7 @@ export class PlaceOrderComponent implements OnInit {
 
                     console.log('Slip uploaded successfully');
                     alert('Payment slip uploaded successfully!');
+                    this.router.navigate(['/dashboards/schoolDashboard']);
 
                     // Optional: Reset form or navigate to another page
                     // this.orderForm.reset();
@@ -331,6 +333,24 @@ export class PlaceOrderComponent implements OnInit {
                   } finally {
                     this.isLoading = false;
                   }
+                } else if (this.orderSummary.paymentMethod === 'Cash') {
+                  const paymentDetails = new Payment(
+                          userdata.id,
+                          response.order_id,
+                          this.orderSummary.totalAmount,
+                          this.orderSummary.paymentMethod
+                        );
+                  
+                        this.paymentService.savePayment(paymentDetails).subscribe(
+                          (response) => {
+                            alert("Order placed successfully.");
+                            this.router.navigate(['/dashboards/schoolDashboard']);
+                          },
+                          (error) => {
+                            console.error('Error saving payment details:', error);
+                            alert("Payment successful, but failed to save payment details.");
+                          }
+                        );
                 }
               }
             },
