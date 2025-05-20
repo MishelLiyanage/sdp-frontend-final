@@ -82,27 +82,31 @@
           (click)="updateTask(task)"
           cdkDrag
         >
-          <p><strong>Task ID:</strong> {{ task.taskId }}</p>
-          <p><strong>Grade:</strong> {{ task.modelPaper.grade }}</p>
-          <p><strong>Category:</strong> {{ task.modelPaper.category }}</p>
-          <p><strong>Paper No:</strong> {{ task.modelPaper.paperNo }}</p>
-          <p><strong>Part No:</strong> {{ task.modelPaper.partNo }}</p>
+          <!-- <p><strong>Task ID:</strong> {{ task.taskId }}</p> -->
+          <p> {{ task.modelPaper.grade }} </p>
+          <p> {{ task.modelPaper.category }} </p>
+          <p> {{ task.modelPaper.paperNo }} {{ task.modelPaper.partNo }}</p>
 
           <!-- 🟡 Assignment Details -->
-          <div *ngIf="task.assignment" class="assignment-details">
-            <p><strong>Assigned Date:</strong>{{ task.assignment.assignedDate | date : "mediumDate" }}</p>
-            <p><strong>Deadline:</strong>{{ task.assignment.deadline | date : "mediumDate" }}</p>
+          <div *ngIf="task.assignment && task.status !== 'Done' && task.status !== 'Printing'" class="assignment-details">
+            <p><strong>Assigned on </strong>{{ task.assignment.assignedDate | date : "mediumDate" }}</p>
+            <p><strong>Deadline </strong>{{ task.assignment.deadline | date : "mediumDate" }}</p>
             <p><strong>Employee ID:</strong> {{ task.assignment.employeeId }}</p>
           </div>
 
           <!-- 🟢 Printing Progress Details -->
-          <div *ngIf="task.printingProgress" class="printingProgress-details">
+          <div *ngIf="task.printingProgress && task.status !== 'Done'" class="printingProgress-details">
             <p><strong>Submitted Date:</strong>{{ task.printingProgress.submittedDate | date : "mediumDate" }}</p>
+            <p><strong>Deadline:</strong>{{ task.assignment?.deadline | date : "mediumDate"}}</p>
             <p><strong>Expected Quantity:</strong>{{ task.printingProgress.expectedQuantity }}</p>
             <p><strong>Remaining Quantity:</strong>{{ task.printingProgress.remainingToPrintQuantity }}</p>
-            <p><strong>Started:</strong>{{ task.printingProgress.isStarted ? "Yes" : "No" }}</p>
-            <p><strong>Sent to Inventory:</strong>{{ task.printingProgress.isSentToInventory ? "Yes" : "No" }}</p>
           </div>
+
+          <!-- 🔴 Printing Progress Details -->
+           <div *ngIf="task.printingProgress && task.status === 'Done'" class="printingProgress-details">
+            <p><strong>Printed Quantity:</strong>{{ task.printingProgress.expectedQuantity - task.printingProgress.remainingToPrintQuantity}}</p>
+
+           </div>
 
           <div *ngIf="!task.assignment">
             <p style="color: rgb(145, 0, 0)">

@@ -40,7 +40,13 @@
 
 .container {
   .heading {
-    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 3, 58));
+    background: #084196;
+    background: linear-gradient(
+      150deg,
+      rgba(8, 65, 150, 1) 0%,
+      rgba(0, 14, 87, 1) 52%,
+      rgba(7, 69, 140, 1) 100%
+    );
     color: white;
     font-family: sharedStyles.$font-family;
 
@@ -57,7 +63,8 @@
   .tableContainer {
     justify-content: center;
     align-items: center;
-    background: url("../../../../assets/images/RegistrationBackground.png");
+    // background: url("../../../../assets/images/RegistrationBackground.png");
+    background-color: #dce9fb;
     display: flex;
     flex-direction: column;
     background-size: cover;
@@ -169,14 +176,35 @@
         font-weight: 700;
       }
     }
+
+    .print-btn {
+      position: absolute;
+      bottom: -3.5rem;
+      right: 2rem;
+      width: 7rem;
+      font-size: 1rem;
+      padding: 0.5rem;
+      background-color: rgb(0, 8, 161);
+      color: white;
+      font-family: sharedStyles.$font-family;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+      }
+    }
   }
 }
 
 @media print {
-  .search-container,
-  .print-btn,
+  #action,
   .update-btn,
-  .delete-btn {
+  .delete-btn,
+  .search-container {
     visibility: hidden;
   }
 

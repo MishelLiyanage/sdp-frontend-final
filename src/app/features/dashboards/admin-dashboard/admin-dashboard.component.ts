@@ -26,6 +26,7 @@ import { UserService } from '../../../services/user.service';
   styleUrl: './admin-dashboard.component.scss',
 })
 export class AdminDashboardComponent {
+  role: string = "";
   username: string = "";
   registeredSchools: number = 0;
   totalOrders: number = 0;
@@ -46,6 +47,7 @@ export class AdminDashboardComponent {
       (userdata) => {
         console.log('User:', userdata);
         this.username = userdata.username;
+        this.role = userdata.role;
       },
       (error) => {
         console.error('Failed to fetch user data', error);

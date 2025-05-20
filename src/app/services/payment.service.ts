@@ -24,4 +24,15 @@ export class PaymentService {
         console.log('Payment Details:', paymentDetails); // Debugging line to check the payment details
         return this.http.post(`${this.baseUrl}/payment/`, paymentDetails, { headers });
     }
+
+    uploadPaymentSlip(file: File, userId: number, orderId: string, amount: number, paymentMethod: string) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('userId', userId.toString());
+    formData.append('orderId', orderId);
+    formData.append('amount', amount.toString());
+    formData.append('paymentMethod', paymentMethod);
+
+    return this.http.post(`${this.baseUrl}/paymentSlip/upload-slip`, formData, { headers: this.getHeaders() });
+  }
 }

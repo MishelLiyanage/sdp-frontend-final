@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../services/login.service';
 import { CounterSettingsComponent } from "../counter-settings/counter-settings.component";
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -14,7 +15,9 @@ import { CounterSettingsComponent } from "../counter-settings/counter-settings.c
   styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
-paperProcessingForm: FormGroup;
+  role: string = "";
+  username: string = "";
+  paperProcessingForm: FormGroup;
   submitted = false;
   submitSuccess = false;
   errorMessage = '';
@@ -23,7 +26,8 @@ paperProcessingForm: FormGroup;
     private formBuilder: FormBuilder,
     private paperProcessingService: PaperProcessingService,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private userService: UserService
   ) {
     this.paperProcessingForm = this.formBuilder.group({
       grade: ['', Validators.required],
@@ -36,11 +40,26 @@ paperProcessingForm: FormGroup;
     });
   }
 
+  ngOnInit() {
+    this.userService.getCurrentUser().subscribe(
+      (userdata) => {
+        console.log('User:', userdata);
+        this.username = userdata.username;
+        this.role = userdata.role;
+        console.log(this.username + " 123456 ***" + this.role);
+        
+      },
+      (error) => {
+        console.error('Failed to fetch user data', error);
+      }
+    );
+  }
+
   // Custom validator to ensure fromPaperNo is less than toPaperNo
   fromToValidator(group: FormGroup): { [key: string]: boolean } | null {
     const from = group.get('fromPaperNo')?.value;
     const to = group.get('toPaperNo')?.value;
-    
+
     if (from && to && Number(from) >= Number(to)) {
       return { 'fromGreaterThanTo': true };
     }
@@ -118,5 +137,13 @@ paperProcessingForm: FormGroup;
 
   logout() {
     this.loginService.logout();
+  }
+
+  goToDashboard() {
+    if (this.role === "ROLE_ADMIN") {
+      this.router.navigate(['/dashboards/adminDashboard']);
+    } else {
+      this.router.navigate(['/dashboards/employeeDashboard']);
+    }
   }
 }
