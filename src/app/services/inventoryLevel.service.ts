@@ -11,7 +11,7 @@ export interface InventoryItem {
   providedIn: 'root'
 })
 export class InventoryLevelService {
-  private baseUrl = 'http://localhost:8083/inventory/levels';
+  private baseUrl = 'http://localhost:8083/inventory';
 
   constructor(private http: HttpClient) {}
 
@@ -26,7 +26,11 @@ export class InventoryLevelService {
     }
 
   getInventoryLevels(): Observable<InventoryItem[]> {
-    return this.http.get<InventoryItem[]>(this.baseUrl, { headers: this.getHeaders() });
+    return this.http.get<InventoryItem[]>(`${this.baseUrl}/levels`, { headers: this.getHeaders() });
+  }
+
+  getAllInventory(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/all`, { headers: this.getHeaders() });
   }
 }
 

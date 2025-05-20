@@ -1,0 +1,68 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St. Joseph's Institute - Inventory</title>
+</head>
+
+<div class="header">
+  <div class="topic">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    <h2 (click)="goToDashboard()">Dashboard</h2>
+  </div>
+
+  <p>Welcome, {{ username }}</p>
+  <p (click)="logout()">Log Out</p>
+</div>
+
+<div id="print-section">
+  <div class="heading">
+    <h1>View Inventory</h1>
+  </div>
+
+  <div class="tableContainer">
+    <div class="search-container">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search by grade, category, paper number"
+      />
+      <button (click)="searchInventory()">Search</button>
+    </div>
+
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Model Paper ID</th>
+            <th>Grade</th>
+            <th>Category</th>
+            <th>Paper No</th>
+            <th>Part No</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filteredInventory">
+            <td>{{ item.modelPaperId }}</td>
+            <td>{{ item.grade }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.paperNo }}</td>
+            <td>{{ item.partNo }}</td>
+            <td>{{ item.quantity }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="print-btn" (click)="print()">Print</button>
+    </div>
+  </div>
+</div>

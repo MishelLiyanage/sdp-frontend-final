@@ -68,6 +68,10 @@ export class AdminDashboardComponent {
     this.router.navigate(['/features/generateParcelList']);
   }
 
+  viewInventory() {
+    this.router.navigate(['/features/viewInventory']);
+  }
+
   registerEmployees() {
     this.router.navigate(['/features/registerEmployee']);
   }
