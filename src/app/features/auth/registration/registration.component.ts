@@ -32,22 +32,22 @@ export class RegistrationComponent {
     });
   }
 
-  // Handle file upload (store only the file name for now)
-  onFileChange(event: Event) {
-    const fileInput = event.target as HTMLInputElement;
-    if (fileInput.files && fileInput.files.length > 0) {
-      const file = fileInput.files[0];
+  // // Handle file upload (store only the file name for now)
+  // onFileChange(event: Event) {
+  //   const fileInput = event.target as HTMLInputElement;
+  //   if (fileInput.files && fileInput.files.length > 0) {
+  //     const file = fileInput.files[0];
 
-      // Read file as Base64 (for backend storage)
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.registrationForm.patchValue({
-          principleSignature: reader.result as string, // Base64 encoded string
-        });
-      };
-      reader.readAsDataURL(file);
-    }
-  }
+  //     // Read file as Base64 (for backend storage)
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       this.registrationForm.patchValue({
+  //         principleSignature: reader.result as string, // Base64 encoded string
+  //       });
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
 
   // Map form data to the SchoolRegistration model
   getFormData(): SchoolRegistration {
@@ -79,7 +79,7 @@ export class RegistrationComponent {
         },
         error: (error) => {
           console.error('Registration failed:', error);
-          alert('Failed to register. Please try again.');
+          alert('Failed to register. Please try again. ' + error['error']);
         }
       });
     }

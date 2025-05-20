@@ -41,7 +41,6 @@
             <th>Address</th>
             <th>Contact No</th>
             <th>Department</th>
-            <th id="action">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -52,14 +51,6 @@
             <td>{{ emp.address }}</td>
             <td>{{ emp.contactNo }}</td>
             <td>{{ emp.departmentName }}</td>
-            <td class="action-buttons">
-              <button class="update-btn" (click)="updateEmployee(emp)">
-                Update
-              </button>
-              <button class="delete-btn" (click)="deleteEmployee(emp)">
-                Delete
-              </button>
-            </td>
           </tr>
         </tbody>
       </table>
