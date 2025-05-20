@@ -274,3 +274,255 @@
     }
   }
 }
+
+/* Responsive Styles */
+@media screen and (max-width: 1400px) {
+  .order-entry {
+    .heading h1 {
+      padding-left: 4rem;
+      font-size: 2rem;
+    }
+    
+    form {
+      padding: 1.5rem;
+      
+      .buttons {
+        gap: 4rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .order-entry {
+    form {
+      gap: 0.5rem;
+      
+      .formInputs {
+        width: 100%;
+      }
+      
+      .buttons {
+        gap: 3rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .order-entry {
+    .heading h1 {
+      padding-left: 2rem;
+      font-size: 1.8rem;
+    }
+    
+    form {
+      flex-direction: column;
+      
+      .buttons {
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: space-between;
+        padding: 1rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .order-entry {
+    .heading h1 {
+      padding-left: 1.5rem;
+      font-size: 1.6rem;
+    }
+
+    form {
+      gap: 0.5rem;
+      padding: 1rem;
+      flex-direction: column;
+
+      .section,
+      .section-papers,
+      .section-counter {
+        gap: 1rem;
+      }
+
+      .buttons {
+        gap: 2rem;
+        padding: 1rem;
+      }
+
+      .formInputs {
+        .section-counter  {
+          .counter-rows {
+            .counter-row {
+              flex-wrap: wrap;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    
+    p {
+      margin-right: 0;
+      margin-top: 0.5rem;
+    }
+  }
+  
+  .order-entry {
+    .heading h1 {
+      padding-left: 2rem;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+    
+    form {
+      padding: 1rem;
+      
+      .buttons {
+        flex-direction: column;
+        gap: 1rem;
+        
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    
+    p {
+      margin-right: 0;
+      margin-top: 0.5rem;
+    }
+  }
+  
+  .order-entry {
+    .heading h1 {
+      padding-left: 1rem;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    
+    form {
+      padding: 1rem;
+      
+      .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+        
+        label {
+          margin-bottom: 0.3rem;
+        }
+        
+        input, select, textarea {
+          width: 100%;
+        }
+      }
+      
+      .section1 {
+        .input-group {
+          flex-direction: column;
+          align-items: flex-start;
+          
+          label {
+            margin-bottom: 0.3rem;
+          }
+          
+          input, select, textarea {
+            width: 100%;
+          }
+        }
+      }
+      
+      .section {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .section-papers {
+        flex-direction: column;
+        
+        .checkboxes {
+          margin-top: 0.5rem;
+        }
+      }
+      
+      .section-counter {
+        flex-direction: column;
+        
+        .counter-rows {
+          width: 100%;
+          
+          .counter-row {
+            flex-wrap: wrap;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .order-entry {
+    .heading h1 {
+      font-size: 1.3rem;
+      padding: 0.8rem;
+    }
+    
+    form {
+      .buttons {
+        flex-direction: column;
+        gap: 1rem;
+        
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+  
+  .section-papers {
+    .checkboxes {
+      justify-content: space-between;
+      
+      label {
+        width: 45%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header {
+    .topic h2 {
+      font-size: 1.2rem;
+    }
+    
+    p {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .section-counter {
+    .counter-rows {
+      .counter-row {
+        input {
+          width: 2.5rem;
+        }
+      }
+    }
+  }
+}

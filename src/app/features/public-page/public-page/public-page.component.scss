@@ -418,43 +418,87 @@ $font-family: "Quattrocento Sans", serif;
       border-radius: 0.5rem;
       padding: 2rem;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      // width: 13rem;
       height: 25rem;
       position: relative;
 
       &.item1 {
-        background-image: url("../../../../assets/images/QP1.jpeg");
+        background-image: url("../../../../assets/images/QP2.jpg");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to bottom,
+            rgba(5, 0, 49, 0.245),
+            rgba(48, 48, 48, 0.375)
+          );
+          z-index: 1;
+        }
       }
 
       &.item2 {
-        background-image: url("../../../../assets/images/QP1.jpeg");
+        background-image: url("../../../../assets/images/QP4.avif");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to bottom,
+            rgba(5, 0, 49, 0.245),
+            rgba(48, 48, 48, 0.375)
+          );
+          z-index: 1;
+        }
       }
 
       &.item3 {
-        background-image: url("../../../../assets/images/QP1.jpeg");
+        background-image: url("../../../../assets/images/QP5.avif");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to bottom,
+            rgba(5, 0, 49, 0.245),
+            rgba(48, 48, 48, 0.375)
+          );
+          z-index: 1;
+        }
       }
 
       &.item4 {
-        background-image: url("../../../../assets/images/QP1.jpeg");
+        background-image: url("../../../../assets/images/QP6.avif");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to bottom,
+            rgba(5, 0, 49, 0.245),
+            rgba(48, 48, 48, 0.375)
+          );
+          z-index: 1;
+        }
       }
 
       h3 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: bold;
         margin-bottom: 1rem;
         font-family: $font-family;
+        color: rgb(37, 1, 37);
         font-weight: 700;
         text-align: center;
         margin-top: 17rem;
