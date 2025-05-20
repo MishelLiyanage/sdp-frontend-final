@@ -352,7 +352,7 @@ export class ScrumboardComponent {
       const token = localStorage.getItem('accessToken');
       const userRole = this.getUserRoleFromToken(token ?? '');
       if (userRole === 'ROLE_EMPLOYEE') {
-        alert('You do not have permission to access this form.');
+        // alert('You do not have permission to access this form.');
         return;
       }
       this.router.navigate(['/features/updatePrintingProgress', task.taskId]);

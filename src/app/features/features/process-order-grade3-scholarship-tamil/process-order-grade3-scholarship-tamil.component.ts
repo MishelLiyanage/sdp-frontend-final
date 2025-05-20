@@ -138,8 +138,8 @@ export class ProcessOrderGrade3ScholarshipTamilComponent {
         this.paperProcessingService.getProcessingDetails(grade, category).subscribe({
           next: (processing) => {
             console.log("Received processing details:", processing);
-            const from = processing.fromPaperNo;
-            const to = processing.toPaperNo;
+            const from = 1;
+            const to = 16;
             const sequenceNo = processing.sequenceNo;
 
             // Patch the sequence number into the form control
@@ -267,8 +267,6 @@ export class ProcessOrderGrade3ScholarshipTamilComponent {
       next: (response) => {
         console.log('Processed order and school details saved successfully:', response);
         alert('Processed order and school details saved successfully:');
-
-        this.orderForm.reset();
       },
       error: (err) => {
         console.error('Error saving processed order and school details:', err);
