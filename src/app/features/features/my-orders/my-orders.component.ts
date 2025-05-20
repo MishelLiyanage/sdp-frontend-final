@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user.service';
 import { OrderService } from '../../../services/order.service';
 import { OrderDetails } from '../../../models/order-details.model';
+import { LoginService } from '../../../services/login.service';
+import { Router } from '@angular/router';
 
 interface OrderResponse {
   orderId: string;
@@ -26,25 +28,40 @@ interface OrderResponse {
   styleUrl: './my-orders.component.scss'
 })
 export class MyOrdersComponent {
+  username: string = '';
+  userRole: string = '';
   schoolOrders: OrderResponse[] = [];
   currentUserId: number = 0;
   orders: OrderResponse[] = [];
 
   constructor(private http: HttpClient,
     private userService: UserService,
-    private orderService: OrderService) { }
+    private orderService: OrderService,
+    private loginService: LoginService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(
       (userdata) => {
         console.log('User:', userdata);
-        this.currentUserId = userdata.id; // Assuming 'id' is the property for user ID
+        this.currentUserId = userdata.id;
+        this.username = userdata.username;
+        this.userRole = userdata.role; // Assuming 'role' is the property for user role
+        // Assuming 'id' is the property for user ID
         this.loadOrders();
       },
       (error) => {
         console.error('Failed to fetch user data', error);
       }
     );
+  }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  goToDashboard() {
+    this.router.navigate(['/dashboards/schoolDashboard']);
   }
 
   private getHeaders(): HttpHeaders {

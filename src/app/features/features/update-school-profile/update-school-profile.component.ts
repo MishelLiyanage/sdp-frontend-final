@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UpdateSchoolProfileService } from '../../../services/update-school-profile.service';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { LoginService } from '../../../services/login.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-update-school-profile',
@@ -10,10 +13,16 @@ import { HttpHeaders } from '@angular/common/http';
   imports: [ReactiveFormsModule]
 })
 export class UpdateSchoolProfileComponent implements OnInit {
+  username: string = '';
+  role: string = '';
   updateForm: FormGroup;
   isEditing = false;
 
-  constructor(private fb: FormBuilder, private profileService: UpdateSchoolProfileService) {
+  constructor(private fb: FormBuilder,
+    private profileService: UpdateSchoolProfileService,
+    private userService: UserService,
+    private loginService: LoginService,
+    private router: Router) {
     this.updateForm = this.fb.group({
       id: [{ value: '', disabled: true }],
       username: [{ value: '', disabled: true }],
@@ -29,7 +38,27 @@ export class UpdateSchoolProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getCurrentUser().subscribe(
+      (userdata) => {
+        console.log('User:', userdata);
+        this.username = userdata.username;
+        this.role = userdata.role;
+
+      },
+      (error) => {
+        console.error('Failed to fetch user data', error);
+      }
+    );
+
     this.loadUserProfile();
+  }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  goToDashboard() {
+    this.router.navigate(['/dashboards/schoolDashboard']);
   }
 
   loadUserProfile() {
@@ -38,12 +67,12 @@ export class UpdateSchoolProfileComponent implements OnInit {
       console.error('Access token is missing');
       return;
     }
-  
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-  
+
     this.profileService.getCurrentUser(headers).subscribe(
       (userData) => {
         const mappedData = {
@@ -58,14 +87,14 @@ export class UpdateSchoolProfileComponent implements OnInit {
           principle_name: userData.principleName,
           principle_signature: userData.principleSignature
         };
-  
+
         this.updateForm.patchValue(mappedData);
       },
       (error) => {
         console.error('Error fetching user profile', error);
       }
     );
-  }  
+  }
 
   enableEditing() {
     this.isEditing = true;
@@ -94,17 +123,17 @@ export class UpdateSchoolProfileComponent implements OnInit {
         console.error('Access token not found');
         return;
       }
-  
+
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       });
-  
+
       const formData = this.updateForm.getRawValue();
-  
+
       this.profileService.updateProfile(formData, headers).subscribe(
         (response: any) => {
-          alert(response.message); 
+          alert(response.message);
           this.isEditing = false;
           this.updateForm.disable();
         },
@@ -114,5 +143,5 @@ export class UpdateSchoolProfileComponent implements OnInit {
         }
       );
     }
-  }  
+  }
 }
