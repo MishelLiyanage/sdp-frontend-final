@@ -39,7 +39,6 @@
           <th>Payment Status</th>
           <th>Order Status</th>
           <th>Amount</th>
-          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -54,9 +53,6 @@
           <td>{{ order.paymentStatus }}</td>
           <td>{{ order.orderStatus }}</td>
           <td>{{ order.amount | currency : "LKR" : "symbol" }}</td>
-          <td class="action-buttons">
-            <button class="delete-btn" (click)="deleteOrder(order)">Delete</button>
-          </td>
         </tr>
       </tbody>
     </table>
