@@ -48,6 +48,7 @@ export class PlaceOrderComponent implements OnInit {
   selectedPaymentMethod: string = '';
 
   selectedFile: File | null = null;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -55,7 +56,7 @@ export class PlaceOrderComponent implements OnInit {
     private modelPaperService: ModelPaperService,
     private orderService: OrderService,
     private payhereService: PayhereService,
-    @Inject(Storage) private storage: Storage
+    private paymentService: PaymentService,
   ) {
     this.orderForm = this.fb.group({
       name: [''],
@@ -207,7 +208,7 @@ export class PlaceOrderComponent implements OnInit {
           );
 
           this.orderService.placeOrder(order).subscribe(
-            (response) => {
+            async (response) => {
               if (response.success) {
                 if (this.orderSummary.paymentMethod === 'Online') {
                   console.log('Order placed successfully:', response);
@@ -257,24 +258,67 @@ export class PlaceOrderComponent implements OnInit {
 
                 } else if (this.orderSummary.paymentMethod === 'Bank Payment / Any Other') {
                   console.log('Order placed successfully:', response);
-                  alert("Order placed successfully. Please upload your payment slip.");
-                  console.log('Order ID: ', response.order_id, 'Have to save the bankslipt and save payment details in the database.'); 
+                  alert("Order placed successfully. Saving your payment slip.");
 
-                  // // Upload payment slip if selected
-                  // if (this.selectedFile) {
-                  //   this.uploadPaymentSlip(this.selectedFile).then((url) => {
-                  //     if (url) {
-                  //       const payment = new Payment(
-                  //         userdata.id,
-                  //         response.order_id,
-                  //         this.orderSummary.totalAmount,
-                  //         url
-                  //       );
-                  //     } else {
-                  //       alert("Error uploading payment slip. Please try again.");
-                  //     }
-                  //   });
-                  // }
+                  try {
+                    if (!this.selectedFile) {
+                      alert("Order placed successfully. Please upload your payment slip later.");
+                      return;
+                    }
+
+                    // Validate file type and size
+                    const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+                    const maxSize = 5 * 1024 * 1024; // 5MB
+
+                    if (!allowedTypes.includes(this.selectedFile.type)) {
+                      alert('Only JPG, PNG, or PDF files are allowed.');
+                      return;
+                    }
+
+                    if (this.selectedFile.size > maxSize) {
+                      alert('File size exceeds 5MB limit.');
+                      return;
+                    }
+
+                    // Show loading indicator (recommend using a proper loading service)
+                    this.isLoading = true;
+
+                    // Use PaymentService instead of raw fetch
+                    await this.paymentService.uploadPaymentSlip(
+                      this.selectedFile,
+                      userdata.id,
+                      response.order_id.toString(),
+                      this.orderSummary.totalAmount,
+                      this.orderSummary.paymentMethod
+                    ).toPromise();
+
+                    console.log('Slip uploaded successfully');
+                    alert('Payment slip uploaded successfully!');
+
+                    // Optional: Reset form or navigate to another page
+                    // this.orderForm.reset();
+                    // this.router.navigate(['/order-confirmation']);
+
+                  } catch (error) {
+                    console.error('Upload error:', error);
+
+                    let errorMessage = 'Failed to upload payment slip.';
+                    if (error instanceof Error) {
+                      errorMessage += ` ${error.message}`;
+                    } else if (typeof error === 'string') {
+                      errorMessage += ` ${error}`;
+                    }
+
+                    alert(errorMessage);
+
+                    // Optionally allow retry
+                    if (confirm('Would you like to try uploading again?')) {
+                      // Trigger file input click
+                      document.getElementById('paymentSlipInput')?.click();
+                    }
+                  } finally {
+                    this.isLoading = false;
+                  }
                 }
               }
             },

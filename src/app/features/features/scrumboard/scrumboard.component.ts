@@ -356,6 +356,10 @@ export class ScrumboardComponent {
         return;
       }
       this.router.navigate(['/features/updatePrintingProgress', task.taskId]);
+    } else if (task.status === 'Done') {
+      alert('You cannot update a task that is already done.');
+
+      
     } else {
       this.router.navigate(['/features/updateTask'], { state: { task } });
     }

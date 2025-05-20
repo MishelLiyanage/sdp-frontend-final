@@ -152,7 +152,8 @@
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
       cursor: grab;
       font-family: "Quattrocento Sans", serif;
-      font-size: 0.9rem;
+      font-size: 1rem;
+      font-weight: 700;
       transition: transform 0.2s;
 
       &:hover {
@@ -162,8 +163,8 @@
       .assignment-details  {
         align-items: center;
         font-family: "Quattrocento Sans", serif;
-        margin-top: 15px;
-        margin-bottom: 15px;
+        font-size: 0.8rem;
+        margin-top: 10px;
         padding-top: 5px;
         padding-bottom: 5px;
         background-color: #636ca0af;
@@ -173,8 +174,8 @@
       .printingProgress-details {
         align-items: center;
         font-family: "Quattrocento Sans", serif;
-        margin-top: 15px;
-        margin-bottom: 15px;
+        font-size: 0.8rem;
+        margin-top: 10px;
         padding-top: 5px;
         padding-bottom: 5px;
         background-color: #80639ac8;

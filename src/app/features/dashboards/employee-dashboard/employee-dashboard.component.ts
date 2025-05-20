@@ -67,7 +67,7 @@ export class EmployeeDashboardComponent {
   }
 
   processOrders() {
-    this.router.navigate(['/features/processOrders']);
+    this.router.navigate(['/features/processOrderNavigator']);
   }
 
   manageOrders() {
