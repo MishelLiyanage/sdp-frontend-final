@@ -36,7 +36,6 @@ export class ManageOrdersComponent implements OnInit {
         console.log('User:', userdata);
         this.username = userdata.username;
         this.role = userdata.role;
-        console.log(this.username + " 123456 ***" + this.role);
         
       },
       (error) => {

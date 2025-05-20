@@ -210,6 +210,27 @@
       }
     }
   }
+
+  .print-btn {
+    position: absolute;
+    bottom: -3.5rem;
+    right: 2rem;
+    width: 7rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    background-color: rgb(0, 8, 161);
+    color: white;
+    font-family: sharedStyles.$font-family;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+  }
 }
 
 .animate-on-scroll {
@@ -264,8 +285,8 @@
 @media (max-width: 425px) {
   .container {
     flex-direction: column;
-    
-    .sidebar{
+
+    .sidebar {
       width: 100%;
       flex-direction: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));

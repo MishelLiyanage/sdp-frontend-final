@@ -23,7 +23,7 @@
   <div class="orderStatisticsContainer">
     <div class="header">
       <h2>Admin Dashboard</h2>
-      <p>Welcome, {{username}}</p>
+      <p>Welcome, {{ username }}</p>
       <p (click)="logout()">Log Out</p>
     </div>
 
@@ -34,12 +34,12 @@
         </div>
         <div class="cardBody">
           <div class="orderStatisticsItem">
-            <h4>Registered Schools</h4>
-            <p>{{ registeredSchools }}</p>
-          </div>
-          <div class="orderStatisticsItem">
             <h4>Total Orders</h4>
             <p>{{ totalOrders }}</p>
+          </div>
+          <div class="orderStatisticsItem">
+            <h4>Orders to Process</h4>
+            <p>{{ ordersToProcess }}</p>
           </div>
           <div class="orderStatisticsItem">
             <h4>Grade 5 Scholarship</h4>
@@ -54,8 +54,8 @@
             <p>{{ grade3scholarship }}</p>
           </div>
           <div class="orderStatisticsItem">
-            <h4>Orders to Process</h4>
-            <p>{{ ordersToProcess }}</p>
+            <h4>Registered Schools</h4>
+            <p>{{ registeredSchools }}</p>
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@
             <div class="revenueByPaymentMethod">
               <app-revenue-by-payment-method></app-revenue-by-payment-method>
             </div>
-            
+
             <div class="inventoryLevel animate-on-scroll">
               <app-inventory-level-chart></app-inventory-level-chart>
             </div>
