@@ -6,6 +6,8 @@ import { EmployeeService } from '../../../services/employee.service';
 import { CommonModule } from '@angular/common';
 import { EmployeeDetails } from '../../../models/employee-details.model';
 import { TaskEmployeeAssignment } from '../../../models/task-employee-assignment.model';
+import { LoginService } from '../../../services/login.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-update-task',
@@ -14,17 +16,21 @@ import { TaskEmployeeAssignment } from '../../../models/task-employee-assignment
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class UpdateTaskComponent implements OnInit {
+  role: string = "";
+  username: string = "";
   updateTaskForm!: FormGroup;
   employees: string[] = []; // Employee names with department
   taskId!: number;
-  
+
   constructor(
     private fb: FormBuilder,
     private taskService: TaskService,
     private employeeService: EmployeeService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private userService: UserService,
+    private loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
     // Initialize Form
@@ -37,11 +43,23 @@ export class UpdateTaskComponent implements OnInit {
       deadline: ['', Validators.required],
       employee: ['', Validators.required]
     });
-  
+
     // Get task from navigation state
     const task = history.state.task;
-  
+
     if (task) {
+      this.userService.getCurrentUser().subscribe(
+        (userdata) => {
+          console.log('User:', userdata);
+          this.username = userdata.username;
+          this.role = userdata.role;
+
+        },
+        (error) => {
+          console.error('Failed to fetch user data', error);
+        }
+      );
+
       this.taskId = task.taskId;
       this.updateTaskForm.patchValue({
         category: task.modelPaper.category,
@@ -57,9 +75,17 @@ export class UpdateTaskComponent implements OnInit {
       // Optional: redirect or show message
       this.router.navigate(['/features/task-list']);
     }
-  
+
     // Load employee options
     this.loadEmployees();
+  }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  goToDashboard() {
+    this.router.navigate(['/features/scrumboard']);
   }
 
   /** 🔹 Load Task Details & Bind to Form */
@@ -78,30 +104,30 @@ export class UpdateTaskComponent implements OnInit {
   /** 🔹 Load Employees & Bind to Select */
   employeesDetails: EmployeeDetails[] = [];
 
-loadEmployees(): void {
-  this.employeeService.getEmployees().subscribe(
-    (data: EmployeeDetails[]) => {
-      this.employees = data.map(employee => `${employee.id} (${employee.nameWithDepartment})`);
-    },
-    (error) => {
-      console.error('Error loading employees:', error);
-      alert('Failed to load employees.');
-    }
-  );
-}
+  loadEmployees(): void {
+    this.employeeService.getEmployees().subscribe(
+      (data: EmployeeDetails[]) => {
+        this.employees = data.map(employee => `${employee.id} (${employee.nameWithDepartment})`);
+      },
+      (error) => {
+        console.error('Error loading employees:', error);
+        alert('Failed to load employees.');
+      }
+    );
+  }
 
   /** 🔹 Update Task */
   onUpdateTask(): void {
     if (this.updateTaskForm.valid) {
-      
+
       //set the taskId, assignedDate, and deadline in the task object
-      const taskData: TaskEmployeeAssignment = { 
+      const taskData: TaskEmployeeAssignment = {
         taskId: this.taskId,
         assignedDate: this.updateTaskForm.value.assignedDate,
         deadline: this.updateTaskForm.value.deadline,
         employeeId: Number(this.updateTaskForm.value.employee.split(' ')[0]) // Extract employee ID from the string
       };
-      
+
       this.taskService.updateTask(taskData).subscribe(
         (response) => {
           console.log('Task updated successfully:', response);

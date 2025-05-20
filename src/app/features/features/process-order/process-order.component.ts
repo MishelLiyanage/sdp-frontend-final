@@ -146,8 +146,8 @@ export class ProcessOrderComponent {
         this.paperProcessingService.getProcessingDetails(grade, category).subscribe({
           next: (processing) => {
             console.log("Received processing details:", processing);
-            const from = processing.fromPaperNo;
-            const to = processing.toPaperNo;
+            const from = 1;
+            const to = 16;
             const sequenceNo = processing.sequenceNo;
 
             // Patch the sequence number into the form control
