@@ -270,16 +270,16 @@ export class ProcessOrderComponent {
       school: schoolData
     };
 
-    // Step 6: Send to backend
+    // save in the database
     this.processOrderService.saveOrderAndSchoolDetails(payload).subscribe({
       next: (response) => {
         console.log('Processed order and school details saved successfully:', response);
         alert('Processed order and school details saved successfully:');
-
         this.orderForm.reset();
       },
       error: (err) => {
         console.error('Error saving processed order and school details:', err);
+        alert(err.error?.message || 'An unexpected error occurred.');
       }
     });
   }
