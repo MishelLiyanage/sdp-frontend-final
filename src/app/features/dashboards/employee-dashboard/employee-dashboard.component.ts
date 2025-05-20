@@ -54,6 +54,10 @@ export class EmployeeDashboardComponent {
     this.router.navigate(['/features/generateParcelList']);
   }
 
+  viewInventory() {
+    this.router.navigate(['/features/viewInventory']);
+  }
+  
   trackQPPreparation() {
     this.router.navigate(['/features/scrumboard']);
   }

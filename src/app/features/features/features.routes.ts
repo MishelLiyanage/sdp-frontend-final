@@ -17,6 +17,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { GenerateParcelListComponent } from './generate-parcel-list/generate-parcel-list.component';
 import { ProcessOrderNavigatorComponent } from './process-order-navigator/process-order-navigator.component';
 import { ProcessOrderGrade3ScholarshipTamilComponent } from './process-order-grade3-scholarship-tamil/process-order-grade3-scholarship-tamil.component';
+import { ViewInventoryComponent } from './view-inventory/view-inventory.component';
 
 export const featuresRoutes: Routes = [
   { path: 'placeOrder', component: PlaceOrderComponent },
@@ -36,5 +37,6 @@ export const featuresRoutes: Routes = [
   { path: 'manageEmployees', component: ManageEmployeesComponent},
   { path: 'schoolRegistration', component: SchoolRegistrationComponent},
   { path: 'settings', component: SettingsComponent},
-  { path: 'generateParcelList', component: GenerateParcelListComponent}
+  { path: 'generateParcelList', component: GenerateParcelListComponent},
+  { path: 'viewInventory', component: ViewInventoryComponent}
 ];
