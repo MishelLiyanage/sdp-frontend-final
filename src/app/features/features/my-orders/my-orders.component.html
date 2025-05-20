@@ -1,3 +1,29 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St. Joseph's Institute</title>
+</head>
+
+<div class="header">
+  <div class="topic">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    <h2 (click)="goToDashboard()">Dashboard</h2>
+  </div>
+
+  <p>Welcome, {{ username }}</p>
+  <p (click)="logout()">Log Out</p>
+</div>
+
 <div class="orders-container">
   <div class="heading">
     <h1>Your Orders</h1>

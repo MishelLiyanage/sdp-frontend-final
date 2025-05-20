@@ -1,5 +1,45 @@
 @use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #01234a;
+  background: linear-gradient(
+    149deg,
+    rgba(1, 35, 74, 1) 0%,
+    rgba(60, 6, 115, 1) 53%,
+    rgba(1, 35, 74, 1) 100%
+  );
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  .topic {
+    display: flex;
+    flex-direction: row;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      color: #ffffff;
+    }
+
+    h2 {
+      font-family: sharedStyles.$font-family;
+      font-size: 1.5rem;
+      margin-left: 0.3rem;
+      color: #ffffff;
+    }
+  }
+
+  p {
+    font-family: sharedStyles.$font-family;
+    font-size: 1.1rem;
+    margin-right: 3rem;
+    color: #ffffff;
+  }
+}
+
 .orders-container {
   display: flex;
   flex-direction: column;
@@ -11,7 +51,7 @@
 
     h1 {
       padding-left: 6rem;
-      padding-top: 5rem;
+      padding-top: 2rem;
       padding-bottom: 1.5rem;
       font-size: 2rem;
       font-weight: 700;
@@ -28,6 +68,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    height: 78.2vh;
 
     .table {
       background-color: rgb(254, 246, 255);

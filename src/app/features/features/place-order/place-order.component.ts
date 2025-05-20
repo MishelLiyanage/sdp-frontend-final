@@ -10,10 +10,9 @@ import { OrderService } from '../../../services/order.service';
 import { PayhereService } from '../../../services/payhere.service';
 import { Order } from '../../../models/order.model';
 import { PaymentService } from '../../../services/payment.service';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { Storage } from '@angular/fire/storage';
-import { Payment } from '../../../models/payment.model';
 import { supabase } from '../../../enviroments/supabase';
+import { Router } from '@angular/router';
+import { LoginService } from '../../../services/login.service';
 
 export interface PublicationTable {
   publicationName: string;
@@ -34,6 +33,8 @@ declare global {
   styleUrl: './place-order.component.scss'
 })
 export class PlaceOrderComponent implements OnInit {
+  role: string = "";
+  username: string = "";
   orderForm: FormGroup;
   orderItems: PublicationTable[] = [];
   orderSummary: any = null;
@@ -57,6 +58,8 @@ export class PlaceOrderComponent implements OnInit {
     private orderService: OrderService,
     private payhereService: PayhereService,
     private paymentService: PaymentService,
+    private router: Router,
+    private loginService: LoginService
   ) {
     this.orderForm = this.fb.group({
       name: [''],
@@ -76,7 +79,8 @@ export class PlaceOrderComponent implements OnInit {
         this.orderForm.patchValue({
           name: response.name,
           email: response.email,
-          address: response.address
+          address: response.address,
+          role: response.role
         });
       },
       (error) => {
@@ -91,6 +95,14 @@ export class PlaceOrderComponent implements OnInit {
       },
       (error) => console.error('Error fetching publications:', error)
     );
+  }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  goToDashboard() {
+      this.router.navigate(['/dashboards/schoolDashboard']);
   }
 
   onSelectionChange(event: Event) {

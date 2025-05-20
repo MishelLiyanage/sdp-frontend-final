@@ -1,17 +1,63 @@
 @use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #01234a;
+  background: linear-gradient(
+    149deg,
+    rgb(0, 23, 50) 0%,
+    rgb(0, 14, 122) 53%,
+    rgb(0, 23, 50) 100%
+  );
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  .topic {
+    display: flex;
+    flex-direction: row;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      color: #ffffff;
+    }
+
+    h2 {
+      font-family: sharedStyles.$font-family;
+      font-size: 1.5rem;
+      margin-left: 0.3rem;
+      color: #ffffff;
+    }
+  }
+
+  p {
+    font-family: sharedStyles.$font-family;
+    font-size: 1.1rem;
+    margin-right: 3rem;
+    color: #ffffff;
+  }
+}
+
 .heading-container {
-  background: linear-gradient(to left top, #000751, #000);
+  background: #080808;
+  background: linear-gradient(
+    149deg,
+    rgba(8, 8, 8, 1) 0%,
+    rgba(4, 12, 99, 1) 51%,
+    rgb(0, 0, 0) 100%
+  );
   background-size: cover;
-  height: 9rem;
+  height: 6rem;
   display: flex;
   flex-direction: column;
 
   h2 {
     color: sharedStyles.$primary-color;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-family: sharedStyles.$font-family;
-    margin-top: 4.5rem;
+    margin-top: 2rem;
     text-align: left;
     margin-left: 100px;
   }
@@ -337,27 +383,27 @@
   .place-order {
     button {
       width: 9rem;
-        height: 2.85rem;
-        font-size: 1rem;
-        font-family: "Quattrocento Sans", serif;
-        font-weight: 700;
-        font-style: normal;
-        background-color: rgb(220, 218, 246);
-        color: #000751;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: background-color 0.3s ease-in-out,
-          transform 0.2s ease-in-out;
-          margin-top: 2.5rem;
+      height: 2.85rem;
+      font-size: 1rem;
+      font-family: "Quattrocento Sans", serif;
+      font-weight: 700;
+      font-style: normal;
+      background-color: rgb(220, 218, 246);
+      color: #000751;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+      margin-top: 2.5rem;
 
-        &:hover {
-          opacity: 0.9;
-          transform: scale(1.05);
-          background-color: #000751;
-          color: white;
-          font-weight: 700;
-        }}
+      &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+        background-color: #000751;
+        color: white;
+        font-weight: 700;
+      }
+    }
   }
 
   .order-summary {
@@ -461,7 +507,7 @@
     padding: 0;
     height: 28vh;
     h2 {
-      font-size: 4rem;
+      font-size: 2.5rem;
       margin-left: 80px;
     }
   }
@@ -514,7 +560,7 @@
     padding: 0;
     height: 28vh;
     h2 {
-      font-size: 4rem;
+      font-size: 2.5rem;
       margin-left: 80px;
     }
   }
@@ -563,7 +609,7 @@
   // Mobile devices
   .heading-container {
     h2 {
-      font-size: 3rem;
+      font-size: 2rem;
       margin-top: 130px;
       margin-left: 60px;
     }
@@ -620,7 +666,7 @@
   // Mobile devices
   .heading-container {
     h2 {
-      font-size: 3rem;
+      font-size: 2rem;
       margin-top: 130px;
       margin-left: 60px;
     }

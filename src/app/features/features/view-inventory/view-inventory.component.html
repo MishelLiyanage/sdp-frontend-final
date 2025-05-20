@@ -52,7 +52,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of filteredInventory">
+          <tr *ngFor="let item of filteredInventory" [ngClass]="{'low-stock': item.quantity < 2000}">
             <td>{{ item.modelPaperId }}</td>
             <td>{{ item.grade }}</td>
             <td>{{ item.category }}</td>

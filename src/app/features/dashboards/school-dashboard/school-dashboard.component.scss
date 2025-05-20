@@ -4,7 +4,13 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: white;
+  background: #01234a;
+  background: linear-gradient(
+    149deg,
+    rgb(0, 23, 50) 0%,
+    rgb(56, 0, 91) 53%,
+    rgb(0, 23, 50) 100%
+  );
   // width: 100%;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -13,14 +19,14 @@
     font-family: sharedStyles.$font-family;
     font-size: 1.5rem;
     margin-left: 1rem;
-    color: #020277;
+    color: #ffffff;
   }
 
   p {
     font-family: sharedStyles.$font-family;
     font-size: 1.1rem;
     margin-right: 1.5rem;
-    color: #020277;
+    color: #ffffff;
   }
 }
 

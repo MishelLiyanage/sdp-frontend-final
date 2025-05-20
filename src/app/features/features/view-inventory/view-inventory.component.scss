@@ -141,6 +141,14 @@
         border-bottom: 2px solid rgba(255, 255, 255, 0.3);
       }
 
+      tr.low-stock {
+        background-color: #eaa0ab; /* Light red background */
+      }
+
+      tr.low-stock:hover {
+        background-color: rgba(234, 188, 192, 0.837); /* Slightly darker red on hover */
+      }
+
       .action-buttons {
         display: flex;
         flex-direction: row;

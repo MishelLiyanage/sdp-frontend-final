@@ -3,6 +3,27 @@
   <title>St. Joseph's Institute</title>
 </head>
 
+<div class="header">
+  <div class="topic">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    <h2 (click)="goToDashboard()">Dashboard</h2>
+  </div>
+
+  <p>Welcome, {{ username }}</p>
+  <p (click)="logout()">Log Out</p>
+</div>
+
 <div>
   <div class="heading">
     <h1>Update Profile</h1>
@@ -37,10 +58,10 @@
         <div class="form-group">
           <input type="text" formControlName="principle_name" placeholder="Principal's Name" />
         </div>
-        <div class="signature-input">
+        <!-- <div class="signature-input">
           <label for="signatureInput">Upload Principal's Signature</label>
           <input type="file" id="signatureInput" (change)="onFileChange($event)" />
-        </div>
+        </div> -->
 
         <button type="submit" class="update-btn" [disabled]="!isEditing">Update Profile</button>
       </form>

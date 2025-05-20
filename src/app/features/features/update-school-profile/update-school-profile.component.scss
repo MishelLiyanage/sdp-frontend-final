@@ -1,7 +1,47 @@
 @use "../../../shared/Styles/sharedStyles.scss" as sharedStyles;
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #01234a;
+  background: linear-gradient(
+    149deg,
+    rgba(1, 35, 74, 1) 0%,
+    rgba(60, 6, 115, 1) 53%,
+    rgba(1, 35, 74, 1) 100%
+  );
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  .topic {
+    display: flex;
+    flex-direction: row;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      color: #ffffff;
+    }
+
+    h2 {
+      font-family: sharedStyles.$font-family;
+      font-size: 1.5rem;
+      margin-left: 0.3rem;
+      color: #ffffff;
+    }
+  }
+
+  p {
+    font-family: sharedStyles.$font-family;
+    font-size: 1.1rem;
+    margin-right: 3rem;
+    color: #ffffff;
+  }
+}
+
 .heading {
-  background-color: rgb(35, 1, 35);
+  background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(1, 4, 71));
   color: white;
   font-family: sharedStyles.$font-family;
 
@@ -15,16 +55,13 @@
 }
 
 .updateForm {
-  background-image: url(../../../../assets/images/profileBackground.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(1, 4, 71));
   margin: 0;
   display: flex;
   justify-content: center;
 
   .update-form-container {
-    background-color: rgb(249, 237, 249);
+    background-color: rgb(223, 229, 255);
     width: 50%;
     height: fit-content;
     padding: 3rem;
@@ -65,7 +102,7 @@
         border-radius: 10px;
         margin-top: 2rem;
         border: none;
-        background-color: rgb(62, 2, 62);
+        background-color: rgb(2, 4, 62);
         color: white;
         font-family: sharedStyles.$font-family;
         font-weight: 700;
@@ -124,7 +161,7 @@
         width: 10rem;
         border-radius: 10px;
         border: none;
-        background-color: rgb(62, 2, 62);
+        background-color: rgb(2, 4, 62);
         color: white;
         font-family: sharedStyles.$font-family;
         font-weight: 700;
@@ -138,7 +175,7 @@
 
       /* Styles for Disabled Update Button */
       .update-btn:disabled {
-        background-color: rgba(62, 2, 62, 0.5);
+        background-color: rgba(2, 4, 62, 0.544);
         color: rgba(255, 255, 255, 0.7);
         cursor: not-allowed;
         box-shadow: none;
