@@ -5,14 +5,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 20vh;
-  background: #080808;
-  background: linear-gradient(
-    149deg,
-    rgba(8, 8, 8, 1) 0%,
-    rgb(34, 1, 66) 51%,
-    rgb(0, 0, 0) 100%
-  );
+  height: fit-content;
+  background-color: #000; // Black background
+  background-image: linear-gradient(to bottom right, #000, #010439);
   padding: 20px;
   padding-top: 6rem;
   padding-bottom: 3rem;
@@ -111,3 +106,5 @@
     }
   }
 }
+
+
